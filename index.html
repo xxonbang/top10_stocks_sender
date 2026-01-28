@@ -590,23 +590,29 @@
         .signal-card.strong-sell.active { border-color: #dc2626; background: rgba(220, 38, 38, 0.06); }
 
         .tip-text {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin: 8px 0 16px;
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            margin: 0 0 16px;
             display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            background: var(--bg-primary);
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
-            border-left: 3px solid var(--accent-primary);
+            line-height: 1.5;
         }
 
         .tip-text svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             flex-shrink: 0;
-            color: var(--accent-primary);
+            color: #64748b;
+            margin-top: 1px;
+        }
+
+        .tip-text span {
+            flex: 1;
         }
 
         .stock-name-link {
@@ -1255,10 +1261,10 @@
                     </div>
                 </div>
 
-                <p class="tip-text">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                    시그널 카드를 클릭하면 필터가 적용되어, 해당되는 종목만 확인 가능합니다
-                </p>
+                <div class="tip-text">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
+                    <span>시그널 카드를 클릭하면 필터가 적용되어, 해당되는 종목만 확인 가능합니다</span>
+                </div>
 
                 <div class="market-tabs">
                     <button class="market-tab ${currentMarket === 'all' ? 'active' : ''}" data-market="all" onclick="switchMarket('all')">전체 <span class="tab-count">${data.results.length}</span></button>
@@ -1293,17 +1299,17 @@
             }
 
             container.innerHTML = `
-                <p class="tip-text">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                    종목명을 클릭하면 네이버 금융에서 해당 종목의 실시간 정보 화면으로 이동합니다
-                </p>
+                <div class="tip-text">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    <span>종목명을 클릭하면 네이버 금융에서 해당 종목의 실시간 정보 화면으로 이동합니다</span>
+                </div>
                 <div class="results-table-wrapper">
                     <table class="results-table">
                         <thead><tr><th>종목</th><th>시그널</th><th>분석 근거</th><th>시각</th></tr></thead>
                         <tbody>
                             ${filteredResults.map(r => `
                                 <tr>
-                                    <td><a href="https://finance.naver.com/item/main.nhn?code=${r.code}" target="_blank" class="stock-name-link"><div class="stock-name">${r.name}</div><div class="stock-code">${r.code}</div></a></td>
+                                    <td><a href="https://stock.naver.com/domestic/stock/${r.code}/price" target="_blank" class="stock-name-link"><div class="stock-name">${r.name}</div><div class="stock-code">${r.code}</div></a></td>
                                     <td><span class="signal-badge ${r.signal}">${r.signal}</span></td>
                                     <td><div class="analysis-reason">${r.reason || '-'}</div></td>
                                     <td><div class="time-info">${r.capture_time ? `캡처: ${r.capture_time.split(' ')[1] || r.capture_time}` : ''}<br>${r.analysis_time ? `분석: ${r.analysis_time.split(' ')[1] || r.analysis_time}` : ''}</div></td>
@@ -1316,7 +1322,7 @@
                     ${filteredResults.map(r => `
                         <div class="stock-card">
                             <div class="stock-card-header">
-                                <a href="https://finance.naver.com/item/main.nhn?code=${r.code}" target="_blank" class="stock-name-link stock-card-info"><div class="stock-name">${r.name}</div><div class="stock-code">${r.code}</div></a>
+                                <a href="https://stock.naver.com/domestic/stock/${r.code}/price" target="_blank" class="stock-name-link stock-card-info"><div class="stock-name">${r.name}</div><div class="stock-code">${r.code}</div></a>
                                 <span class="signal-badge ${r.signal}">${r.signal}</span>
                             </div>
                             <div class="stock-card-reason">${r.reason || '-'}</div>
