@@ -28,10 +28,19 @@ jobs:
 
       - name: Run analysis
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_01: ${{ secrets.GEMINI_API_KEY_01 }}
+          GEMINI_API_KEY_02: ${{ secrets.GEMINI_API_KEY_02 }}
+          GEMINI_API_KEY_03: ${{ secrets.GEMINI_API_KEY_03 }}
         run: python main.py
 
-      - name: Upload results
+      - name: Copy results to web directory
+        run: |
+          mkdir -p results
+          if [ -f output/analysis_*.json ]; then
+            cp output/analysis_*.json results/latest.json
+          fi
+
+      - name: Upload results artifact
         uses: actions/upload-artifact@v4
         with:
           name: analysis-results
@@ -41,6 +50,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/
-          git diff --staged --quiet || git commit -m "Update analysis results"
+          git add results/
+          git diff --staged --quiet || git commit -m "Update analysis results - $(date +'%Y-%m-%d %H:%M')"
           git push
