@@ -2,10 +2,10 @@ name: Stock Analysis
 
 on:
   schedule:
-    # KST 08:00, 13:00, 22:00
-    - cron: '0 23 * * *'
-    - cron: '0 4 * * *'
-    - cron: '0 13 * * *'
+    # KST 07:30 (UTC 22:30 previous day)
+    - cron: '30 22 * * *'
+    # KST 21:30 (UTC 12:30)
+    - cron: '30 12 * * *'
   workflow_dispatch:
 
 jobs:
