@@ -68,23 +68,48 @@
         }
 
         .logo {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            text-decoration: none;
         }
 
         .logo-icon {
-            width: 32px; height: 32px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1rem;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-text .brand {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #0891b2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text .tagline {
+            font-size: 0.6rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .nav-links { display: flex; gap: 4px; }
@@ -773,14 +798,29 @@
 <body>
     <nav>
         <div class="nav-content">
-            <div class="logo">
-                <div class="logo-icon">📊</div>
-                <span>AVSSA</span>
-            </div>
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1e3a5f"/>
+                                <stop offset="50%" stop-color="#2563eb"/>
+                                <stop offset="100%" stop-color="#0891b2"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="2" y="2" width="36" height="36" rx="10" stroke="url(#logoGradient)" stroke-width="2.5" fill="none"/>
+                        <path d="M10 26L16 20L22 24L30 14" stroke="url(#logoGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="30" cy="14" r="3" fill="url(#logoGradient)"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="brand">avssa</span>
+                    <span class="tagline">AI Vision Stock Signal</span>
+                </div>
+            </a>
             <div class="nav-links">
                 <a href="#results" class="active">분석 결과</a>
                 <a href="#features">기능</a>
-                <a href="https://github.com/xxonbang/top50_analyzer" target="_blank">GitHub</a>
             </div>
         </div>
     </nav>
