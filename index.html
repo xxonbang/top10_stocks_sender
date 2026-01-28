@@ -1117,18 +1117,29 @@
             });
         }
 
+        function getLatestAnalysisTime(results) {
+            const times = results
+                .map(r => r.analysis_time)
+                .filter(t => t && t !== 'N/A')
+                .sort()
+                .reverse();
+            return times.length > 0 ? times[0] : null;
+        }
+
         function renderResults(data) {
             const container = document.getElementById('results-container');
             const { kospi, kosdaq } = categorizeStocks(data.results);
             const signalCounts = getSignalCounts(data.results);
+            const latestTime = getLatestAnalysisTime(data.results);
+            const timeDisplay = latestTime ? latestTime.split(' ')[1] : '';
 
             container.innerHTML = `
                 <div class="results-meta">
                     <div class="meta-card">
                         <div class="meta-icon date">📅</div>
                         <div>
-                            <div class="meta-label">분석 일자</div>
-                            <div class="meta-value">${data.date}</div>
+                            <div class="meta-label">분석 일시</div>
+                            <div class="meta-value">${data.date}${timeDisplay ? ` <span style="font-size:0.8em;color:var(--text-muted);font-weight:500;">${timeDisplay}</span>` : ''}</div>
                         </div>
                     </div>
                     <div class="meta-card">
