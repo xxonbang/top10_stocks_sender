@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI Vision Stock Signal Analyzer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,10 @@
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
             --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+            /* Mobile Safe Area */
+            --safe-area-top: env(safe-area-inset-top);
+            --safe-area-bottom: env(safe-area-inset-bottom);
         }
 
         * {
@@ -55,6 +59,8 @@
             line-height: 1.7;
             min-height: 100vh;
             font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Navigation */
@@ -65,9 +71,11 @@
             right: 0;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             z-index: 100;
-            padding: 0 24px;
+            padding: 0 16px;
+            padding-top: var(--safe-area-top);
         }
 
         .nav-content {
@@ -76,28 +84,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 64px;
+            height: 56px;
         }
 
         .logo {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .logo-icon {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .nav-links {
@@ -108,9 +116,9 @@
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            padding: 10px 18px;
+            padding: 8px 14px;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             transition: all 0.2s;
         }
@@ -120,23 +128,35 @@
             background: var(--bg-accent);
         }
 
+        /* Mobile Menu Button */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+        }
+
         /* Main Content */
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 24px 60px;
+            padding: 80px 16px 60px;
+            padding-top: calc(80px + var(--safe-area-top));
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 50px 0 60px;
+            padding: 30px 0 40px;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--text-primary);
             letter-spacing: -0.5px;
         }
@@ -149,56 +169,57 @@
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-secondary);
             max-width: 550px;
-            margin: 0 auto 28px;
-            line-height: 1.8;
+            margin: 0 auto 20px;
+            line-height: 1.7;
         }
 
         .hero-badges {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .badge {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            border-radius: 24px;
-            font-size: 0.85rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             font-weight: 500;
+            white-space: nowrap;
         }
 
         /* Section Titles */
         .section-header {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .section-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .section-subtitle {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         /* Analysis Results Section */
         .results-section {
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .results-meta {
             display: flex;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
@@ -206,28 +227,31 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 16px 20px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             box-shadow: var(--shadow-sm);
+            flex: 1;
+            min-width: 140px;
         }
 
         .meta-icon {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .meta-icon.date { background: #dbeafe; }
         .meta-icon.count { background: #d1fae5; }
 
         .meta-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -236,7 +260,7 @@
         }
 
         .meta-value {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -245,21 +269,15 @@
         .signal-summary {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        @media (max-width: 768px) {
-            .signal-summary {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            gap: 8px;
+            margin-bottom: 24px;
         }
 
         .signal-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 20px 16px;
+            padding: 14px 8px;
             text-align: center;
             transition: all 0.2s;
             box-shadow: var(--shadow-sm);
@@ -271,33 +289,87 @@
         }
 
         .signal-count {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .signal-label {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             font-weight: 500;
         }
 
-        .signal-card.strong-buy { border-left: 4px solid var(--signal-strong-buy); }
+        .signal-card.strong-buy { border-left: 3px solid var(--signal-strong-buy); }
         .signal-card.strong-buy .signal-count { color: var(--signal-strong-buy); }
 
-        .signal-card.buy { border-left: 4px solid var(--signal-buy); }
+        .signal-card.buy { border-left: 3px solid var(--signal-buy); }
         .signal-card.buy .signal-count { color: var(--signal-buy); }
 
-        .signal-card.neutral { border-left: 4px solid var(--signal-neutral); }
+        .signal-card.neutral { border-left: 3px solid var(--signal-neutral); }
         .signal-card.neutral .signal-count { color: var(--signal-neutral); }
 
-        .signal-card.sell { border-left: 4px solid var(--signal-sell); }
+        .signal-card.sell { border-left: 3px solid var(--signal-sell); }
         .signal-card.sell .signal-count { color: var(--signal-sell); }
 
-        .signal-card.strong-sell { border-left: 4px solid var(--signal-strong-sell); }
+        .signal-card.strong-sell { border-left: 3px solid var(--signal-strong-sell); }
         .signal-card.strong-sell .signal-count { color: var(--signal-strong-sell); }
 
-        /* Results Table */
+        /* Market Tabs */
+        .market-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            background: var(--bg-secondary);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .market-tab {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .market-tab:hover {
+            color: var(--text-secondary);
+            background: var(--bg-primary);
+        }
+
+        .market-tab.active {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .market-tab .tab-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .market-tab.active .tab-count {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .market-tab:not(.active) .tab-count {
+            background: var(--bg-primary);
+        }
+
+        /* Results Table - Desktop */
         .results-table-wrapper {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -313,9 +385,9 @@
 
         .results-table th {
             background: var(--bg-primary);
-            padding: 14px 20px;
+            padding: 12px 16px;
             text-align: left;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -324,7 +396,7 @@
         }
 
         .results-table td {
-            padding: 16px 20px;
+            padding: 14px 16px;
             border-bottom: 1px solid var(--border-light);
             vertical-align: middle;
         }
@@ -340,11 +412,11 @@
         .stock-name {
             font-weight: 600;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .stock-code {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             font-family: 'SF Mono', Monaco, monospace;
             margin-top: 2px;
@@ -352,9 +424,9 @@
 
         .signal-badge {
             display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
@@ -365,31 +437,85 @@
         .signal-badge.적극매도 { background: #fee2e2; color: var(--signal-strong-sell); }
 
         .analysis-reason {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            line-height: 1.6;
-            max-width: 380px;
+            line-height: 1.5;
+            max-width: 350px;
         }
 
         .time-info {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Mobile Stock Cards */
+        .stock-cards {
+            display: none;
+        }
+
+        .stock-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stock-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .stock-card-info {
+            flex: 1;
+        }
+
+        .stock-card .stock-name {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .stock-card .stock-code {
+            font-size: 0.8rem;
+        }
+
+        .stock-card .signal-badge {
+            flex-shrink: 0;
+        }
+
+        .stock-card-reason {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
             line-height: 1.6;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .stock-card-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            display: flex;
+            gap: 12px;
         }
 
         /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 40px;
         }
 
         .feature-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 26px;
+            border-radius: 14px;
+            padding: 20px;
             transition: all 0.3s;
             box-shadow: var(--shadow-sm);
         }
@@ -401,14 +527,14 @@
         }
 
         .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 16px;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
         }
 
         .feature-icon.blue { background: #dbeafe; }
@@ -417,16 +543,16 @@
         .feature-icon.amber { background: #fef3c7; }
 
         .feature-card h3 {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text-primary);
         }
 
         .feature-card p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* Workflow */
@@ -434,23 +560,19 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 36px;
-            margin-bottom: 50px;
+            padding: 24px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow-sm);
         }
 
         .workflow-steps {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
-            margin-top: 28px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
         }
 
         .step {
-            flex: 1;
-            min-width: 160px;
             text-align: center;
             position: relative;
         }
@@ -458,75 +580,70 @@
         .step:not(:last-child)::after {
             content: '→';
             position: absolute;
-            top: 20px;
-            right: -12px;
+            top: 18px;
+            right: -10px;
             color: var(--border-color);
-            font-size: 1.2rem;
-        }
-
-        @media (max-width: 768px) {
-            .step:not(:last-child)::after {
-                display: none;
-            }
+            font-size: 1rem;
         }
 
         .step-number {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 14px;
+            margin: 0 auto 10px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: white;
         }
 
         .step h4 {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             color: var(--text-primary);
         }
 
         .step p {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         /* Footer */
         footer {
             border-top: 1px solid var(--border-color);
-            padding: 36px 24px;
+            padding: 28px 16px;
+            padding-bottom: calc(28px + var(--safe-area-bottom));
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             background: var(--bg-secondary);
         }
 
         footer p:last-child {
-            margin-top: 8px;
-            font-size: 0.8rem;
+            margin-top: 6px;
+            font-size: 0.75rem;
         }
 
         /* Loading State */
         .loading {
             text-align: center;
-            padding: 60px;
+            padding: 50px 20px;
             color: var(--text-muted);
         }
 
         .loading-spinner {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border: 3px solid var(--border-color);
             border-top-color: var(--accent-primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 16px;
+            margin: 0 auto 14px;
         }
 
         @keyframes spin {
@@ -536,39 +653,199 @@
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 70px 20px;
+            padding: 50px 20px;
             background: var(--bg-secondary);
             border: 2px dashed var(--border-color);
             border-radius: 16px;
         }
 
         .empty-state-icon {
-            font-size: 3rem;
-            margin-bottom: 16px;
+            font-size: 2.5rem;
+            margin-bottom: 14px;
         }
 
         .empty-state h3 {
-            font-size: 1.15rem;
-            margin-bottom: 8px;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
             color: var(--text-primary);
         }
 
         .empty-state p {
             color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
-        /* Responsive */
-        @media (max-width: 640px) {
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-content {
+                height: 52px;
+            }
+
+            main {
+                padding: 72px 12px 40px;
+                padding-top: calc(72px + var(--safe-area-top));
+            }
+
+            .hero {
+                padding: 20px 0 30px;
+            }
+
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .badge {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+
+            .section-title {
+                font-size: 1.15rem;
+            }
+
+            .signal-summary {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 6px;
+            }
+
+            .signal-card {
+                padding: 10px 4px;
+                border-radius: 10px;
+            }
+
+            .signal-count {
+                font-size: 1.2rem;
+            }
+
+            .signal-label {
+                font-size: 0.65rem;
+            }
+
+            .market-tabs {
+                padding: 4px;
+            }
+
+            .market-tab {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+
+            .market-tab .tab-count {
+                font-size: 0.7rem;
+                padding: 2px 6px;
+            }
+
+            /* Show card view, hide table on mobile */
             .results-table-wrapper {
-                overflow-x: auto;
+                display: none;
             }
 
-            .results-table {
-                min-width: 650px;
+            .stock-cards {
+                display: block;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .feature-card {
+                padding: 18px;
+            }
+
+            .workflow {
+                padding: 20px 16px;
+            }
+
+            .workflow-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .step:not(:last-child)::after {
+                display: none;
+            }
+
+            .step-number {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+
+            .meta-card {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+
+            .meta-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .meta-value {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Desktop enhancements */
+        @media (min-width: 769px) {
+            nav {
+                padding: 0 24px;
+            }
+
+            .nav-content {
+                height: 64px;
+            }
+
+            main {
+                padding: 100px 24px 60px;
+            }
+
+            .hero {
+                padding: 50px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .signal-summary {
+                gap: 12px;
+            }
+
+            .signal-card {
+                padding: 20px 16px;
+            }
+
+            .signal-count {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .workflow-steps {
+                gap: 16px;
             }
         }
     </style>
@@ -675,6 +952,9 @@
     </footer>
 
     <script>
+        let allData = null;
+        let currentMarket = 'all';
+
         async function loadResults() {
             const container = document.getElementById('results-container');
 
@@ -685,8 +965,8 @@
                     throw new Error('No results available');
                 }
 
-                const data = await response.json();
-                renderResults(data);
+                allData = await response.json();
+                renderResults(allData);
             } catch (error) {
                 container.innerHTML = `
                     <div class="empty-state">
@@ -698,8 +978,43 @@
             }
         }
 
+        function getMarketFromCode(code) {
+            // KOSDAQ codes typically start with 0, 1, 2, 3 and are 6 digits
+            // KOSPI codes are also 6 digits but typically in different ranges
+            // Based on the data, we can check code patterns or use the first 50 as KOSPI
+            const codeNum = parseInt(code);
+            // Common KOSDAQ patterns: starts with 0, 1, 2, 3 (under 400000)
+            // But this isn't reliable, so we'll use position-based detection
+            return null;
+        }
+
+        function categorizeStocks(results) {
+            // First 50 are KOSPI, next 50 are KOSDAQ (based on collection order)
+            const kospi = results.slice(0, 50);
+            const kosdaq = results.slice(50, 100);
+            return { kospi, kosdaq };
+        }
+
+        function switchMarket(market) {
+            currentMarket = market;
+
+            // Update tab states
+            document.querySelectorAll('.market-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.market === market) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Filter and render results
+            if (allData) {
+                renderStockList(allData, market);
+            }
+        }
+
         function renderResults(data) {
             const container = document.getElementById('results-container');
+            const { kospi, kosdaq } = categorizeStocks(data.results);
 
             const signalCounts = {
                 '적극매수': 0,
@@ -756,6 +1071,42 @@
                     </div>
                 </div>
 
+                <div class="market-tabs">
+                    <button class="market-tab active" data-market="all" onclick="switchMarket('all')">
+                        전체 <span class="tab-count">${data.results.length}</span>
+                    </button>
+                    <button class="market-tab" data-market="kospi" onclick="switchMarket('kospi')">
+                        코스피 <span class="tab-count">${kospi.length}</span>
+                    </button>
+                    <button class="market-tab" data-market="kosdaq" onclick="switchMarket('kosdaq')">
+                        코스닥 <span class="tab-count">${kosdaq.length}</span>
+                    </button>
+                </div>
+
+                <div id="stock-list-container"></div>
+            `;
+
+            renderStockList(data, currentMarket);
+        }
+
+        function renderStockList(data, market) {
+            const container = document.getElementById('stock-list-container');
+            const { kospi, kosdaq } = categorizeStocks(data.results);
+
+            let filteredResults;
+            switch(market) {
+                case 'kospi':
+                    filteredResults = kospi;
+                    break;
+                case 'kosdaq':
+                    filteredResults = kosdaq;
+                    break;
+                default:
+                    filteredResults = data.results;
+            }
+
+            container.innerHTML = `
+                <!-- Desktop Table View -->
                 <div class="results-table-wrapper">
                     <table class="results-table">
                         <thead>
@@ -767,7 +1118,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            ${data.results.map(r => `
+                            ${filteredResults.map(r => `
                                 <tr>
                                     <td>
                                         <div class="stock-name">${r.name}</div>
@@ -789,6 +1140,26 @@
                             `).join('')}
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Mobile Card View -->
+                <div class="stock-cards">
+                    ${filteredResults.map(r => `
+                        <div class="stock-card">
+                            <div class="stock-card-header">
+                                <div class="stock-card-info">
+                                    <div class="stock-name">${r.name}</div>
+                                    <div class="stock-code">${r.code}</div>
+                                </div>
+                                <span class="signal-badge ${r.signal}">${r.signal}</span>
+                            </div>
+                            <div class="stock-card-reason">${r.reason || '-'}</div>
+                            <div class="stock-card-time">
+                                ${r.capture_time ? `<span>캡처 ${r.capture_time.split(' ')[1] || r.capture_time}</span>` : ''}
+                                ${r.analysis_time ? `<span>분석 ${r.analysis_time.split(' ')[1] || r.analysis_time}</span>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
                 </div>
             `;
         }
