@@ -114,6 +114,12 @@ jobs:
           fi
           echo "API keys verified."
 
+      - name: Check disk space (before)
+        run: |
+          echo "=== 디스크 공간 (분석 전) ==="
+          df -h .
+          echo ""
+
       - name: Run analysis
         id: analysis
         env:
@@ -123,6 +129,18 @@ jobs:
         run: |
           python main.py
           echo "analysis_success=true" >> $GITHUB_OUTPUT
+
+      - name: Check disk space (after)
+        if: always()
+        run: |
+          echo "=== 디스크 공간 (분석 후) ==="
+          df -h .
+          echo ""
+          echo "=== 캡처 폴더 크기 ==="
+          du -sh captures/ 2>/dev/null || echo "captures/ 폴더 없음"
+          echo ""
+          echo "=== 출력 폴더 크기 ==="
+          du -sh output/ 2>/dev/null || echo "output/ 폴더 없음"
 
       - name: Copy results to web directory
         if: steps.analysis.outputs.analysis_success == 'true'
@@ -143,6 +161,7 @@ jobs:
           name: analysis-results-${{ github.run_number }}
           path: output/
           if-no-files-found: warn
+          retention-days: 7
 
       - name: Commit results
         if: steps.analysis.outputs.analysis_success == 'true'
