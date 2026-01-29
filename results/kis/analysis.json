@@ -1,0 +1,106 @@
+{
+  "analysis_time": "2026-01-29 15:30:00",
+  "total_analyzed": 5,
+  "results": [
+    {
+      "code": "340930",
+      "name": "유일에너테크",
+      "market": "KOSDAQ",
+      "current_price": 1550,
+      "change_rate": 15.5,
+      "signal": "중립",
+      "reason": "오늘 거래량 급증과 함께 주가가 크게 상승하며 강한 상승 모멘텀을 보여주지만, 기관의 지속적인 순매도세와 현재 적자 상태인 밸류에이션이 리스크 요인으로 작용합니다. 또한 52주 신고가 근접으로 단기 차익 실현 압력이 존재하여 추가 상승 여력이 제한적일 수 있습니다.",
+      "key_factors": {
+        "price_trend": "상승",
+        "volume_signal": "급증",
+        "foreign_flow": "매수우위",
+        "institution_flow": "매도우위",
+        "valuation": "고평가"
+      },
+      "risk_level": "높음",
+      "confidence": 0.6,
+      "analysis_time": "2026-01-29 15:30:00",
+      "data_source": "KIS_API"
+    },
+    {
+      "code": "001510",
+      "name": "SK증권",
+      "market": "KOSPI",
+      "current_price": 894,
+      "change_rate": 29.94,
+      "signal": "적극매수",
+      "reason": "금일 상한가 달성과 52주 신고가 경신, 그리고 외국인/기관의 강력한 쌍끌이 순매수가 단기적인 주가 상승 모멘텀을 매우 강하게 지지합니다. 막대한 거래량은 시장의 폭발적인 관심을 증명하며 추가 상승 가능성이 높습니다.",
+      "key_factors": {
+        "price_trend": "상승",
+        "volume_signal": "급증",
+        "foreign_flow": "매수우위",
+        "institution_flow": "매수우위",
+        "valuation": "저평가"
+      },
+      "risk_level": "중간",
+      "confidence": 0.9,
+      "analysis_time": "2026-01-29 15:30:00",
+      "data_source": "KIS_API"
+    },
+    {
+      "code": "469750",
+      "name": "아이비젼웍스",
+      "market": "KOSDAQ",
+      "current_price": 1392,
+      "change_rate": 4.11,
+      "signal": "중립",
+      "reason": "금일 폭발적인 거래량으로 주가가 상승했으나, 외국인의 순매도와 개인의 순매수가 두드러져 단기 고점 부담이 있습니다. 또한 적자 상태의 기업으로 밸류에이션 리스크가 존재하며, 오늘 고가에서 밀린 점은 단기 매물 압박을 시사합니다.",
+      "key_factors": {
+        "price_trend": "상승",
+        "volume_signal": "급증",
+        "foreign_flow": "매도우위",
+        "institution_flow": "중립",
+        "valuation": "고평가"
+      },
+      "risk_level": "높음",
+      "confidence": 0.5,
+      "analysis_time": "2026-01-29 15:30:00",
+      "data_source": "KIS_API"
+    },
+    {
+      "code": "010170",
+      "name": "대한광통신",
+      "market": "KOSPI",
+      "current_price": 3840,
+      "change_rate": 15.49,
+      "signal": "중립",
+      "reason": "외국인의 강한 순매수세와 주가 급등으로 단기 모멘텀은 있으나, 기관의 지속적인 매도와 적자 상태의 높은 PBR은 밸류에이션 부담을 가중시키므로 신중한 접근이 필요합니다. 급격한 가격 변동성과 52주 신고가 근접에 따른 단기 조정 가능성도 존재합니다.",
+      "key_factors": {
+        "price_trend": "상승",
+        "volume_signal": "증가",
+        "foreign_flow": "매수우위",
+        "institution_flow": "매도우위",
+        "valuation": "고평가"
+      },
+      "risk_level": "높음",
+      "confidence": 0.6,
+      "analysis_time": "2026-01-29 15:30:00",
+      "data_source": "KIS_API"
+    },
+    {
+      "code": "459550",
+      "name": "알트",
+      "market": "KOSDAQ",
+      "current_price": 4600,
+      "change_rate": -6.22,
+      "signal": "중립",
+      "reason": "어제의 급등 이후 금일 차익 실현 매물이 출회되며 하락 전환했고, 외국인과 기관의 순매도세가 확인됩니다. 양호한 밸류에이션에도 불구하고 단기 조정 및 수급 부담이 있어 신중한 접근이 필요합니다.",
+      "key_factors": {
+        "price_trend": "횡보",
+        "volume_signal": "증가",
+        "foreign_flow": "매도우위",
+        "institution_flow": "매도우위",
+        "valuation": "적정"
+      },
+      "risk_level": "중간",
+      "confidence": 0.7,
+      "analysis_time": "2026-01-29 15:30:00",
+      "data_source": "KIS_API"
+    }
+  ]
+}
