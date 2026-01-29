@@ -70,37 +70,37 @@ async def capture_stock_screenshot(page: Page, stock: dict, capture_dir: Path, m
 
     for attempt in range(max_retries):
         try:
-        await page.goto(url, wait_until="networkidle", timeout=30000)
-        await page.wait_for_timeout(2000)
+            await page.goto(url, wait_until="networkidle", timeout=30000)
+            await page.wait_for_timeout(2000)
 
-        # 전체 페이지 스크롤
-        await page.evaluate("""
-            async () => {
-                await new Promise(resolve => {
-                    let total = 0;
-                    const timer = setInterval(() => {
-                        window.scrollBy(0, 300);
-                        total += 300;
-                        if (total >= document.body.scrollHeight) {
-                            clearInterval(timer);
-                            window.scrollTo(0, 0);
-                            resolve();
-                        }
-                    }, 100);
-                });
-            }
-        """)
-        await page.wait_for_timeout(1000)
+            # 전체 페이지 스크롤
+            await page.evaluate("""
+                async () => {
+                    await new Promise(resolve => {
+                        let total = 0;
+                        const timer = setInterval(() => {
+                            window.scrollBy(0, 300);
+                            total += 300;
+                            if (total >= document.body.scrollHeight) {
+                                clearInterval(timer);
+                                window.scrollTo(0, 0);
+                                resolve();
+                            }
+                        }, 100);
+                    });
+                }
+            """)
+            await page.wait_for_timeout(1000)
 
-        # 스크린샷 저장
-        filepath = capture_dir / f"{code}.png"
-        await page.screenshot(path=str(filepath), full_page=True)
+            # 스크린샷 저장
+            filepath = capture_dir / f"{code}.png"
+            await page.screenshot(path=str(filepath), full_page=True)
 
-        # 캡처 시각 기록 (KST)
-        capture_time = datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
+            # 캡처 시각 기록 (KST)
+            capture_time = datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
 
-        print(f"  [OK] {name} ({code})")
-        return {**stock, "success": True, "screenshot": str(filepath), "capture_time": capture_time}
+            print(f"  [OK] {name} ({code})")
+            return {**stock, "success": True, "screenshot": str(filepath), "capture_time": capture_time}
 
         except Exception as e:
             if attempt < max_retries - 1:
