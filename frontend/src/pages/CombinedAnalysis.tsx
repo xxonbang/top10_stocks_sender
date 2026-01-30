@@ -1,5 +1,4 @@
 import { useState, useMemo, memo } from 'react';
-import { List } from 'react-window';
 import { useQuery } from '@tanstack/react-query';
 import { fetchLatestData, fetchKISData, fetchKISAnalysis } from '@/services/api';
 import type { StockResult, KISStockData, KISAnalysisResult, MarketType, SignalType } from '@/services/types';
@@ -238,29 +237,6 @@ function TipText({ children }: { children: React.ReactNode }) {
 // 시그널 타입 리스트
 const SIGNAL_TYPES: SignalType[] = ['적극매수', '매수', '중립', '매도', '적극매도'];
 
-// 가상화된 종목 리스트 - 화면에 보이는 항목만 렌더링
-const ITEM_HEIGHT = 280; // 카드 높이 + 간격
-const LIST_HEIGHT = 800; // 리스트 컨테이너 높이
-
-function VirtualizedStockList({ stocks }: { stocks: CombinedStock[] }) {
-  return (
-    <List
-      rowComponent={({ index, style }) => {
-        const stock = stocks[index];
-        return (
-          <div style={{ ...style, paddingBottom: 16 }}>
-            <CombinedStockCard stock={stock} />
-          </div>
-        );
-      }}
-      rowProps={{}}
-      rowCount={stocks.length}
-      rowHeight={ITEM_HEIGHT}
-      style={{ height: LIST_HEIGHT }}
-      className="scrollbar-thin"
-    />
-  );
-}
 
 export function CombinedAnalysis() {
   const [marketFilter, setMarketFilter] = useState<MarketType>('all');
@@ -616,9 +592,13 @@ export function CombinedAnalysis() {
         onChange={setMarketFilter}
       />
 
-      {/* 종목 리스트 (가상화) */}
+      {/* 종목 그리드 */}
       {filteredStocks.length > 0 ? (
-        <VirtualizedStockList stocks={filteredStocks} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredStocks.map(stock => (
+            <CombinedStockCard key={stock.code} stock={stock} />
+          ))}
+        </div>
       ) : (
         <EmptyState
           icon="🔍"
