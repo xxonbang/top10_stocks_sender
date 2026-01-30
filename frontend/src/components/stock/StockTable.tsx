@@ -31,7 +31,7 @@ export function StockTable({ stocks }: StockTableProps) {
             <tr key={stock.code} className="hover:bg-bg-primary">
               <td className="px-4 py-3.5 border-b border-border-light align-middle whitespace-nowrap">
                 <a
-                  href={`https://stock.naver.com/domestic/stock/${stock.code}/price`}
+                  href={`https://m.stock.naver.com/domestic/stock/${stock.code}/total`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-inherit no-underline hover:text-accent-primary hover:underline transition-colors"

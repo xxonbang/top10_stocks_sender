@@ -11,7 +11,7 @@ export function StockCard({ stock }: StockCardProps) {
     <div className="bg-bg-secondary border border-border rounded-xl p-3 md:p-4 mb-2.5 md:mb-3">
       <div className="flex justify-between items-start mb-2.5 md:mb-3">
         <a
-          href={`https://stock.naver.com/domestic/stock/${stock.code}/price`}
+          href={`https://m.stock.naver.com/domestic/stock/${stock.code}/total`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1 min-w-0 text-inherit no-underline hover:text-accent-primary transition-colors"
