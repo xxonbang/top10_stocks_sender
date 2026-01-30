@@ -258,7 +258,17 @@ class KISClient:
                 return self.request(method, path, tr_id, params, body, tr_cont, _retry=False)
 
             response.raise_for_status()
-            return response.json()
+            data = response.json()
+
+            # 응답 본문에서 토큰 만료 확인 (HTTP 200이지만 rt_cd가 실패인 경우)
+            if _retry and data.get("rt_cd") != "0":
+                msg = data.get("msg1", "")
+                if "만료" in msg or "token" in msg.lower():
+                    print(f"[KIS] 토큰이 만료되었습니다 (msg: {msg}). 재발급 시도...")
+                    self._refresh_token()
+                    return self.request(method, path, tr_id, params, body, tr_cont, _retry=False)
+
+            return data
 
         except requests.exceptions.HTTPError as e:
             # 에러 응답 본문 확인
