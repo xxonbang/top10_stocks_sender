@@ -443,8 +443,10 @@ jobs:
 
               git commit -m "Update analysis results - $KST_TIME KST [Vision: $VISION_STATUS, KIS: $KIS_STATUS]"
 
-              # 원격 변경사항이 있을 수 있으므로 pull --rebase 후 push
-              git pull --rebase origin main || true
+              # 원격 변경사항이 있을 수 있으므로 pull 후 push
+              # rebase 대신 merge 사용 (충돌 시 새 분석 결과 우선)
+              git fetch origin main
+              git merge origin/main -X ours --no-edit || true
               git push
               echo "Results committed and pushed."
               echo "committed=true" >> $GITHUB_OUTPUT
