@@ -275,6 +275,12 @@ class KISClient:
             try:
                 error_data = response.json()
                 error_msg = error_data.get('msg1', str(e))
+
+                # 500 에러에서도 토큰 만료 메시지 확인 후 재시도
+                if _retry and ("만료" in error_msg or "token" in error_msg.lower() or "expired" in error_msg.lower()):
+                    print(f"[KIS] 토큰이 만료되었습니다 (HTTP {response.status_code}, msg: {error_msg}). 재발급 시도...")
+                    self._refresh_token()
+                    return self.request(method, path, tr_id, params, body, tr_cont, _retry=False)
             except:
                 error_msg = str(e)
             raise Exception(f"API 요청 실패: {error_msg}")
