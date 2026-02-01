@@ -37,7 +37,7 @@ export function StockList({ title, kospiStocks, kosdaqStocks, history, news, typ
             <span className="text-xs sm:text-sm text-muted-foreground">({kospiStocks.length})</span>
           </div>
           {kospiStocks.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
               {kospiStocks.map((stock) => (
                 <StockCard
                   key={stock.code}
@@ -61,7 +61,7 @@ export function StockList({ title, kospiStocks, kosdaqStocks, history, news, typ
             <span className="text-xs sm:text-sm text-muted-foreground">({kosdaqStocks.length})</span>
           </div>
           {kosdaqStocks.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
               {kosdaqStocks.map((stock) => (
                 <StockCard
                   key={stock.code}
