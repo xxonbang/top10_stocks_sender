@@ -1,4 +1,5 @@
-import { TrendingUp, TrendingDown, ExternalLink, Newspaper } from "lucide-react"
+import { useState } from "react"
+import { TrendingUp, TrendingDown, ExternalLink, Newspaper, ChevronDown, ChevronUp } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn, formatPrice, formatVolume, formatChangeRate, getChangeBgColor } from "@/lib/utils"
@@ -12,9 +13,11 @@ interface StockCardProps {
 }
 
 export function StockCard({ stock, history, news, type }: StockCardProps) {
+  const [isNewsExpanded, setIsNewsExpanded] = useState(false)
   const isRising = type === "rising"
   const TrendIcon = isRising ? TrendingUp : TrendingDown
   const naverUrl = `https://m.stock.naver.com/domestic/stock/${stock.code}/total`
+  const hasNews = news && news.news && news.news.length > 0
 
   return (
     <Card className="group hover:shadow-lg transition-all duration-200 hover:border-primary/30 bg-card">
@@ -84,28 +87,68 @@ export function StockCard({ stock, history, news, type }: StockCardProps) {
           </div>
         </div>
 
-        {/* News Section - Hidden on mobile, visible on sm+ */}
-        {news && news.news && news.news.length > 0 && (
-          <div className="hidden sm:block mt-2 pt-2 border-t border-border/50">
-            <div className="flex items-center gap-1.5 mb-1.5">
-              <Newspaper className="w-3 h-3 text-muted-foreground" />
-              <span className="text-[10px] font-medium text-muted-foreground">관련 뉴스</span>
+        {/* News Section */}
+        {hasNews && (
+          <div className="mt-2 pt-2 border-t border-border/50">
+            {/* Mobile: Expand/Collapse Button */}
+            <button
+              onClick={() => setIsNewsExpanded(!isNewsExpanded)}
+              className="sm:hidden flex items-center justify-between w-full text-left"
+            >
+              <div className="flex items-center gap-1.5">
+                <Newspaper className="w-3 h-3 text-muted-foreground" />
+                <span className="text-[10px] font-medium text-muted-foreground">
+                  관련 뉴스 ({news.news.length})
+                </span>
+              </div>
+              {isNewsExpanded ? (
+                <ChevronUp className="w-4 h-4 text-muted-foreground" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              )}
+            </button>
+
+            {/* Mobile: Collapsible News List */}
+            {isNewsExpanded && (
+              <ul className="sm:hidden mt-1.5 space-y-1">
+                {news.news.slice(0, 3).map((item, idx) => (
+                  <li key={idx}>
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-muted-foreground hover:text-primary transition-colors line-clamp-2 block"
+                      title={item.title}
+                    >
+                      • {item.title.replace(/<[^>]*>/g, '')}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Desktop: Always visible */}
+            <div className="hidden sm:block">
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <Newspaper className="w-3 h-3 text-muted-foreground" />
+                <span className="text-[10px] font-medium text-muted-foreground">관련 뉴스</span>
+              </div>
+              <ul className="space-y-1">
+                {news.news.slice(0, 2).map((item, idx) => (
+                  <li key={idx}>
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] sm:text-xs text-muted-foreground hover:text-primary transition-colors line-clamp-1 block"
+                      title={item.title}
+                    >
+                      • {item.title.replace(/<[^>]*>/g, '')}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="space-y-1">
-              {news.news.slice(0, 2).map((item, idx) => (
-                <li key={idx}>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[10px] sm:text-xs text-muted-foreground hover:text-primary transition-colors line-clamp-1 block"
-                    title={item.title}
-                  >
-                    • {item.title.replace(/<[^>]*>/g, '')}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         )}
       </CardContent>
