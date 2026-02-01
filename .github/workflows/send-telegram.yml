@@ -4,6 +4,8 @@ on:
   schedule:
     # KST 09:30 (UTC 00:30) - 장 시작 후 30분
     - cron: '30 0 * * 1-5'
+    # KST 21:00 (UTC 12:00) - 장 마감 후
+    - cron: '0 12 * * 1-5'
   workflow_dispatch:
     inputs:
       skip_news:
