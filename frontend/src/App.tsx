@@ -32,8 +32,8 @@ function App() {
           </div>
         )}
 
-        {/* Responsive Grid: 1 column on mobile, 2 columns on large screens */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
+        {/* Stock Lists - Full width with 2-column cards inside */}
+        <div className="space-y-4 sm:space-y-6">
           {/* Rising Stocks */}
           {data && (
             <StockList
