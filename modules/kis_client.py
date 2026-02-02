@@ -7,10 +7,11 @@
 - 한국투자증권 API는 Access Token 발급이 1일 1회로 제한됩니다.
 - 토큰은 24시간 유효하므로, 캐시된 토큰을 최대한 재사용합니다.
 - 토큰이 만료되어도 먼저 사용을 시도하고, 실패 시에만 재발급합니다.
+- 로컬과 GitHub Actions 간 토큰 공유를 위해 Supabase를 사용합니다.
 """
 import json
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional, Dict, Any
 
@@ -100,19 +101,27 @@ class KISClient:
         """Supabase에서 토큰 로드"""
         manager = get_supabase_manager()
         if not manager.is_available():
+            print("[KIS] Supabase 미설정 - 로컬 캐시만 사용합니다.")
             return False
 
         token_data = get_kis_token_from_supabase()
         if not token_data:
+            print("[KIS] Supabase에 저장된 토큰이 없습니다.")
             return False
 
         try:
             self._access_token = token_data.get('access_token')
-            self._token_expires_at = datetime.fromisoformat(token_data['expires_at'])
-            self._token_issued_at = datetime.fromisoformat(token_data['issued_at'])
+            # UTC로 통일하여 시간대 문제 방지
+            expires_at_str = token_data['expires_at']
+            issued_at_str = token_data['issued_at']
 
-            # 토큰 상태 출력
-            remaining = self._token_expires_at - datetime.now()
+            # timezone 정보가 없으면 UTC로 간주
+            self._token_expires_at = self._parse_datetime(expires_at_str)
+            self._token_issued_at = self._parse_datetime(issued_at_str)
+
+            # 토큰 상태 출력 (UTC 기준)
+            now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+            remaining = self._token_expires_at - now_utc
             if remaining.total_seconds() > 0:
                 hours = remaining.total_seconds() / 3600
                 print(f"[KIS] Supabase에서 토큰 로드 완료 (유효시간: {hours:.1f}시간 남음)")
@@ -126,6 +135,14 @@ class KISClient:
         except (KeyError, ValueError) as e:
             print(f"[KIS] Supabase 토큰 파싱 실패: {e}")
             return False
+
+    def _parse_datetime(self, dt_str: str) -> datetime:
+        """ISO 형식 문자열을 datetime으로 파싱 (timezone 제거)"""
+        dt = datetime.fromisoformat(dt_str.replace('Z', '+00:00'))
+        # timezone-aware면 UTC로 변환 후 naive로 변경
+        if dt.tzinfo is not None:
+            dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
+        return dt
 
     def _load_token_from_file(self) -> bool:
         """로컬 파일에서 토큰 로드"""
@@ -141,11 +158,12 @@ class KISClient:
                 return False
 
             self._access_token = token_data.get('access_token')
-            self._token_expires_at = datetime.fromisoformat(token_data['expires_at'])
-            self._token_issued_at = datetime.fromisoformat(token_data['issued_at'])
+            self._token_expires_at = self._parse_datetime(token_data['expires_at'])
+            self._token_issued_at = self._parse_datetime(token_data['issued_at'])
 
-            # 토큰 상태 출력
-            remaining = self._token_expires_at - datetime.now()
+            # 토큰 상태 출력 (UTC 기준)
+            now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+            remaining = self._token_expires_at - now_utc
             if remaining.total_seconds() > 0:
                 hours = remaining.total_seconds() / 3600
                 print(f"[KIS] 로컬 캐시에서 토큰 로드 완료 (유효시간: {hours:.1f}시간 남음)")
@@ -191,20 +209,24 @@ class KISClient:
         with open(self._token_cache_path, 'w') as f:
             json.dump(cache, f, indent=2)
 
+    def _now_utc(self) -> datetime:
+        """현재 UTC 시간 반환 (timezone-naive)"""
+        return datetime.now(timezone.utc).replace(tzinfo=None)
+
     def _can_refresh_token(self) -> bool:
         """토큰 재발급 가능 여부 확인 (1일 1회 제한)"""
         if self._token_issued_at is None:
             return True
 
         # 마지막 발급으로부터 23시간이 지났는지 확인 (여유 1시간)
-        time_since_issue = datetime.now() - self._token_issued_at
+        time_since_issue = self._now_utc() - self._token_issued_at
         return time_since_issue.total_seconds() >= 23 * 3600
 
     def _is_token_valid(self) -> bool:
         """토큰이 유효한지 확인 (만료 10분 전까지 유효)"""
         if not self._access_token or not self._token_expires_at:
             return False
-        return datetime.now() < self._token_expires_at - timedelta(minutes=10)
+        return self._now_utc() < self._token_expires_at - timedelta(minutes=10)
 
     def get_access_token(self, force_refresh: bool = False) -> str:
         """OAuth 액세스 토큰 반환
@@ -238,12 +260,12 @@ class KISClient:
         """
         # 1일 1회 제한 확인
         if not self._can_refresh_token():
-            remaining = timedelta(hours=23) - (datetime.now() - self._token_issued_at)
+            remaining = timedelta(hours=23) - (self._now_utc() - self._token_issued_at)
             hours = remaining.total_seconds() / 3600
             raise TokenRefreshLimitError(
                 f"토큰 재발급은 1일 1회로 제한됩니다. "
                 f"약 {hours:.1f}시간 후에 다시 시도하세요. "
-                f"(마지막 발급: {self._token_issued_at.strftime('%Y-%m-%d %H:%M:%S')})"
+                f"(마지막 발급: {self._token_issued_at.strftime('%Y-%m-%d %H:%M:%S')} UTC)"
             )
 
         print(f"[KIS] 새 토큰 발급 중... (주의: 1일 1회 제한)")
@@ -281,7 +303,7 @@ class KISClient:
             raise Exception(f"토큰 발급 실패: {data}")
 
         self._access_token = data['access_token']
-        self._token_issued_at = datetime.now()
+        self._token_issued_at = self._now_utc()  # UTC 시간 사용
 
         # 토큰 만료 시간 (보통 24시간)
         expires_in = int(data.get('expires_in', 86400))
@@ -290,6 +312,7 @@ class KISClient:
         self._save_token_cache()
 
         print(f"[KIS] 토큰 발급 완료 (유효기간: {expires_in // 3600}시간)")
+        print(f"[KIS] 토큰이 Supabase와 로컬에 저장되었습니다.")
 
         return self._access_token
 
@@ -318,7 +341,7 @@ class KISClient:
             raise Exception(f"토큰 발급 실패: {data}")
 
         self._access_token = data['access_token']
-        self._token_issued_at = datetime.now()
+        self._token_issued_at = self._now_utc()  # UTC 시간 사용
 
         # 토큰 만료 시간 (보통 24시간)
         expires_in = int(data.get('expires_in', 86400))
@@ -327,6 +350,7 @@ class KISClient:
         self._save_token_cache()
 
         print(f"[KIS] 강제 토큰 발급 완료 (유효기간: {expires_in // 3600}시간)")
+        print(f"[KIS] 새 토큰이 Supabase와 로컬에 저장되었습니다.")
 
         return self._access_token
 
@@ -417,15 +441,16 @@ class KISClient:
             "has_token": self._access_token is not None,
             "is_valid": self._is_token_valid(),
             "can_refresh": self._can_refresh_token(),
+            "supabase_available": get_supabase_manager().is_available(),
         }
 
         if self._token_expires_at:
-            remaining = self._token_expires_at - datetime.now()
-            status["expires_at"] = self._token_expires_at.isoformat()
+            remaining = self._token_expires_at - self._now_utc()
+            status["expires_at"] = self._token_expires_at.isoformat() + "Z"  # UTC 표시
             status["remaining_hours"] = max(0, remaining.total_seconds() / 3600)
 
         if self._token_issued_at:
-            status["issued_at"] = self._token_issued_at.isoformat()
+            status["issued_at"] = self._token_issued_at.isoformat() + "Z"  # UTC 표시
 
         return status
 
