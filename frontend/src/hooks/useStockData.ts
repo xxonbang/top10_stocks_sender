@@ -47,6 +47,15 @@ export function useStockData(): UseStockDataReturn {
 function getMockData(): StockData {
   return {
     timestamp: new Date().toISOString().replace("T", " ").slice(0, 19),
+    exchange: {
+      timestamp: new Date().toISOString().replace("T", " ").slice(0, 19),
+      search_date: new Date().toISOString().slice(0, 10).replace(/-/g, ""),
+      rates: [
+        { currency: "USD", currency_name: "미국 달러", rate: 1450.00, ttb: 1435.50, tts: 1464.50, is_100: false },
+        { currency: "JPY", currency_name: "일본 옌", rate: 950.00, ttb: 940.50, tts: 959.50, is_100: true },
+        { currency: "EUR", currency_name: "유로", rate: 1580.00, ttb: 1564.20, tts: 1595.80, is_100: false },
+      ],
+    },
     rising: {
       kospi: [
         { rank: 1, code: "005930", name: "삼성전자", current_price: 87000, change_rate: 3.57, volume: 15000000 },
