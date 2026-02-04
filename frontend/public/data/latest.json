@@ -1,138 +1,113 @@
 {
-  "timestamp": "2026-02-03 23:05:15",
+  "timestamp": "2026-02-04 09:32:38",
   "exchange": {
-    "timestamp": "2026-02-03 23:04:50",
-    "search_date": "20260203",
-    "rates": [
-      {
-        "currency": "USD",
-        "currency_name": "미국 달러",
-        "rate": 1457.3,
-        "ttb": 1442.72,
-        "tts": 1471.87,
-        "is_100": false
-      },
-      {
-        "currency": "JPY",
-        "currency_name": "일본 옌",
-        "rate": 936.66,
-        "ttb": 927.29,
-        "tts": 946.02,
-        "is_100": true
-      },
-      {
-        "currency": "EUR",
-        "currency_name": "유로",
-        "rate": 1718.59,
-        "ttb": 1701.4,
-        "tts": 1735.77,
-        "is_100": false
-      }
-    ]
+    "timestamp": "",
+    "search_date": "",
+    "rates": []
   },
   "rising": {
     "kospi": [
       {
         "rank": 1,
-        "code": "027360",
-        "name": "아주IB투자",
-        "current_price": 5110,
-        "change_rate": 14.19,
-        "change_price": 635,
-        "volume": 44812999,
-        "volume_rate": 435.05,
-        "trading_value": 231517239382,
+        "code": "225190",
+        "name": "LK삼양",
+        "current_price": 2360,
+        "change_rate": 27.09,
+        "change_price": 503,
+        "volume": 26167134,
+        "volume_rate": 218.24,
+        "trading_value": 59558589038,
         "market": "KOSPI",
         "is_etf": false
       },
       {
         "rank": 2,
-        "code": "002780",
-        "name": "진흥기업",
-        "current_price": 795,
-        "change_rate": 17.6,
-        "change_price": 119,
-        "volume": 25135795,
-        "volume_rate": 2094.32,
-        "trading_value": 20314240683,
+        "code": "038530",
+        "name": "케이바이오",
+        "current_price": 357,
+        "change_rate": 23.53,
+        "change_price": 68,
+        "volume": 18618264,
+        "volume_rate": 126.08,
+        "trading_value": 6321766124,
         "market": "KOSPI",
         "is_etf": false
       },
       {
         "rank": 3,
-        "code": "255220",
-        "name": "SG",
-        "current_price": 3240,
-        "change_rate": 22.26,
-        "change_price": 590,
-        "volume": 24457553,
-        "volume_rate": 721.62,
-        "trading_value": 78603404544,
+        "code": "083640",
+        "name": "인콘",
+        "current_price": 642,
+        "change_rate": 29.96,
+        "change_price": 148,
+        "volume": 8574224,
+        "volume_rate": 38.77,
+        "trading_value": 5354643007,
         "market": "KOSPI",
         "is_etf": false
       },
       {
         "rank": 4,
-        "code": "083640",
-        "name": "인콘",
-        "current_price": 494,
-        "change_rate": 30.0,
-        "change_price": 114,
-        "volume": 22115550,
-        "volume_rate": 89.83,
-        "trading_value": 10293185798,
+        "code": "009070",
+        "name": "KCTC",
+        "current_price": 7500,
+        "change_rate": 9.01,
+        "change_price": 620,
+        "volume": 5753154,
+        "volume_rate": 121.34,
+        "trading_value": 44025050110,
         "market": "KOSPI",
         "is_etf": false
       },
       {
         "rank": 5,
-        "code": "006800",
-        "name": "미래에셋증권",
-        "current_price": 49950,
-        "change_rate": 24.72,
-        "change_price": 9900,
-        "volume": 19048790,
-        "volume_rate": 299.8,
-        "trading_value": 911638977175,
+        "code": "001360",
+        "name": "삼성제약",
+        "current_price": 2205,
+        "change_rate": 14.31,
+        "change_price": 276,
+        "volume": 5141763,
+        "volume_rate": 150.06,
+        "trading_value": 11070124316,
         "market": "KOSPI",
         "is_etf": false
       },
       {
         "rank": 6,
-        "code": "115610",
-        "name": "이미지스",
-        "current_price": 2430,
-        "change_rate": 29.6,
-        "change_price": 555,
-        "volume": 17899602,
-        "volume_rate": 361.5,
-        "trading_value": 41004083675,
+        "code": "008600",
+        "name": "윌비스",
+        "current_price": 374,
+        "change_rate": 14.02,
+        "change_price": 46,
+        "volume": 4842572,
+        "volume_rate": 570.71,
+        "trading_value": 1794432905,
         "market": "KOSPI",
         "is_etf": false
       },
       {
         "rank": 7,
-        "code": "052900",
-        "name": "KX하이텍",
-        "current_price": 1315,
-        "change_rate": 19.55,
-        "change_price": 215,
-        "volume": 16214817,
-        "volume_rate": 189.86,
-        "trading_value": 21034161251,
+        "code": "044180",
+        "name": "KD",
+        "current_price": 388,
+        "change_rate": 15.13,
+        "change_price": 51,
+        "volume": 4588941,
+        "volume_rate": 168.99,
+        "trading_value": 1748863735,
         "market": "KOSPI",
         "is_etf": false
       },
       {
         "rank": 8,
-        "code": "001440",
-        "name": "대한전선",
-        "current_price": 30800,
-        "change_rate": 15.57,
-        "change_price": 4150,
-        "volume": 15605824,
-        "volume_rate": 335.99,
-        "trading_value": 468578069900,
+        "code": "130660",
+        "name": "한전산업",
+        "current_price": 17200,
+        "change_rate": 28.74,
+        "change_price": 3840,
+        "volume": 3984910,
+        "volume_rate": 1430.14,
+        "trading_value": 65469620095,
         "market": "KOSPI",
         "is_etf": false
       },
@@ -140,25 +115,25 @@
         "rank": 9,
         "code": "100790",
         "name": "미래에셋벤처투자",
-        "current_price": 22100,
-        "change_rate": 30.0,
-        "change_price": 5100,
-        "volume": 15604745,
-        "volume_rate": 757.21,
-        "trading_value": 329002146825,
+        "current_price": 25950,
+        "change_rate": 17.42,
+        "change_price": 3850,
+        "volume": 3487738,
+        "volume_rate": 22.35,
+        "trading_value": 92008110975,
         "market": "KOSPI",
         "is_etf": false
       },
       {
         "rank": 10,
-        "code": "272210",
-        "name": "한화시스템",
-        "current_price": 119500,
-        "change_rate": 28.63,
-        "change_price": 26600,
-        "volume": 14174959,
-        "volume_rate": 253.52,
-        "trading_value": 1569106813400,
+        "code": "003380",
+        "name": "하림지주",
+        "current_price": 18100,
+        "change_rate": 19.95,
+        "change_price": 3010,
+        "volume": 2925487,
+        "volume_rate": 48.61,
+        "trading_value": 49186695845,
         "market": "KOSPI",
         "is_etf": false
       }
@@ -168,12 +143,187 @@
         "rank": 1,
         "code": "389680",
         "name": "유디엠텍",
-        "current_price": 1079,
-        "change_rate": 30.0,
-        "change_price": 249,
-        "volume": 22459175,
-        "volume_rate": 1371.28,
-        "trading_value": 22519397164,
+        "current_price": 1402,
+        "change_rate": 29.94,
+        "change_price": 323,
+        "volume": 6591805,
+        "volume_rate": 29.35,
+        "trading_value": 8789691824,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 2,
+        "code": "328380",
+        "name": "솔트웨어",
+        "current_price": 1070,
+        "change_rate": 27.38,
+        "change_price": 230,
+        "volume": 4896865,
+        "volume_rate": 1604.07,
+        "trading_value": 5191728266,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 3,
+        "code": "340930",
+        "name": "유일에너테크",
+        "current_price": 1509,
+        "change_rate": 5.89,
+        "change_price": 84,
+        "volume": 2192306,
+        "volume_rate": 38.44,
+        "trading_value": 3238971106,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 4,
+        "code": "452260",
+        "name": "한화갤러리아",
+        "current_price": 2040,
+        "change_rate": 1.75,
+        "change_price": 35,
+        "volume": 1543849,
+        "volume_rate": 11.31,
+        "trading_value": 3090808811,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 5,
+        "code": "317240",
+        "name": "TS트릴리온",
+        "current_price": 433,
+        "change_rate": 2.36,
+        "change_price": 10,
+        "volume": 1488897,
+        "volume_rate": 41.14,
+        "trading_value": 654430082,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 6,
+        "code": "388790",
+        "name": "라이콤",
+        "current_price": 2650,
+        "change_rate": 9.05,
+        "change_price": 220,
+        "volume": 1107067,
+        "volume_rate": 696.33,
+        "trading_value": 2977003855,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 7,
+        "code": "396300",
+        "name": "세아메카닉스",
+        "current_price": 4610,
+        "change_rate": 1.21,
+        "change_price": 55,
+        "volume": 973319,
+        "volume_rate": 48.17,
+        "trading_value": 4569407132,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 8,
+        "code": "457190",
+        "name": "이수스페셜티케미컬",
+        "current_price": 119500,
+        "change_rate": 11.16,
+        "change_price": 12000,
+        "volume": 804673,
+        "volume_rate": 91.9,
+        "trading_value": 95134556500,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 9,
+        "code": "340450",
+        "name": "지씨지놈",
+        "current_price": 9080,
+        "change_rate": 3.42,
+        "change_price": 300,
+        "volume": 789375,
+        "volume_rate": 56.13,
+        "trading_value": 7259980165,
+        "market": "KOSDAQ",
+        "is_etf": false
+      },
+      {
+        "rank": 10,
+        "code": "388050",
+        "name": "지투파워",
+        "current_price": 9320,
+        "change_rate": 4.25,
+        "change_price": 380,
+        "volume": 711974,
+        "volume_rate": 230.55,
+        "trading_value": 6608938125,
+        "market": "KOSDAQ",
+        "is_etf": false
+      }
+    ]
+  },
+  "falling": {
+    "kospi": [
+      {
+        "rank": 1,
+        "code": "255220",
+        "name": "SG",
+        "current_price": 3010,
+        "change_rate": -7.1,
+        "change_price": -230,
+        "volume": 4624593,
+        "volume_rate": 18.91,
+        "trading_value": 14055245273,
+        "market": "KOSPI",
+        "is_etf": false
+      },
+      {
+        "rank": 2,
+        "code": "090710",
+        "name": "휴림로봇",
+        "current_price": 14140,
+        "change_rate": -3.48,
+        "change_price": -510,
+        "volume": 2835737,
+        "volume_rate": 29.89,
+        "trading_value": 40457545875,
+        "market": "KOSPI",
+        "is_etf": false
+      },
+      {
+        "rank": 3,
+        "code": "049630",
+        "name": "재영솔루텍",
+        "current_price": 4690,
+        "change_rate": -4.67,
+        "change_price": -230,
+        "volume": 2729238,
+        "volume_rate": 30.31,
+        "trading_value": 13143980233,
+        "market": "KOSPI",
+        "is_etf": false
+      }
+    ],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "321370",
+        "name": "센서뷰",
+        "current_price": 3665,
+        "change_rate": -7.45,
+        "change_price": -295,
+        "volume": 1975362,
+        "volume_rate": 48.55,
+        "trading_value": 7427844008,
         "market": "KOSDAQ",
         "is_etf": false
       },
@@ -181,258 +331,172 @@
         "rank": 2,
         "code": "365330",
         "name": "에스와이스틸텍",
-        "current_price": 4100,
-        "change_rate": 16.15,
-        "change_price": 570,
-        "volume": 19981325,
-        "volume_rate": 1484.83,
-        "trading_value": 81137716772,
+        "current_price": 3940,
+        "change_rate": -3.9,
+        "change_price": -160,
+        "volume": 1955689,
+        "volume_rate": 9.79,
+        "trading_value": 7690514750,
         "market": "KOSDAQ",
         "is_etf": false
       },
       {
         "rank": 3,
-        "code": "452260",
-        "name": "한화갤러리아",
-        "current_price": 2005,
-        "change_rate": 5.14,
-        "change_price": 98,
-        "volume": 13645042,
-        "volume_rate": 89.04,
-        "trading_value": 27324257187,
+        "code": "474170",
+        "name": "루미르",
+        "current_price": 19860,
+        "change_rate": -1.93,
+        "change_price": -390,
+        "volume": 1114817,
+        "volume_rate": 13.31,
+        "trading_value": 22509135070,
         "market": "KOSDAQ",
         "is_etf": false
       },
       {
         "rank": 4,
-        "code": "464490",
-        "name": "쿼드메디슨",
-        "current_price": 17700,
-        "change_rate": 18.0,
-        "change_price": 2700,
-        "volume": 8505510,
-        "volume_rate": 182.85,
-        "trading_value": 148265554785,
+        "code": "307870",
+        "name": "비투엔",
+        "current_price": 1249,
+        "change_rate": -0.87,
+        "change_price": -11,
+        "volume": 964285,
+        "volume_rate": 150.11,
+        "trading_value": 1266322778,
         "market": "KOSDAQ",
         "is_etf": false
       },
       {
         "rank": 5,
-        "code": "474170",
-        "name": "루미르",
-        "current_price": 20250,
-        "change_rate": 15.32,
-        "change_price": 2690,
-        "volume": 8378645,
-        "volume_rate": 80.35,
-        "trading_value": 166689829750,
+        "code": "332570",
+        "name": "PS일렉트로닉스",
+        "current_price": 7270,
+        "change_rate": -5.58,
+        "change_price": -430,
+        "volume": 946369,
+        "volume_rate": 31.34,
+        "trading_value": 6951518785,
         "market": "KOSDAQ",
         "is_etf": false
       },
       {
         "rank": 6,
-        "code": "417010",
-        "name": "나노팀",
-        "current_price": 11950,
-        "change_rate": 18.08,
-        "change_price": 1830,
-        "volume": 6882172,
-        "volume_rate": 707.25,
-        "trading_value": 84499248820,
+        "code": "331920",
+        "name": "셀레믹스",
+        "current_price": 3745,
+        "change_rate": -3.23,
+        "change_price": -125,
+        "volume": 927530,
+        "volume_rate": 87.93,
+        "trading_value": 3625596208,
         "market": "KOSDAQ",
         "is_etf": false
       },
       {
         "rank": 7,
-        "code": "396270",
-        "name": "넥스트칩",
-        "current_price": 4025,
-        "change_rate": 15.99,
-        "change_price": 555,
-        "volume": 4340891,
-        "volume_rate": 249.02,
-        "trading_value": 17488731454,
+        "code": "317850",
+        "name": "대모",
+        "current_price": 9580,
+        "change_rate": -6.99,
+        "change_price": -720,
+        "volume": 826557,
+        "volume_rate": 27.63,
+        "trading_value": 7915585415,
         "market": "KOSDAQ",
         "is_etf": false
       },
       {
         "rank": 8,
-        "code": "321370",
-        "name": "센서뷰",
-        "current_price": 3960,
-        "change_rate": 5.18,
-        "change_price": 195,
-        "volume": 4069035,
-        "volume_rate": 135.29,
-        "trading_value": 16028524218,
+        "code": "319400",
+        "name": "현대무벡스",
+        "current_price": 33850,
+        "change_rate": -1.88,
+        "change_price": -650,
+        "volume": 790989,
+        "volume_rate": 22.13,
+        "trading_value": 27300692450,
         "market": "KOSDAQ",
         "is_etf": false
       },
       {
         "rank": 9,
-        "code": "460470",
-        "name": "아이빔테크놀로지",
-        "current_price": 3170,
-        "change_rate": 10.07,
-        "change_price": 290,
-        "volume": 4006051,
-        "volume_rate": 3560.08,
-        "trading_value": 14185365234,
+        "code": "373200",
+        "name": "엑스플러스",
+        "current_price": 557,
+        "change_rate": -7.17,
+        "change_price": -43,
+        "volume": 780451,
+        "volume_rate": 62.93,
+        "trading_value": 444403004,
         "market": "KOSDAQ",
         "is_etf": false
       },
       {
         "rank": 10,
-        "code": "478340",
-        "name": "나라스페이스테크놀로지",
-        "current_price": 61700,
-        "change_rate": 11.78,
-        "change_price": 6500,
-        "volume": 3375066,
-        "volume_rate": 294.82,
-        "trading_value": 208204223550,
-        "market": "KOSDAQ",
-        "is_etf": false
-      }
-    ]
-  },
-  "falling": {
-    "kospi": [],
-    "kosdaq": [
-      {
-        "rank": 1,
-        "code": "340930",
-        "name": "유일에너테크",
-        "current_price": 1425,
-        "change_rate": -0.77,
-        "change_price": -11,
-        "volume": 5703254,
-        "volume_rate": 46.99,
-        "trading_value": 8220114207,
-        "market": "KOSDAQ",
-        "is_etf": false
-      },
-      {
-        "rank": 2,
-        "code": "354200",
-        "name": "엔젠바이오",
-        "current_price": 2540,
-        "change_rate": -3.61,
-        "change_price": -95,
-        "volume": 4347347,
-        "volume_rate": 42.84,
-        "trading_value": 11115368144,
-        "market": "KOSDAQ",
-        "is_etf": false
-      },
-      {
-        "rank": 3,
-        "code": "317240",
-        "name": "TS트릴리온",
-        "current_price": 423,
-        "change_rate": -3.64,
-        "change_price": -16,
-        "volume": 3618812,
-        "volume_rate": 96.75,
-        "trading_value": 1561890969,
-        "market": "KOSDAQ",
-        "is_etf": false
-      },
-      {
-        "rank": 4,
-        "code": "368770",
-        "name": "파이버프로",
-        "current_price": 17900,
-        "change_rate": -0.56,
-        "change_price": -100,
-        "volume": 3028901,
-        "volume_rate": 73.15,
-        "trading_value": 57046138590,
-        "market": "KOSDAQ",
-        "is_etf": false
-      },
-      {
-        "rank": 5,
-        "code": "380550",
-        "name": "뉴로핏",
-        "current_price": 35150,
-        "change_rate": -4.22,
-        "change_price": -1550,
-        "volume": 3016056,
-        "volume_rate": 28.69,
-        "trading_value": 104797224800,
+        "code": "417010",
+        "name": "나노팀",
+        "current_price": 11710,
+        "change_rate": -2.01,
+        "change_price": -240,
+        "volume": 683776,
+        "volume_rate": 9.94,
+        "trading_value": 8312298705,
         "market": "KOSDAQ",
         "is_etf": false
       }
     ]
   },
   "history": {
-    "027360": {
-      "code": "027360",
+    "225190": {
+      "code": "225190",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 2355,
+          "change_rate": 26.82
+        },
+        {
           "date": "2026-02-03",
-          "close": 5110,
-          "change_rate": 14.19
+          "close": 1857,
+          "change_rate": 29.95
         },
         {
           "date": "2026-02-02",
-          "close": 4475,
-          "change_rate": -6.58
-        },
-        {
-          "date": "2026-01-30",
-          "close": 4790,
-          "change_rate": 6.21
+          "close": 1429,
+          "change_rate": -3.64
         }
       ],
-      "total_change_rate": 13.3
+      "total_change_rate": 58.8
     },
-    "002780": {
-      "code": "002780",
+    "038530": {
+      "code": "038530",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 356,
+          "change_rate": 23.18
+        },
+        {
           "date": "2026-02-03",
-          "close": 795,
-          "change_rate": 17.6
+          "close": 289,
+          "change_rate": 8.65
         },
         {
           "date": "2026-02-02",
-          "close": 676,
-          "change_rate": 0.15
-        },
-        {
-          "date": "2026-01-30",
-          "close": 675,
-          "change_rate": -0.88
-        }
-      ],
-      "total_change_rate": 16.74
-    },
-    "255220": {
-      "code": "255220",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 3240,
-          "change_rate": 22.26
-        },
-        {
-          "date": "2026-02-02",
-          "close": 2650,
+          "close": 266,
           "change_rate": -1.12
-        },
-        {
-          "date": "2026-01-30",
-          "close": 2680,
-          "change_rate": -6.13
         }
       ],
-      "total_change_rate": 13.49
+      "total_change_rate": 32.34
     },
     "083640": {
       "code": "083640",
       "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 642,
+          "change_rate": 29.96
+        },
         {
           "date": "2026-02-03",
           "close": 494,
@@ -442,102 +506,123 @@
           "date": "2026-02-02",
           "close": 380,
           "change_rate": 29.69
-        },
-        {
-          "date": "2026-01-30",
-          "close": 293,
-          "change_rate": -6.98
         }
       ],
-      "total_change_rate": 56.83
+      "total_change_rate": 119.11
     },
-    "006800": {
-      "code": "006800",
+    "009070": {
+      "code": "009070",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 7530,
+          "change_rate": 9.45
+        },
+        {
           "date": "2026-02-03",
-          "close": 49950,
-          "change_rate": 24.72
+          "close": 6880,
+          "change_rate": 8.01
         },
         {
           "date": "2026-02-02",
-          "close": 40050,
-          "change_rate": -6.32
-        },
-        {
-          "date": "2026-01-30",
-          "close": 42750,
-          "change_rate": 4.65
+          "close": 6370,
+          "change_rate": -5.49
         }
       ],
-      "total_change_rate": 22.28
+      "total_change_rate": 11.72
     },
-    "115610": {
-      "code": "115610",
+    "001360": {
+      "code": "001360",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 2140,
+          "change_rate": 10.94
+        },
+        {
           "date": "2026-02-03",
-          "close": 2430,
-          "change_rate": 29.6
+          "close": 1929,
+          "change_rate": 7.89
         },
         {
           "date": "2026-02-02",
-          "close": 1875,
-          "change_rate": 8.19
-        },
-        {
-          "date": "2026-01-30",
-          "close": 1733,
-          "change_rate": 10.24
+          "close": 1788,
+          "change_rate": -1.27
         }
       ],
-      "total_change_rate": 54.58
+      "total_change_rate": 18.17
     },
-    "052900": {
-      "code": "052900",
+    "008600": {
+      "code": "008600",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 371,
+          "change_rate": 13.11
+        },
+        {
           "date": "2026-02-03",
-          "close": 1315,
-          "change_rate": 19.55
+          "close": 328,
+          "change_rate": -0.61
         },
         {
           "date": "2026-02-02",
-          "close": 1100,
-          "change_rate": 9.78
-        },
-        {
-          "date": "2026-01-30",
-          "close": 1002,
-          "change_rate": 0.91
+          "close": 330,
+          "change_rate": -2.08
         }
       ],
-      "total_change_rate": 32.43
+      "total_change_rate": 10.09
     },
-    "001440": {
-      "code": "001440",
+    "044180": {
+      "code": "044180",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 396,
+          "change_rate": 17.51
+        },
+        {
           "date": "2026-02-03",
-          "close": 30800,
-          "change_rate": 15.57
+          "close": 337,
+          "change_rate": 2.12
         },
         {
           "date": "2026-02-02",
-          "close": 26650,
-          "change_rate": -9.35
-        },
-        {
-          "date": "2026-01-30",
-          "close": 29400,
-          "change_rate": 3.89
+          "close": 330,
+          "change_rate": -8.84
         }
       ],
-      "total_change_rate": 8.83
+      "total_change_rate": 9.39
+    },
+    "130660": {
+      "code": "130660",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 17060,
+          "change_rate": 27.69
+        },
+        {
+          "date": "2026-02-03",
+          "close": 13360,
+          "change_rate": 3.17
+        },
+        {
+          "date": "2026-02-02",
+          "close": 12950,
+          "change_rate": -5.54
+        }
+      ],
+      "total_change_rate": 24.43
     },
     "100790": {
       "code": "100790",
       "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 25900,
+          "change_rate": 17.19
+        },
         {
           "date": "2026-02-03",
           "close": 22100,
@@ -547,39 +632,39 @@
           "date": "2026-02-02",
           "close": 17000,
           "change_rate": -3.41
-        },
-        {
-          "date": "2026-01-30",
-          "close": 17600,
-          "change_rate": -8.33
         }
       ],
-      "total_change_rate": 15.1
+      "total_change_rate": 47.16
     },
-    "272210": {
-      "code": "272210",
+    "003380": {
+      "code": "003380",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 18100,
+          "change_rate": 19.95
+        },
+        {
           "date": "2026-02-03",
-          "close": 119500,
-          "change_rate": 28.63
+          "close": 15090,
+          "change_rate": 8.48
         },
         {
           "date": "2026-02-02",
-          "close": 92900,
-          "change_rate": -1.38
-        },
-        {
-          "date": "2026-01-30",
-          "close": 94200,
-          "change_rate": 1.51
+          "close": 13910,
+          "change_rate": -3.54
         }
       ],
-      "total_change_rate": 28.77
+      "total_change_rate": 25.52
     },
     "389680": {
       "code": "389680",
       "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 1402,
+          "change_rate": 29.94
+        },
         {
           "date": "2026-02-03",
           "close": 1079,
@@ -589,207 +674,39 @@
           "date": "2026-02-02",
           "close": 830,
           "change_rate": -6.74
-        },
-        {
-          "date": "2026-01-30",
-          "close": 890,
-          "change_rate": 0.45
         }
       ],
-      "total_change_rate": 21.78
+      "total_change_rate": 57.53
     },
-    "365330": {
-      "code": "365330",
+    "328380": {
+      "code": "328380",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 1059,
+          "change_rate": 26.07
+        },
+        {
           "date": "2026-02-03",
-          "close": 4100,
-          "change_rate": 16.15
+          "close": 840,
+          "change_rate": 3.96
         },
         {
           "date": "2026-02-02",
-          "close": 3530,
-          "change_rate": 1.73
-        },
-        {
-          "date": "2026-01-30",
-          "close": 3470,
-          "change_rate": -4.01
+          "close": 808,
+          "change_rate": 0.0
         }
       ],
-      "total_change_rate": 13.42
-    },
-    "452260": {
-      "code": "452260",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 2005,
-          "change_rate": 5.14
-        },
-        {
-          "date": "2026-02-02",
-          "close": 1907,
-          "change_rate": 4.72
-        },
-        {
-          "date": "2026-01-30",
-          "close": 1821,
-          "change_rate": -2.57
-        }
-      ],
-      "total_change_rate": 7.28
-    },
-    "464490": {
-      "code": "464490",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 17700,
-          "change_rate": 18.0
-        },
-        {
-          "date": "2026-02-02",
-          "close": 15000,
-          "change_rate": 11.28
-        },
-        {
-          "date": "2026-01-30",
-          "close": 13480,
-          "change_rate": -6.19
-        }
-      ],
-      "total_change_rate": 23.17
-    },
-    "474170": {
-      "code": "474170",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 20250,
-          "change_rate": 15.32
-        },
-        {
-          "date": "2026-02-02",
-          "close": 17560,
-          "change_rate": 11.14
-        },
-        {
-          "date": "2026-01-30",
-          "close": 15800,
-          "change_rate": 4.22
-        }
-      ],
-      "total_change_rate": 33.58
-    },
-    "417010": {
-      "code": "417010",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 11950,
-          "change_rate": 18.08
-        },
-        {
-          "date": "2026-02-02",
-          "close": 10120,
-          "change_rate": -8.42
-        },
-        {
-          "date": "2026-01-30",
-          "close": 11050,
-          "change_rate": -0.18
-        }
-      ],
-      "total_change_rate": 7.95
-    },
-    "396270": {
-      "code": "396270",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 4025,
-          "change_rate": 15.99
-        },
-        {
-          "date": "2026-02-02",
-          "close": 3470,
-          "change_rate": 1.76
-        },
-        {
-          "date": "2026-01-30",
-          "close": 3410,
-          "change_rate": -6.19
-        }
-      ],
-      "total_change_rate": 10.73
-    },
-    "321370": {
-      "code": "321370",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 3960,
-          "change_rate": 5.18
-        },
-        {
-          "date": "2026-02-02",
-          "close": 3765,
-          "change_rate": -2.84
-        },
-        {
-          "date": "2026-01-30",
-          "close": 3875,
-          "change_rate": 0.39
-        }
-      ],
-      "total_change_rate": 2.59
-    },
-    "460470": {
-      "code": "460470",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 3170,
-          "change_rate": 10.07
-        },
-        {
-          "date": "2026-02-02",
-          "close": 2880,
-          "change_rate": -7.1
-        },
-        {
-          "date": "2026-01-30",
-          "close": 3100,
-          "change_rate": 4.38
-        }
-      ],
-      "total_change_rate": 6.73
-    },
-    "478340": {
-      "code": "478340",
-      "changes": [
-        {
-          "date": "2026-02-03",
-          "close": 61700,
-          "change_rate": 11.78
-        },
-        {
-          "date": "2026-02-02",
-          "close": 55200,
-          "change_rate": -8.46
-        },
-        {
-          "date": "2026-01-30",
-          "close": 60300,
-          "change_rate": 3.08
-        }
-      ],
-      "total_change_rate": 5.47
+      "total_change_rate": 31.06
     },
     "340930": {
       "code": "340930",
       "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 1501,
+          "change_rate": 5.33
+        },
         {
           "date": "2026-02-03",
           "close": 1425,
@@ -799,39 +716,39 @@
           "date": "2026-02-02",
           "close": 1436,
           "change_rate": -2.05
-        },
-        {
-          "date": "2026-01-30",
-          "close": 1466,
-          "change_rate": -5.42
         }
       ],
-      "total_change_rate": -8.06
+      "total_change_rate": 2.39
     },
-    "354200": {
-      "code": "354200",
+    "452260": {
+      "code": "452260",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 2030,
+          "change_rate": 1.25
+        },
+        {
           "date": "2026-02-03",
-          "close": 2540,
-          "change_rate": -3.61
+          "close": 2005,
+          "change_rate": 5.14
         },
         {
           "date": "2026-02-02",
-          "close": 2635,
-          "change_rate": 29.8
-        },
-        {
-          "date": "2026-01-30",
-          "close": 2030,
-          "change_rate": -9.58
+          "close": 1907,
+          "change_rate": 4.72
         }
       ],
-      "total_change_rate": 13.14
+      "total_change_rate": 11.48
     },
     "317240": {
       "code": "317240",
       "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 433,
+          "change_rate": 2.36
+        },
         {
           "date": "2026-02-03",
           "close": 423,
@@ -841,57 +758,1247 @@
           "date": "2026-02-02",
           "close": 439,
           "change_rate": -5.79
-        },
-        {
-          "date": "2026-01-30",
-          "close": 466,
-          "change_rate": -3.12
         }
       ],
-      "total_change_rate": -12.06
+      "total_change_rate": -7.08
     },
-    "368770": {
-      "code": "368770",
+    "388790": {
+      "code": "388790",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 2665,
+          "change_rate": 9.67
+        },
+        {
           "date": "2026-02-03",
-          "close": 17900,
-          "change_rate": -0.56
+          "close": 2430,
+          "change_rate": 2.32
         },
         {
           "date": "2026-02-02",
-          "close": 18000,
-          "change_rate": 7.08
-        },
-        {
-          "date": "2026-01-30",
-          "close": 16810,
-          "change_rate": -3.72
+          "close": 2375,
+          "change_rate": -5.57
         }
       ],
-      "total_change_rate": 2.52
+      "total_change_rate": 5.96
     },
-    "380550": {
-      "code": "380550",
+    "396300": {
+      "code": "396300",
       "changes": [
         {
+          "date": "2026-02-04",
+          "close": 4595,
+          "change_rate": 0.88
+        },
+        {
           "date": "2026-02-03",
-          "close": 35150,
-          "change_rate": -4.22
+          "close": 4555,
+          "change_rate": 2.59
         },
         {
           "date": "2026-02-02",
-          "close": 36700,
-          "change_rate": 29.91
-        },
-        {
-          "date": "2026-01-30",
-          "close": 28250,
-          "change_rate": 29.89
+          "close": 4440,
+          "change_rate": -2.09
         }
       ],
-      "total_change_rate": 61.61
+      "total_change_rate": 1.32
+    },
+    "457190": {
+      "code": "457190",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 120400,
+          "change_rate": 12.0
+        },
+        {
+          "date": "2026-02-03",
+          "close": 107500,
+          "change_rate": 3.76
+        },
+        {
+          "date": "2026-02-02",
+          "close": 103600,
+          "change_rate": -2.63
+        }
+      ],
+      "total_change_rate": 13.16
+    },
+    "340450": {
+      "code": "340450",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 9080,
+          "change_rate": 3.42
+        },
+        {
+          "date": "2026-02-03",
+          "close": 8780,
+          "change_rate": 3.66
+        },
+        {
+          "date": "2026-02-02",
+          "close": 8470,
+          "change_rate": 2.92
+        }
+      ],
+      "total_change_rate": 10.33
+    },
+    "388050": {
+      "code": "388050",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 9270,
+          "change_rate": 3.69
+        },
+        {
+          "date": "2026-02-03",
+          "close": 8940,
+          "change_rate": 5.3
+        },
+        {
+          "date": "2026-02-02",
+          "close": 8490,
+          "change_rate": -3.52
+        }
+      ],
+      "total_change_rate": 5.34
+    },
+    "255220": {
+      "code": "255220",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 3000,
+          "change_rate": -7.41
+        },
+        {
+          "date": "2026-02-03",
+          "close": 3240,
+          "change_rate": 22.26
+        },
+        {
+          "date": "2026-02-02",
+          "close": 2650,
+          "change_rate": -1.12
+        }
+      ],
+      "total_change_rate": 11.94
+    },
+    "090710": {
+      "code": "090710",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 14140,
+          "change_rate": -3.48
+        },
+        {
+          "date": "2026-02-03",
+          "close": 14650,
+          "change_rate": 1.88
+        },
+        {
+          "date": "2026-02-02",
+          "close": 14380,
+          "change_rate": -2.44
+        }
+      ],
+      "total_change_rate": -4.07
+    },
+    "049630": {
+      "code": "049630",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 4705,
+          "change_rate": -4.37
+        },
+        {
+          "date": "2026-02-03",
+          "close": 4920,
+          "change_rate": 4.13
+        },
+        {
+          "date": "2026-02-02",
+          "close": 4725,
+          "change_rate": 0.64
+        }
+      ],
+      "total_change_rate": 0.21
+    },
+    "321370": {
+      "code": "321370",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 3685,
+          "change_rate": -6.94
+        },
+        {
+          "date": "2026-02-03",
+          "close": 3960,
+          "change_rate": 5.18
+        },
+        {
+          "date": "2026-02-02",
+          "close": 3765,
+          "change_rate": -2.84
+        }
+      ],
+      "total_change_rate": -4.9
+    },
+    "365330": {
+      "code": "365330",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 3945,
+          "change_rate": -3.78
+        },
+        {
+          "date": "2026-02-03",
+          "close": 4100,
+          "change_rate": 16.15
+        },
+        {
+          "date": "2026-02-02",
+          "close": 3530,
+          "change_rate": 1.73
+        }
+      ],
+      "total_change_rate": 13.69
+    },
+    "474170": {
+      "code": "474170",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 19750,
+          "change_rate": -2.47
+        },
+        {
+          "date": "2026-02-03",
+          "close": 20250,
+          "change_rate": 15.32
+        },
+        {
+          "date": "2026-02-02",
+          "close": 17560,
+          "change_rate": 11.14
+        }
+      ],
+      "total_change_rate": 25.0
+    },
+    "307870": {
+      "code": "307870",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 1244,
+          "change_rate": -1.27
+        },
+        {
+          "date": "2026-02-03",
+          "close": 1260,
+          "change_rate": -4.55
+        },
+        {
+          "date": "2026-02-02",
+          "close": 1320,
+          "change_rate": -2.87
+        }
+      ],
+      "total_change_rate": -8.46
+    },
+    "332570": {
+      "code": "332570",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 7260,
+          "change_rate": -5.71
+        },
+        {
+          "date": "2026-02-03",
+          "close": 7700,
+          "change_rate": 7.84
+        },
+        {
+          "date": "2026-02-02",
+          "close": 7140,
+          "change_rate": -4.67
+        }
+      ],
+      "total_change_rate": -3.07
+    },
+    "331920": {
+      "code": "331920",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 3780,
+          "change_rate": -2.33
+        },
+        {
+          "date": "2026-02-03",
+          "close": 3870,
+          "change_rate": 29.87
+        },
+        {
+          "date": "2026-02-02",
+          "close": 2980,
+          "change_rate": 0.34
+        }
+      ],
+      "total_change_rate": 27.27
+    },
+    "317850": {
+      "code": "317850",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 9570,
+          "change_rate": -7.09
+        },
+        {
+          "date": "2026-02-03",
+          "close": 10300,
+          "change_rate": 24.7
+        },
+        {
+          "date": "2026-02-02",
+          "close": 8260,
+          "change_rate": 2.23
+        }
+      ],
+      "total_change_rate": 18.44
+    },
+    "319400": {
+      "code": "319400",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 34200,
+          "change_rate": -0.87
+        },
+        {
+          "date": "2026-02-03",
+          "close": 34500,
+          "change_rate": 3.29
+        },
+        {
+          "date": "2026-02-02",
+          "close": 33400,
+          "change_rate": 5.7
+        }
+      ],
+      "total_change_rate": 8.23
+    },
+    "373200": {
+      "code": "373200",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 557,
+          "change_rate": -7.17
+        },
+        {
+          "date": "2026-02-03",
+          "close": 600,
+          "change_rate": -4.76
+        },
+        {
+          "date": "2026-02-02",
+          "close": 630,
+          "change_rate": -2.33
+        }
+      ],
+      "total_change_rate": -13.64
+    },
+    "417010": {
+      "code": "417010",
+      "changes": [
+        {
+          "date": "2026-02-04",
+          "close": 11720,
+          "change_rate": -1.92
+        },
+        {
+          "date": "2026-02-03",
+          "close": 11950,
+          "change_rate": 18.08
+        },
+        {
+          "date": "2026-02-02",
+          "close": 10120,
+          "change_rate": -8.42
+        }
+      ],
+      "total_change_rate": 6.06
     }
   },
-  "news": {}
+  "news": {
+    "225190": {
+      "name": "LK삼양",
+      "news": [
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "3일 전진건설로봇, 삼표시멘트, 파두, 미래에셋벤처투자, LK삼양, 이녹스, 다산디엠씨, 하이즈항공... 이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로 풀이된다....",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "누가 '4일 천하'래? 워시 쇼크 싹 씻고 '5천피' 진짜 시작이다 [뉴스톡 ...",
+          "link": "http://www.newswell.co.kr/news/articleView.html?idxno=15904",
+          "description": "미래에셋벤처투자 ▲LK삼양 ▲이녹스 ▲다산디엠씨 ▲하이즈항공 ▲유디엠텍 ▲인콘 ▲셀레믹스 ▲코이즈 등 12종목이다. 이 가운데 삼표시멘트와 인콘은 2연상을 달렸다. 양 주식시장은 전날 반납분을 회복했다....",
+          "pubDate": "02-03 15:38",
+          "originallink": "http://www.newswell.co.kr/news/articleView.html?idxno=15904"
+        },
+        {
+          "title": "[N2 증시 풍향계] 미래에셋증권·한화오션 ‘강세’…삼표시멘트·파두...",
+          "link": "https://www.news2day.co.kr/article/20260203500142",
+          "description": "직행…인콘·LK삼양 등도 ‘불기둥’ 파두(440110)가 장 초반 상한가로 직행했다. 파두는 코스닥시장에서 현재 전장 대비 6350원(29.88%) 급등한 2만7600원을 나타내고 있다. 파두는 이날 주식거래정지 해제가 결정되며...",
+          "pubDate": "02-03 10:42",
+          "originallink": "https://www.news2day.co.kr/article/20260203500142"
+        }
+      ]
+    },
+    "038530": {
+      "name": "케이바이오",
+      "news": [
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로... 대주산업, 케이바이오, 삼표시멘트, 우리기술, 나무기술, LK삼양, 네오셈, 재영솔루텍, 대한광통신, 휴림로봇...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "오천피·삼천스닥에 설레는 '히든 챔피언'...대박 날 곳은 어디?",
+          "link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=240471",
+          "description": "그중 이미 기업공개(IPO) 막바지 단계인 케이뱅크, 대기업 계열사 HD현대로보틱스 등을 제외하고 각... 이들은 최근 주식 시장에서 화제인 바이오·로봇 관련 기업들이다. 실적 면에서는 앞선 기업들에 비해 부족하지만...",
+          "pubDate": "02-03 17:08",
+          "originallink": "https://www.insightkorea.co.kr/news/articleView.html?idxno=240471"
+        },
+        {
+          "title": "[장외시황] 한패스, 코스닥 상장 예비심사 승인",
+          "link": "https://www.etoday.co.kr/news/view/2552658",
+          "description": "이투데이=임하은 기자 | 3일 비상장 주식 시장은 상승했다. 해외 송금 핀테크 전문기업 한패스가 한국거래소로부터 코스닥 상장을 위한 예비심사 승인을 받았다. 면역항암제 바이오 전문업체 카나프테라퓨틱스는...",
+          "pubDate": "02-03 16:14",
+          "originallink": "https://www.etoday.co.kr/news/view/2552658"
+        }
+      ]
+    },
+    "083640": {
+      "name": "인콘",
+      "news": [
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "유디엠텍, 인콘, 셀레믹스, 코이즈가 상한가에 이름을 올리고 장을 마감한 가운데 투자자들의 관심이... 이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "누가 '4일 천하'래? 워시 쇼크 싹 씻고 '5천피' 진짜 시작이다 [뉴스톡 ...",
+          "link": "http://www.newswell.co.kr/news/articleView.html?idxno=15904",
+          "description": "이 가운데 삼표시멘트와 인콘은 2연상을 달렸다. 양 주식시장은 전날 반납분을 회복했다. 코스피지수는 338.41p(6.84%) 뛴 5288.08로 5천피를 가볍게 되찾았고, 코스닥은 45.97p(4.19%) 급등한 1144.33으로 장을 마감했다....",
+          "pubDate": "02-03 15:38",
+          "originallink": "http://www.newswell.co.kr/news/articleView.html?idxno=15904"
+        },
+        {
+          "title": "[N2 증시 풍향계] 미래에셋증권·한화오션 ‘강세’…삼표시멘트·파두...",
+          "link": "https://www.news2day.co.kr/article/20260203500142",
+          "description": "직행…인콘·LK삼양 등도 ‘불기둥’ 파두(440110)가 장 초반 상한가로 직행했다. 파두는 코스닥시장에서 현재 전장 대비 6350원(29.88%) 급등한 2만7600원을 나타내고 있다. 파두는 이날 주식거래정지 해제가 결정되며...",
+          "pubDate": "02-03 10:42",
+          "originallink": "https://www.news2day.co.kr/article/20260203500142"
+        }
+      ]
+    },
+    "009070": {
+      "name": "KCTC",
+      "news": [
+        {
+          "title": "마산·평택 터미널 쥐고 미디어까지… 동양고속의 조용한 영토 확장",
+          "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=425067",
+          "description": "중견 부동산 보유 기업 대성산업과 물류·운송 전문 KCTC도 각각 11%, 10%대 상승을 나타낸다. 장 초반 매수세가... 이번 상승은 투자자들의 안전자산 선호와 함께 실물자산 가치가 주식시장에 반영되는 움직임으로 평가된다.",
+          "pubDate": "02-03 12:56",
+          "originallink": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=425067"
+        },
+        {
+          "title": "KCTC 주가, 2월 3일 장중 6,870원 7.85% 상승",
+          "link": "https://www.job-post.co.kr/news/articleView.html?idxno=205441",
+          "description": "외국인 투자자들의 KCTC 주식 소진율은 3.14%이다. 동일 업종의 등락률이 0.58% 상승한 가운데, KCTC의 주가 상승률은 이를 크게 상회하는 모습을 보이고 있다. 현재까지의 변동폭은 저가 6,370원과 고가 6...",
+          "pubDate": "02-03 11:26",
+          "originallink": "https://www.job-post.co.kr/news/articleView.html?idxno=205441"
+        },
+        {
+          "title": "KCTC 주가, 30일 장중 6,750원 5.80% 상승",
+          "link": "https://www.e-science.co.kr/news/articleView.html?idxno=124195",
+          "description": "외국인 투자자들은 전체 상장주식수 30,000,000주 중 1,369,377주를 보유하여 4.56%의 소진율을 나타냈다. 동일업종 등락률이 -2.10% 하락세를 보이는 가운데 KCTC는 상승 흐름을 보였다. 시간대별 시세 흐름을...",
+          "pubDate": "01-30 14:42",
+          "originallink": "https://www.e-science.co.kr/news/articleView.html?idxno=124195"
+        }
+      ]
+    },
+    "001360": {
+      "name": "삼성제약",
+      "news": [
+        {
+          "title": "주식시장 활황 속 제약ㆍ바이오주 상대적 부진",
+          "link": "http://www.newsmp.com/news/articleView.html?idxno=251412",
+          "description": "이 가운데 유가증권시장에서는 삼양바이오팜이 82.1%의 상승률로 5위를, 현대약품은 41.1%로 31위를 기록했으며, JW중외제약과 삼성제약, 한올바이오파마, 셀트리온 등도 두 자릿수의 상승률로 200위 안에 이름을...",
+          "pubDate": "02-02 12:22",
+          "originallink": "http://www.newsmp.com/news/articleView.html?idxno=251412"
+        },
+        {
+          "title": "삼성제약 주가, 1월 28일 장중 1,657원 2.98% 상승",
+          "link": "https://www.job-post.co.kr/news/articleView.html?idxno=204381",
+          "description": "총 상장주식수 94,162,079주 중 외국인 보유 주식수는 2,828,832주로, 외국인 소진율은 3.00%를 기록하고 있다. 지난 거래일 삼성제약은 시가 1,631원으로 시작하여 고가 1,650원, 저가 1,600원을 기록한 뒤 1,609원으로...",
+          "pubDate": "01-28 10:46",
+          "originallink": "https://www.job-post.co.kr/news/articleView.html?idxno=204381"
+        },
+        {
+          "title": "삼성제약 주가, 1월 26일 장중 1,590원 0.51% 상승",
+          "link": "https://www.joongangenews.com/news/articleView.html?idxno=489632",
+          "description": "외국인 투자자들의 삼성제약에 대한 소진율은 2.66%로 나타났다. 이는 전체 상장 주식수 94,162,079주 중 2,505,328주를 외국인이 보유하고 있음을 의미한다. 지난 거래일, 삼성제약은 1,522원에 거래를 시작하여...",
+          "pubDate": "01-26 10:30",
+          "originallink": "https://www.joongangenews.com/news/articleView.html?idxno=489632"
+        }
+      ]
+    },
+    "008600": {
+      "name": "윌비스",
+      "news": [
+        {
+          "title": "[베스트&워스트] 와이투솔루션 40.71% 급등⋯SK스퀘어도 강세",
+          "link": "https://www.etoday.co.kr/news/view/2551596",
+          "description": "윌비스는 257원에서 337원으로 31.13% 올랐다. 뚜렷한 개별 재료가 부각되지 않은 가운데 저가 소형주... 유상증자 추진 이슈가 부각되면서 주식 가치 희석 우려가 반영된 것으로 풀이된다. 진양화학은...",
+          "pubDate": "01-31 09:02",
+          "originallink": "https://www.etoday.co.kr/news/view/2551596"
+        },
+        {
+          "title": "1월 28일 주식시장 주요공시",
+          "link": "https://www.catchnews.kr/news/articleView.html?idxno=120007",
+          "description": "주식 10,000,000,000주를 14.42조원에 추가로 취득하기로 결정(취득후지분율:100.0%, 취득예정일:2030-01... 상장폐지일:2026-02-10) ▶윌비스, 공매도 과열종목 지정 ▶코난테크놀로지, 공매도 과열종목 지정...",
+          "pubDate": "01-29 08:49",
+          "originallink": "https://www.catchnews.kr/news/articleView.html?idxno=120007"
+        },
+        {
+          "title": "[공시] 에코프로에이치엔·솔브레인홀딩스 등 15개 종목, 29일 공매도 금...",
+          "link": "http://www.newstnt.com/news/articleView.html?idxno=581282",
+          "description": "(402030) ▲윌비스(008600) 공매도란 주식이나 채권을 보유하지 않은 상태에서 행사하는 매도 주문을 말한다. 통상적으로 주식 투자는 싼값에 사서 비싸게 파는 것이 기본이지만, 공매도는 이와 반대로 주가가...",
+          "pubDate": "01-28 21:50",
+          "originallink": "http://www.newstnt.com/news/articleView.html?idxno=581282"
+        }
+      ]
+    },
+    "044180": {
+      "name": "KD",
+      "news": [
+        {
+          "title": "2월 2일 주식시장 주요공시",
+          "link": "https://www.catchnews.kr/news/articleView.html?idxno=120198",
+          "description": "09%) ▶노타, 주식회사 퓨리오사에이아이와 공급계약(AI소프트웨어)체결(계약기간:2026-01-30~2029-06... 7%) 규모 파생상품(전환사채) 금융부채 평가손실 발생 ▶KD, 17.33억원(자기자본대비 4.50%) 규모...",
+          "pubDate": "02-03 08:41",
+          "originallink": "https://www.catchnews.kr/news/articleView.html?idxno=120198"
+        },
+        {
+          "title": "건설 중소형 관련주, '룰루랄라 콧노래' 상지건설·진흥기업...'눈물이 ...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=248942",
+          "description": "국내 공동주택 건설업체 KD(케이디주식회사)와 건축설계사무소 디에이그룹엔지니어링종합건축사사무소(이하 디에이그룹)와 손잡고 모듈러 주택 시장에 본격 진출한다. KD와 디에이그룹은 '모듈러 주택 연구개발 및...",
+          "pubDate": "02-02 18:26",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=248942"
+        },
+        {
+          "title": "1월 30일 주식시장 주요공시",
+          "link": "https://www.catchnews.kr/news/articleView.html?idxno=120132",
+          "description": "주식회사, 주식회사 에치엔지가 영위하고있는 화장품 제조사업부문 195.31억원 규모에 양수 결정 ▶KD, 16.85억원(자기자본대비 4.27%) 규모 대출원리금 연체사실 발생 ▶인크레더블버즈...",
+          "pubDate": "02-02 08:30",
+          "originallink": "https://www.catchnews.kr/news/articleView.html?idxno=120132"
+        }
+      ]
+    },
+    "130660": {
+      "name": "한전산업",
+      "news": [
+        {
+          "title": "하나증권 \"한·미 외교장관 회담에 산업재주 부각, 두산에너빌리티 한국...",
+          "link": "https://www.businesspost.co.kr/BP?command=article_view&num=429101",
+          "description": "국내 주식시장에서 산업재주에 주목해야 한다는 증권가 의견이 나왔다. 하나증권 리서치센터... 관련 종목으로는 두산에너빌리티, 한국전력, 한전KPS, 한화오션, HD현대중공업, 한화시스템, HD현대일렉트릭...",
+          "pubDate": "02-04 09:24",
+          "originallink": "https://www.businesspost.co.kr/BP?command=article_view&num=429101"
+        },
+        {
+          "title": "NH투자 \"미국 의지만으로 자국 원전 확대 어려워, '팀 코리아' 참여 가능...",
+          "link": "https://www.businesspost.co.kr/BP?command=article_view&num=429093",
+          "description": "미국의 원전 확대에 한국 기업의 참여가 필수적인 만큼 국내 주식 투자에서 한국전력공사 중심의 '팀 코리아... 직면했다\"며 \"한전 중심의 '팀 코리아'가 미국 원전 시장 참여 가능성이 높아질 것\"이라고 말했다. 미국 원전...",
+          "pubDate": "02-04 08:54",
+          "originallink": "https://www.businesspost.co.kr/BP?command=article_view&num=429093"
+        },
+        {
+          "title": "원자력발전 관련주, '껑충껑충' 삼미금속·대한전선·두산에너빌리티·...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249024",
+          "description": "한전산업은 1990년 한전산업개발주식회사로 설립되어 2010년 유가증권시장에 상장한 이후, 전국 화력 및 원자력발전소에서 설비 운전 및 정비를 주요 사업으로 영위해왔다. 발전설비 운전 및 정비는 전체 매출의 약 94...",
+          "pubDate": "02-03 18:20",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249024"
+        }
+      ]
+    },
+    "100790": {
+      "name": "미래에셋벤처투자",
+      "news": [
+        {
+          "title": "[연중기획-'코스피 1만'을 이끌 주역들] 증권·운용사, '머니무브' 중심...",
+          "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=293996",
+          "description": "1년 전 8000원 수준에 머물던 미래에셋증권 주가는 현재 5만원 수준으로 뛰어올랐다. 이들 PI 투자는 단순한 채권·주식뿐 아니라 벤처, 프라이빗에쿼티, 구조화증권 등 비상장 영역까지 확대됐다. 한국투자증권도...",
+          "pubDate": "02-04 09:00",
+          "originallink": "https://www.straightnews.co.kr/news/articleView.html?idxno=293996"
+        },
+        {
+          "title": "2월 3일 주식시장 주요공시",
+          "link": "https://www.catchnews.kr/news/articleView.html?idxno=120250",
+          "description": "1%) 현금배당(결산배당) 결정(배당기준일:2025-12-31) ▶미래에셋비전스팩5호, 2025년 개별기준... 62억원(전년대비 적자전환) ▶알서포트, 운영자금 확보를 위해 엔에이치투자증권 주식회사(본건...",
+          "pubDate": "02-04 08:54",
+          "originallink": "https://www.catchnews.kr/news/articleView.html?idxno=120250"
+        },
+        {
+          "title": "[ETF 리그테이블] [2026년 1월] 박현주 회장 보다 못한 미래에셋…위태로...",
+          "link": "https://dealsite.co.kr/articles/156201",
+          "description": "심해지면서 미래는 반쪽짜리 영업에 그칠 수밖에 없는 상황이다. 해외 주식이나 ETF 상품을 기반으로... 투자에 참여한 미래에셋증권과 미래에셋벤처투자, 미래에셋캐피탈의 주가도 크게 올랐다. 해당 투자는...",
+          "pubDate": "02-04 07:16",
+          "originallink": "https://dealsite.co.kr/articles/156201"
+        }
+      ]
+    },
+    "003380": {
+      "name": "하림지주",
+      "news": [
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로... SFA반도체, 하림지주다. 이날 코스피는 전장보다 338.41포인트(6.84%) 오른 5,288.08에 거래를 마감했다. 전날 5% 넘게...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "마산·평택 터미널 쥐고 미디어까지… 동양고속의 조용한 영토 확장",
+          "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=425067",
+          "description": "세이브존I&C와 하림지주 역시 안정적 부동산 자산과 배당 기대감이 상승 요인으로 작용하며 각각 8%, 7%대... 이번 상승은 투자자들의 안전자산 선호와 함께 실물자산 가치가 주식시장에 반영되는 움직임으로 평가된다.",
+          "pubDate": "02-03 12:56",
+          "originallink": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=425067"
+        },
+        {
+          "title": "[단독]‘비자발적 자사주’ 소각 강제땐 기업 40% 빚독촉 내몰려",
+          "link": "https://n.news.naver.com/mnews/article/020/0003694486?sid=101",
+          "description": "비자발적 자사주 수량 기준으로 미래에셋증권이 가장 많고, 롯데지주(2위), 하림지주(7위), SK(10위), HD현대... 계열사 주식이 대거 지주사의 자사주가 됐고 자본금에 산입됐다. 롯데지주 전체 주식 중 자사주 비율은 현재 27.5...",
+          "pubDate": "02-03 04:34",
+          "originallink": "https://www.donga.com/news/Economy/article/all/20260203/133284843/2"
+        }
+      ]
+    },
+    "389680": {
+      "name": "유디엠텍",
+      "news": [
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "하이즈항공, 유디엠텍, 인콘, 셀레믹스, 코이즈가 상한가에 이름을 올리고 장을 마감한 가운데... 이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로 풀이된다....",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "유디엠텍 주가, 2월 3일 상한가 1,079원 기록 마감",
+          "link": "https://www.topstarnews.net/news/articleView.html?idxno=15952526",
+          "description": "상장 주식수 대비 외국인소진율은 1.05%를 나타내고 있어 외국인 투자자의 비중이 낮은 수준임을 알 수 있다. 동일 업종의 평균 PER은 34.62이며, 동일 업종의 등락률이 3.34% 상승한 것에 비해 유디엠텍은 훨씬 큰...",
+          "pubDate": "02-03 15:46",
+          "originallink": "https://www.topstarnews.net/news/articleView.html?idxno=15952526"
+        },
+        {
+          "title": "누가 '4일 천하'래? 워시 쇼크 싹 씻고 '5천피' 진짜 시작이다 [뉴스톡 ...",
+          "link": "http://www.newswell.co.kr/news/articleView.html?idxno=15904",
+          "description": "하이즈항공 ▲유디엠텍 ▲인콘 ▲셀레믹스 ▲코이즈 등 12종목이다. 이 가운데 삼표시멘트와 인콘은 2연상을 달렸다. 양 주식시장은 전날 반납분을 회복했다. 코스피지수는 338.41p(6.84%) 뛴 5288.08로 5천피를 가볍게...",
+          "pubDate": "02-03 15:38",
+          "originallink": "http://www.newswell.co.kr/news/articleView.html?idxno=15904"
+        }
+      ]
+    },
+    "328380": {
+      "name": "솔트웨어",
+      "news": [
+        {
+          "title": "2월 3일 주식시장 주요공시",
+          "link": "https://www.catchnews.kr/news/articleView.html?idxno=120250",
+          "description": "31) ▶솔트웨어, 2025년 연결기준 매출액 636.74억원(전년대비 +10.03%), 영업이익 5.66억원(전년대비 흑자전환), 순이익 8.38억원(전년대비 흑자전환) ▶아이티아이즈, 운영자금 확보를 위해 KB증권 주식회...",
+          "pubDate": "02-04 08:54",
+          "originallink": "https://www.catchnews.kr/news/articleView.html?idxno=120250"
+        },
+        {
+          "title": "[박정식의 국내 주식시황] 인공지능 밸류에이션 및 중동 지정학적 리스...",
+          "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=261264",
+          "description": "2/3(화) 장 마감 후 시간외 거래에서는 팜스코, 솔트웨어, 라이콤, CJ CGV, 샘표 등이 호실적 발표 속 상승했고, 솔디펜스가 한화에어로스페이스와 22.59억원 규모 공급계약 체결에 상승했다. 원익IPS, KX하이텍, 저스템 등...",
+          "pubDate": "02-04 08:28",
+          "originallink": "https://www.newsquest.co.kr/news/articleView.html?idxno=261264"
+        },
+        {
+          "title": "스마트팩토리 수요 폭발… 엠아이큐브솔루션, 설비에서 데이터까지 잡았...",
+          "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=404046",
+          "description": "엠아이큐브솔루션이 주식시장에서 신흥 성장주로 부각 되면서 매수세가 몰리고 있는 것으로 보인다. 제조... DB 솔트웨어 굿센 롯데정보통신 코닉오토메이션 인포바인 이노뎁 정원엔시스 엠브레인 엔텔스 카카오페이...",
+          "pubDate": "12-08 19:34",
+          "originallink": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=404046"
+        }
+      ]
+    },
+    "340930": {
+      "name": "유일에너테크",
+      "news": [
+        {
+          "title": "수소차 관련주, '맑고 화창' 우수AMS·한온시스템·현대차·삼보모터스....",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249025",
+          "description": "반면 유일에너테크, 덕양에너젠은 하락했다. 유일에너테크와 덕양에너젠은 전 거래일 대비 각각 11원... 아이에스티이는 지난 8월 20일 쌍용씨앤이 주식회사와 산소부화설비 구축사업 계약을 체결했다고 공시했다....",
+          "pubDate": "02-03 18:20",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249025"
+        },
+        {
+          "title": "이강수 전무이사, 유일에너테크 주식 보유 변동 공시",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626521",
+          "description": "발행회사에 관한 사항회 사 명유일에너테크(주)법인구분코스닥상장법인회사코드 340930발행주식 총수68,875,7852. 보고자에 관한 사항보고구분변동보고자 구분개인(국내)성명(명칭)한 글이강수한자(영문)...",
+          "pubDate": "02-03 15:36",
+          "originallink": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626521"
+        },
+        {
+          "title": "김병렬 전무이사, 유일에너테크 주식 보유 현황 공시",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626516",
+          "description": "유일에너테크(340930)의 김병렬 전무이사가 2026년 2월 3일 기준으로 주식 보유 현황을 공시했다. 김 전무이사는 유일에너테크의 보통주 288만7462주를 보유하고 있으며, 이는 지분율 4.19%에 해당한다. 2월...",
+          "pubDate": "02-03 15:26",
+          "originallink": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626516"
+        }
+      ]
+    },
+    "452260": {
+      "name": "한화갤러리아",
+      "news": [
+        {
+          "title": "'한화머시너리앤서비스'는 뭐지?",
+          "link": "http://www.ilemonde.com/news/articleView.html?idxno=21923",
+          "description": "물적분할과 달리 인적분할은 기존 주주들이 지분율대로 신설 법인의 주식을 나눠 갖는다. 이는 향후 형제들... 한화갤러리아 역시 영업이익률이 0.1% 수준에 머물 정도로 수익성이 악화했다. 신설 지주사가 ㈜한화로부터...",
+          "pubDate": "02-04 07:42",
+          "originallink": "http://www.ilemonde.com/news/articleView.html?idxno=21923"
+        },
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로... 한화시스템, 한화갤러리아, TIGER 코스닥150, KODEX 200, 한온시스템, TIGER 미국S&P500, 대성산업, 금호에이치티, TIGER...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "[사사건건] 대통령은 고강도 압박, 여당은 ‘한문장’…당정 부동산 ‘...",
+          "link": "https://n.news.naver.com/mnews/article/056/0012117882?sid=100",
+          "description": "뚫고 주식시장 활성화도 됐던 만큼 대체 투자 수단도 생겼고, 그리고 집값 안정화에 대한 의지나 열망이... 잠실에 있는 갤러리아 그쪽에, 한화갤러리아 주상복합 아파트가 있는데 그거 관련해서 팔지 않았죠. 그리고 끝내...",
+          "pubDate": "02-03 15:59",
+          "originallink": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8476189&ref=A"
+        }
+      ]
+    },
+    "317240": {
+      "name": "TS트릴리온",
+      "news": [
+        {
+          "title": "[코퍼스코리아 톺아보기] 'M&A 잔혹사' 반복…관리종목·불성실공시 리...",
+          "link": "https://www.greened.kr/news/articleView.html?idxno=336394",
+          "description": "수반하는 주식 양수도 계약이 해지됐다고 공시했다. 오 대표의 구주 매각이 무산되면서 리버스에이징... 해성티피씨), TS트릴리온, 이미지스 등에서 M&A를 시도했던 주체들과의 연결고리가 확인됐다. [본지보도: 새 FI...",
+          "pubDate": "02-02 06:00",
+          "originallink": "https://www.greened.kr/news/articleView.html?idxno=336394"
+        },
+        {
+          "title": "[주식마감] 천스닥에 개미들 몰렸다… 레버리지 ETN 상한가, 에코프로에...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1138798",
+          "description": "네오셈, TS트릴리온, 웰크론한텍, 삼기, 휴림에이텍, SFA반도체, 율촌이다. 이날 코스피는 전장보다 85.96포인트(1.69%) 오른 5,170.81로 거래를 종료했다. 지수는 60.54포인트(1.19%) 오른 5,145.39로 출발한 이후 오전...",
+          "pubDate": "01-28 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1138798"
+        },
+        {
+          "title": "[더벨][Company Watch]TS트릴리온, 옛 대주주 조합 해산 직후 엑시트 기회",
+          "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202601191529519160101562",
+          "description": "TS트릴리온은 지난 9일 비상장 법인 비비알컴퍼니의 주식 30만주(지분 100%)를 취득하며 자회사로 편입했다. 현금 유출 없이 49억원 규모 3회차 전환사채(CB)를 발행해 인수 대금으로 지급하는 대용납입 방식을 택했다....",
+          "pubDate": "01-21 07:18",
+          "originallink": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202601191529519160101562"
+        }
+      ]
+    },
+    "388790": {
+      "name": "라이콤",
+      "news": [
+        {
+          "title": "2월 3일 주식시장 주요공시",
+          "link": "https://www.catchnews.kr/news/articleView.html?idxno=120250",
+          "description": "01억원(전년대비 적자지속) ▶코맥스, 변우석이 최대주주 변경 수반 주식 담보제공 계약... 주주환원정책안내(총주주환원율 40%로 기준 상향하여 적극적인 주주환원정책 시행 등) ▶라이콤, 2025년...",
+          "pubDate": "02-04 08:54",
+          "originallink": "https://www.catchnews.kr/news/articleView.html?idxno=120250"
+        },
+        {
+          "title": "[박정식의 국내 주식시황] 인공지능 밸류에이션 및 중동 지정학적 리스...",
+          "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=261264",
+          "description": "2/3(화) 장 마감 후 시간외 거래에서는 팜스코, 솔트웨어, 라이콤, CJ CGV, 샘표 등이 호실적 발표 속 상승했고, 솔디펜스가 한화에어로스페이스와 22.59억원 규모 공급계약 체결에 상승했다. 원익IPS, KX하이텍, 저스템 등...",
+          "pubDate": "02-04 08:28",
+          "originallink": "https://www.newsquest.co.kr/news/articleView.html?idxno=261264"
+        },
+        {
+          "title": "자율주행차 관련주, '함박웃음' 다산디엠씨·넥스트칩·드림텍·삼성전...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249029",
+          "description": "한국단자, 라이콤, 현대모비스, 코리아에프티, HL만도, 유진로봇, 라닉스, KT, 포니링크, 팅크웨어... 다산디엠씨는 1998년 설립되어 2025년 (주)디엠씨 주식 추가 취득으로 자동차 부품 사업에 신규진출했다. 커넥티드...",
+          "pubDate": "02-04 00:20",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249029"
+        }
+      ]
+    },
+    "396300": {
+      "name": "세아메카닉스",
+      "news": [
+        {
+          "title": "사실상 지배주주 조창현, 세아메카닉스 주식 1만1001주 매수",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626392",
+          "description": "조창현은 이번 보고일 기준으로 세아메카닉스 주식 5만1010주를 보유하고 있으며, 이는 직전 보고일인 2026년 1월 21일에 비해 1만1001주 증가한 수치다. 지분율은 0.15%에서 0.19%로 0.04%포인트 상승했다....",
+          "pubDate": "02-03 11:06",
+          "originallink": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626392"
+        },
+        {
+          "title": "2차전지 관련주, '봄날의 햇살' 쎄노텍·쎄크·애경케미칼·엠플러스......",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=248947",
+          "description": "반면 미코, 유일에너테크, 세아메카닉스, HB테크놀러지, 조일알미늄, 성우하이텍, 원익피앤이, 나인테크... 이차전지 조립 장비 전문기업 엠플러스가 보유 중인 자기주식 32만 7173주(전체발행주식 수 대비 2.69%) 중...",
+          "pubDate": "02-03 00:16",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=248947"
+        },
+        {
+          "title": "[이달해의 달달한 10분] '엔비알모션' 로보택시 최대 수혜! \"상장 후 첫...",
+          "link": "https://news.mtn.co.kr/news-detail/2026020214062377411",
+          "description": "화상>이달해 주식명가 MTN W 어드바이저▶실시간 종목 검색 상위 TOP10- 에코프로- 제주은행▶달달한... 1/29 세아메카닉스 +15.3% (최고가 기준) 목표가 달성* 1/12 루미르 +47.1% (최고가 기준) 목표가 달성※ 이...",
+          "pubDate": "02-02 14:12",
+          "originallink": "https://news.mtn.co.kr/news-detail/2026020214062377411"
+        }
+      ]
+    },
+    "457190": {
+      "name": "이수스페셜티케미컬",
+      "news": [
+        {
+          "title": "2차전지 관련주, '봄날의 햇살' 쎄노텍·쎄크·애경케미칼·엠플러스......",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=248947",
+          "description": "나노신소재, 이수스페셜티케미컬, 세방전지, 포스코퓨처엠, 이랜텍, 대성하이텍, 피아이이, 삼진엘앤디... 이차전지 조립 장비 전문기업 엠플러스가 보유 중인 자기주식 32만 7173주(전체발행주식 수 대비 2.69%) 중...",
+          "pubDate": "02-03 00:16",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=248947"
+        },
+        {
+          "title": "[추천주 직썰] 주도주 반도체 순환매 이후, '2차전지·로봇·바이오' 주...",
+          "link": "https://www.ziksir.com/news/articleView.html?idxno=121978",
+          "description": "투자자예탁금은 주식 매수를 위해 증권사 계좌에 맡겨둔 자금이나 주식 매도 후 인출하지 않은 자금으로... 이 ETF는 이수스페셜티케미컬, 삼성SDI, 대주전자재료, 롯데에너지머티리얼즈 등 10개 종목으로 구성돼 있다....",
+          "pubDate": "02-02 08:00",
+          "originallink": "https://www.ziksir.com/news/articleView.html?idxno=121978"
+        },
+        {
+          "title": "코스피 5천 다음은 코스닥 3천? 바이오·배터리·소부장 ETF로 담아볼까",
+          "link": "https://www.businesspost.co.kr/BP?command=article_view&num=428748",
+          "description": "바이오기업 주식을 대거 포함하고 있다. 신한자산운용의 'SOL 전고체배터리&실리콘음극재'는 대주전자재료, 이수스페셜티케미컬 등 코스닥 2차전지 기업들을 담고 있다. 리노공업, 원익IPS, 이오테크닉스 등...",
+          "pubDate": "02-01 06:12",
+          "originallink": "https://www.businesspost.co.kr/BP?command=article_view&num=428748"
+        }
+      ]
+    },
+    "340450": {
+      "name": "지씨지놈",
+      "news": [
+        {
+          "title": "유전자 치료제·분석 관련주, '봄바람 살랑' 엔젠바이오·진원생명과학...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=248937",
+          "description": "2일 한국거래소에 따르면 엔젠바이오, 진원생명과학, 지씨지놈, 랩지노믹스, 아미코젠, 쓰리빌리언는... 특허권자는 사회복지법인 삼성생명공익재단과 이엔셀 주식회사이며, 존속 기간은 2042년 11월 7일까지다. 이번...",
+          "pubDate": "02-02 18:10",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=248937"
+        },
+        {
+          "title": "조은해 연구소장, 지씨지놈 주식 1만주 추가 매수",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=625573",
+          "description": "발행회사에 관한 사항회 사 명(주)지씨지놈법인구분코스닥상장법인회사코드 340450발행주식 총수23,650,7932. 보고자에 관한 사항보고구분변동보고자 구분개인(국내)성명(명칭)한 글조은해한자(영문)...",
+          "pubDate": "01-30 17:16",
+          "originallink": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=625573"
+        },
+        {
+          "title": "[중복상장의 파고] 출발 달랐던 덕산넵코어스, 공모 순항 '기대'",
+          "link": "https://www.the-stock.kr/news/articleView.html?idxno=31913",
+          "description": "대기업 자회사 IPO에 집중됐던 중복상장 논란이 주식시장 전반으로 확산하면서다. 회사 최대주주는... 지씨지놈(녹십자)·동국생명과학(동국제약) 등 유사한 설립배경을 가졌던 기업들도 IPO를 마무리했다. 전례가 있는...",
+          "pubDate": "01-28 12:52",
+          "originallink": "https://www.the-stock.kr/news/articleView.html?idxno=31913"
+        }
+      ]
+    },
+    "388050": {
+      "name": "지투파워",
+      "news": [
+        {
+          "title": "원자력발전 관련주, '껑충껑충' 삼미금속·대한전선·두산에너빌리티·...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249024",
+          "description": "일진파워, 지투파워, 태웅, 원일티엔아이, DL이앤씨, GS건설, 삼영엠텍, 한미글로벌, 에너토크, 한양이엔지... 이후 1961년 '한국전력주식회사'로 개편되고, 1982년 현재의 통합형 전력공기업으로 재설립되며 국가...",
+          "pubDate": "02-03 18:20",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249024"
+        },
+        {
+          "title": "전력설비 관련주, '봄날의 햇살' 에이루트·바이오스마트... '먹구름' 두...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=248941",
+          "description": "금화피에스시, 지투파워, 위너스, 세명전기, 제일일렉트릭, 한전산업, 비츠로테크, LS에코에너지... 이후 1961년 '한국전력주식회사'로 개편되고, 1982년 현재의 통합형 전력공기업으로 재설립되며 국가 전력공급의...",
+          "pubDate": "02-02 18:20",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=248941"
+        },
+        {
+          "title": "이광진 상무, 지투파워 주식 1399주 보유 공시",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=625996",
+          "description": "발행회사에 관한 사항회 사 명지투파워(주)법인구분코스닥상장법인회사코드 388050발행주식 총수18,709,4372. 보고자에 관한 사항보고구분신규보고자 구분개인(국내)성명(명칭)한 글이광진한자(영문)李光鎭(Lee...",
+          "pubDate": "02-02 17:16",
+          "originallink": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=625996"
+        }
+      ]
+    },
+    "255220": {
+      "name": "SG",
+      "news": [
+        {
+          "title": "[박정식의 국내 주식시황] 인공지능 밸류에이션 및 중동 지정학적 리스...",
+          "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=261264",
+          "description": "거래량 상위 종목으로는 SG, SK증권, 에스와이스틸텍, 동양, 아주IB투자 등. 2/3(화) 대체거래소(NXT) 애프터마켓에서는 반도체 슈퍼사이클 지속 전망에 기가비스, 주성엔지니어링 등 일부 반도체 관련주가 상승했다....",
+          "pubDate": "02-04 08:28",
+          "originallink": "https://www.newsquest.co.kr/news/articleView.html?idxno=261264"
+        },
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로... 코스닥 시장 거래 상위종목 30위는 아주IB투자, 바이오스마트, SG, 다날, 유디엠텍, 인콘, 네오펙트...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "3종 암호화폐 ETN 서비스 개시… 독일 ING, '비트코인·이더리움·솔라나...",
+          "link": "https://www.tokenpost.kr/news/blockchain/328690",
+          "description": "기존 주식·채권과 함께 같은 증권계좌에 편입된다는 점이다. ING는 \"투자자들이 익숙한 금융 시스템 안에서... 소시에떼제네랄은 이미 자회사인 SG 포지를 통해 유로 스테이블코인을 출시한 바 있으며, 서클의 EURC와...",
+          "pubDate": "02-03 16:04",
+          "originallink": "https://www.tokenpost.kr/news/blockchain/328690"
+        }
+      ]
+    },
+    "090710": {
+      "name": "휴림로봇",
+      "news": [
+        {
+          "title": "휴림로봇, 출발 시그널 주시…반등 시도 속 변동성 경계 여전",
+          "link": "https://www.cbci.co.kr/news/articleView.html?idxno=553785",
+          "description": "휴림로봇은 4일 장 초반 음봉으로 출발했다. 전날에 이어 이틀 연속 상승에 실패한 흐름이다. 앞서 3거래일... [※ 본 기사에서 제공하는 정보는 일반적인 주식시장 상황에 대한 설명을 목적으로 하며, 특정 종목에 대한 투자...",
+          "pubDate": "02-04 09:08",
+          "originallink": "https://www.cbci.co.kr/news/articleView.html?idxno=553785"
+        },
+        {
+          "title": "로봇·산업용·협동로봇 관련주, '웃음꽃' TPC·대동기어·아진엑스텍·...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249027",
+          "description": "HL만도, 휴림로봇, 협진, 한라캐스트는 상승했다. TPC와 대동기어와 아진엑스텍은 전 거래일 대비 각각각... 지난 12일부터 13일까지 이틀간 장내에서 주식을 취득해 보유 주식 수는 22만7739주로 증가했다. 지분율은 0.43...",
+          "pubDate": "02-04 00:10",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249027"
+        },
+        {
+          "title": "휴림로봇, 검은월요일 극복 여부 촉각...주가 심리적 영향 변수",
+          "link": "https://www.cbci.co.kr/news/articleView.html?idxno=553679",
+          "description": "휴림로봇은 270원 오른 14650원에 마감했다. 이는 전일보다 1.88%나 오른 것이다. 휴림로봇은 3일 극적인 모습을... 주식시장은 변동성이 매우 크며, 급락 이후 나타나는 단기 반등은 추세 전환이 아닐 수 있다. 투자 판단에...",
+          "pubDate": "02-04 00:00",
+          "originallink": "https://www.cbci.co.kr/news/articleView.html?idxno=553679"
+        }
+      ]
+    },
+    "049630": {
+      "name": "재영솔루텍",
+      "news": [
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로... 네오셈, 재영솔루텍, 대한광통신, 휴림로봇, 쿼드메디슨, 루미르, 덕양에너젠, 나노팀, 코아시아씨엠...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "재영솔루텍 주가, 2월 3일 4,920원 4.13% 상승 마감",
+          "link": "https://www.topstarnews.net/news/articleView.html?idxno=15952577",
+          "description": "81%로, 전체 상장 주식수 대비 외국인 보유 비중은 비교적 낮은 수준이었다. 동일업종의 평균 등락률이 4.86% 상승한 것과 비교하면, 재영솔루텍의 주가 상승률은 업종 평균과 뚜렷한 차이 없이 유사한 흐름을...",
+          "pubDate": "02-03 16:14",
+          "originallink": "https://www.topstarnews.net/news/articleView.html?idxno=15952577"
+        },
+        {
+          "title": "재영솔루텍 주가, 2월 3일 장중 4,825원 2.12% 상승",
+          "link": "https://www.job-post.co.kr/news/articleView.html?idxno=205332",
+          "description": "외국인 투자 동향을 살펴보면, 전체 상장주식수 116,897,560주 가운데 외국인이 보유한 주식수는 2,118,660주이며, 외국인소진율은 1.81%이다. 이는 외국인 투자자들의 재영솔루텍에 대한 현재 지분율을 나타낸다....",
+          "pubDate": "02-03 10:32",
+          "originallink": "https://www.job-post.co.kr/news/articleView.html?idxno=205332"
+        }
+      ]
+    },
+    "321370": {
+      "name": "센서뷰",
+      "news": [
+        {
+          "title": "스페이스X 관련주, '덩실덩실' 미래에셋벤처투자·미래에셋증권·나노팀...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249026",
+          "description": "이녹스첨단소재, 센서뷰, 스피어, 켄코아에어로스페이스는 상승했다. 미래에셋벤처투자와... Ltd.)의 주식 500만주를 취득하기로 결정했다고 지난 1월 15일 공시했다. 취득금액은 73억 6400만원으로 자기자본 대비 11.40...",
+          "pubDate": "02-04 00:10",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249026"
+        },
+        {
+          "title": "[공시속보] 센서뷰, 국내사모 신주인수권행사로 추가상장→상장주식수...",
+          "link": "https://www.topstarnews.net/news/articleView.html?idxno=15952575",
+          "description": "한국거래소에 따르면 이번에 추가상장되는 주식은 보통주로, 단축코드는 A321370, 1주당 액면가는 500원이며, 신규 등록 후 센서뷰의 전체 상장주식수는 48,409,865주로 증가한다. 회사는 \"보통주 국내사모...",
+          "pubDate": "02-03 16:12",
+          "originallink": "https://www.topstarnews.net/news/articleView.html?idxno=15952575"
+        },
+        {
+          "title": "[특징주] 미래에셋벤처투자·미래에셋증권 등 스페이스X 관련주 강세......",
+          "link": "https://www.joongangenews.com/news/articleView.html?idxno=492254",
+          "description": "국내 주식시장 스페이스X 관련주들이 강세를 보이고 있다. 3일 한국거래소에 따르면 오전 9시 15분 기준... 켄코아에어로스페이스, 센서뷰, 스피어, LG에너지솔루션 등 주가가 오르는 중이다. 머스크 스페이스X...",
+          "pubDate": "02-03 09:20",
+          "originallink": "https://www.joongangenews.com/news/articleView.html?idxno=492254"
+        }
+      ]
+    },
+    "365330": {
+      "name": "에스와이스틸텍",
+      "news": [
+        {
+          "title": "[박정식의 국내 주식시황] 인공지능 밸류에이션 및 중동 지정학적 리스...",
+          "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=261264",
+          "description": "거래량 상위 종목으로는 SG, SK증권, 에스와이스틸텍, 동양, 아주IB투자 등. 2/3(화) 대체거래소(NXT) 애프터마켓에서는 반도체 슈퍼사이클 지속 전망에 기가비스, 주성엔지니어링 등 일부 반도체 관련주가 상승했다....",
+          "pubDate": "02-04 08:28",
+          "originallink": "https://www.newsquest.co.kr/news/articleView.html?idxno=261264"
+        },
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로... 네오펙트, 에스와이스틸텍, 이미지스, 삼미금속, KX하이텍, 미래에셋벤처투자, 대주산업, 케이바이오...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "[주식마감기사] 러·우 전쟁 종결 기대감에 '재건주' 대모 상한가... 삼...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1126174",
+          "description": "상장 주식 수는 743만5870주다. 이번 상장은 지난 1일 삼양그룹 지주회사인 삼양홀딩스에서 인적분할된... 코스닥 시장 거래 상위종목 30위는 신영스팩11호, 에스와이스틸텍, 스맥, 서울전자통신, 퓨처코어, 재영솔루텍...",
+          "pubDate": "11-24 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1126174"
+        }
+      ]
+    },
+    "474170": {
+      "name": "루미르",
+      "news": [
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로... 쿼드메디슨, 루미르, 덕양에너젠, 나노팀, 코아시아씨엠, 흥국에프엔비, SFA반도체, 하림지주다. 이날 코스피는...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "[이달해의 달달한 10분] 엠디바이스, 낸드 가격 인상 직수혜! \"투톱 상승...",
+          "link": "https://news.mtn.co.kr/news-detail/2026020313205848745",
+          "description": "화상>이달해 주식명가 MTN W 어드바이저▶실시간 종목 검색 상위 TOP10- 한화시스템... 7% (최고가 기준) 3차 목표가 달성* 1/12 루미르 +59.1% (최고가 기준) 2차 목표가 달성※ 이 방송은 매일 12시 ~ 12시 52분에...",
+          "pubDate": "02-03 14:46",
+          "originallink": "https://news.mtn.co.kr/news-detail/2026020313205848745"
+        },
+        {
+          "title": "\"스페이스X, xAI 합병 시 기업가치 1.5조달러\"…우주항공주 일제히 급등",
+          "link": "https://www.apnews.kr/news/articleView.html?idxno=3045482",
+          "description": "©AP신문(AP뉴스)/이미지 제공 = 주식차트연구소 ▲주도 테마지도 일론 머스크가 이끄는 미국 우주기업... 75%), 루미르(+15.32%), 나라스페이스테크놀로지(+12.86%), 제노코(+10.61%), 쎄트렉아이(+9.10%), 컨텍(+8.59...",
+          "pubDate": "02-03 11:54",
+          "originallink": "https://www.apnews.kr/news/articleView.html?idxno=3045482"
+        }
+      ]
+    },
+    "307870": {
+      "name": "비투엔",
+      "news": [
+        {
+          "title": "[세미콜론] 해외는 이미 '스마트 관세청'…우리나라 'AI 관세행정'은?",
+          "link": "https://www.sejungilbo.com/news/articleView.html?idxno=56848",
+          "description": "관세청이 주식회사 비투엔에 의뢰한 '관세행정 및 관세청 정보시스템의 미래 발전방향 연구' 보고서에 따르면 글로벌 관세·무역 및 국내 공공영역의 디지털 전환이 가속화됨에 따라 기술기반의 업무 혁신과 신속한...",
+          "pubDate": "01-30 08:48",
+          "originallink": "https://www.sejungilbo.com/news/articleView.html?idxno=56848"
+        },
+        {
+          "title": "1월 21일 주식시장 주요공시",
+          "link": "https://www.nbnews.kr/news/articleView.html?idxno=119723",
+          "description": "위반으로 비투엔 지분 전량(2,820,000주)을 38.23억원에 처분 결정 계약 해제 ▶유비온, 6억원 규모... (대한민국) 주식 1,750,000주를 175억원에 추가로 취득하기로 결정(취득후지분율:100%, 취득예정일:2026...",
+          "pubDate": "01-22 08:56",
+          "originallink": "https://www.nbnews.kr/news/articleView.html?idxno=119723"
+        },
+        {
+          "title": "차AI헬스케어, 보유 비투엔 주식 매각계획 전면취소",
+          "link": "http://thetracker.co.kr/View.aspx?No=3949534",
+          "description": "더트래커 김상년 snk0701@thetracker.co.kr 더트래커 = 김상년 기자차병원그룹 소속 코스피 상장사인 차AI헬스케어는 회사 보유 비투엔 주식 282만주를 엑티브4및 모멘텀1호 조합에 매도하려던 계획을 전면 취소한다고 21일...",
+          "pubDate": "01-21 13:20",
+          "originallink": "http://thetracker.co.kr/View.aspx?No=3949534"
+        }
+      ]
+    },
+    "332570": {
+      "name": "PS일렉트로닉스",
+      "news": [
+        {
+          "title": "PS일렉트로닉스 주가, 2월 3일 장중 7,490원 4.90% 상승",
+          "link": "https://www.job-post.co.kr/news/articleView.html?idxno=205426",
+          "description": "PS일렉트로닉스는 코스닥 시장에서 시가총액 3,284억 원을 기록하며 330위에 자리하고 있다. 총 상장주식수 43,789,726주 가운데 외국인 보유 주식수는 1,228,099주로, 외국인 소진율은 2.80%에 달한다. 현재...",
+          "pubDate": "02-03 11:12",
+          "originallink": "https://www.job-post.co.kr/news/articleView.html?idxno=205426"
+        },
+        {
+          "title": "PS일렉트로닉스 주가, 1월 28일 장중 7,630원 5.83% 상승",
+          "link": "https://www.joongangenews.com/news/articleView.html?idxno=490569",
+          "description": "외국인 투자자들은 상장 주식수 43,789,726주 중 1,736,406주를 보유하며 3.97%의 외국인 소진율을 보였다. 지난 거래일 PS일렉트로닉스 주가는 시가 7,350원으로 출발하여 7,520원의 고가와 7,050원의 저가를...",
+          "pubDate": "01-28 10:42",
+          "originallink": "https://www.joongangenews.com/news/articleView.html?idxno=490569"
+        },
+        {
+          "title": "1월 21일 주식시장 주요공시",
+          "link": "https://www.nbnews.kr/news/articleView.html?idxno=119723",
+          "description": "6%) 현금배당(결산배당) 결정(배당기준일:2025-12-31) ▶PS일렉트로닉스, 보통주 563,174주 소각 결정... (대한민국) 주식 1,750,000주를 175억원에 추가로 취득하기로 결정(취득후지분율:100%, 취득예정일:2026...",
+          "pubDate": "01-22 08:56",
+          "originallink": "https://www.nbnews.kr/news/articleView.html?idxno=119723"
+        }
+      ]
+    },
+    "331920": {
+      "name": "셀레믹스",
+      "news": [
+        {
+          "title": "2월 3일 주식시장 주요공시",
+          "link": "https://www.catchnews.kr/news/articleView.html?idxno=120250",
+          "description": "98억원(전년대비 적자전환) ▶셀레믹스, 최대주주 김효기 외 1인이 박종갑에 보유주식 429,933주를 25.79억원에 양도하는 최대주주 변경 수반 주식양수도 계약 체결(변경예정일:2026-03-04). 운영자금...",
+          "pubDate": "02-04 08:54",
+          "originallink": "https://www.catchnews.kr/news/articleView.html?idxno=120250"
+        },
+        {
+          "title": "셀레믹스, 50억원 규모 전환사채 발행 결정",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626657",
+          "description": "전환에 따라 발행될 주식은 셀레믹스의 기명식 보통주 168만5772주로, 이는 주식총수 대비 20.6%에 해당한다. 전환청구기간은 2027년 2월 27일부터 2029년 1월 27일까지다. 이사회 결의는 2026년 2월 3일에 이루어졌으며...",
+          "pubDate": "02-04 07:26",
+          "originallink": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626657"
+        },
+        {
+          "title": "셀레믹스, 유상증자 결정…보통주 163만2829주 발행",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626658",
+          "description": "주요사항보고서(유상증자결정) 금융위원회 / 한국거래소 귀중2026 년 2 월 3 일회 사 명 :주식회사 셀레믹스대 표 이 사 :이 용 훈, 김 효 기본 점 소 재 지 :서울시 금천구 가산디지털1로 131, 에이동 20층 2004호 외...",
+          "pubDate": "02-04 07:26",
+          "originallink": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=626658"
+        }
+      ]
+    },
+    "317850": {
+      "name": "대모",
+      "news": [
+        {
+          "title": "[중국증시 주간 포인트] ②2월 국내외 빅테크 'AI 대전', 해외 대형 기술...",
+          "link": "https://www.newspim.com/news/view/20260201000139",
+          "description": "이 기사는 2월 2일 오전 06시00분 '해외 주식 투자의 도우미' GAM(Global Asset Management)에 출고된 프리미엄... ② 바이두(9888.HK)가 개발한 AI 기반 지식강화 거대언어모델(LLM)인 원신대모형(文心大模型)은 1월 26일부터...",
+          "pubDate": "02-02 06:00",
+          "originallink": "https://www.newspim.com/news/view/20260201000139"
+        },
+        {
+          "title": "웹의 미래를 재정의하다… AI 에이전트로 마음의 여유 실현하는 ‘유토...",
+          "link": "https://n.news.naver.com/mnews/article/020/0003693497?sid=105",
+          "description": "펠리시스와 레디컬벤처스를 비롯해 ‘딥러닝의 대모’로 불리는 페이페이 리 스탠퍼드대 교수, 구글 AI를... ‘AI 로봇 반도체 BIG 3 투자 트렌드’ ‘2025-2027 앞으로 3년 미국 주식 트렌드’ 등의 저자다.",
+          "pubDate": "01-29 17:42",
+          "originallink": "https://www.donga.com/news/It/article/all/20260129/133250084/1"
+        },
+        {
+          "title": "깊이가 다른 글로벌 투자 정보 GAM - 맛보기편 (1/27)",
+          "link": "https://www.newspim.com/news/view/20260127001011",
+          "description": "개발한 대모형(大模型) 브랜드인 퉁이첸원(通義千問∙Qwen) 홍보 이미지. [AI의 종목 이야기] 中 '유니트리... 관련 주식들 [자료=블룸버그] [AI의 종목 이야기] 애플, 업그레이드된 신형 에어태그 발표 애플의 신형...",
+          "pubDate": "01-27 16:50",
+          "originallink": "https://www.newspim.com/news/view/20260127001011"
+        }
+      ]
+    },
+    "319400": {
+      "name": "현대무벡스",
+      "news": [
+        {
+          "title": "휴림로봇, 출발 시그널 주시…반등 시도 속 변동성 경계 여전",
+          "link": "https://www.cbci.co.kr/news/articleView.html?idxno=553785",
+          "description": "한편 같은 시각 현대무벡스와 티로보틱스 등 일부 로봇 관련 종목은 상승으로 출발했다. 종목별로 흐름이... [※ 본 기사에서 제공하는 정보는 일반적인 주식시장 상황에 대한 설명을 목적으로 하며, 특정 종목에 대한 투자...",
+          "pubDate": "02-04 09:08",
+          "originallink": "https://www.cbci.co.kr/news/articleView.html?idxno=553785"
+        },
+        {
+          "title": "로봇·산업용·협동로봇 관련주, '웃음꽃' TPC·대동기어·아진엑스텍·...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249027",
+          "description": "와이투솔루션, 현대무벡스, 퍼스텍, HL만도, 휴림로봇, 협진, 한라캐스트는 상승했다. TPC와 대동기어와... 지난 12일부터 13일까지 이틀간 장내에서 주식을 취득해 보유 주식 수는 22만7739주로 증가했다. 지분율은 0.43...",
+          "pubDate": "02-04 00:10",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249027"
+        },
+        {
+          "title": "휴림로봇, 최대주주 '헐값 매각' 논란...고점 엑시트 위한 '꽃놀이패' 인...",
+          "link": "http://www.ttlnews.com/news/articleView.html?idxno=3075940",
+          "description": "3일 금융감독원 전자공시시스템에 따르면 휴림로봇의 최대주주인 휴림홀딩스는 보유 주식 250만주를... 9개로 이 가운데 뉴로메카, 협진, 현대무벡스, 휴림로봇, 모베이스전자, 본시스템즈 등 로봇 관련주가 6개가 포함됐다.",
+          "pubDate": "02-03 18:16",
+          "originallink": "http://www.ttlnews.com/news/articleView.html?idxno=3075940"
+        }
+      ]
+    },
+    "373200": {
+      "name": "엑스플러스",
+      "news": [
+        {
+          "title": "로봇·산업용·협동로봇 관련주, '웃음꽃' TPC·대동기어·아진엑스텍·...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249027",
+          "description": "3일 한국거래소에 따르면 TPC, 대동기어, 아진엑스텍, 대동, 티로보틱스, 아이엘, 뉴로메카, 우림피티에스... 미국 베어로보틱스의 서빙로봇인 '서비'와 '서비플러스'의 위탁생산을 독점적으로 맡아 진행 중으로...",
+          "pubDate": "02-04 00:10",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249027"
+        },
+        {
+          "title": "오늘의 메모[2월 4일]",
+          "link": "https://n.news.naver.com/mnews/article/011/0004585985?sid=101",
+          "description": "(079950) ▲보통주추가상장=드림씨아이에스(223250)·HEM파마·M83(주식매수선택권행사) 뉴로메카(348340)·휴림에이텍·모아라이프플러스(국내CB) ▲주권변경상장=위드텍(348350)·아진엑스텍(주식소각)",
+          "pubDate": "02-03 10:41",
+          "originallink": "https://www.sedaily.com/article/20004078?ref=naver"
+        },
+        {
+          "title": "의료기기 관련주, '봄꽃만개' 네오펙트·뉴로핏·시지메드텍... '시들시...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=248938",
+          "description": "바이오플러스, 엘앤케이바이오, 리가켐바이오, 한국비티비, 셀바스헬스케어, 큐리오시스, 뷰노... 원텍은 1999년 설립된 의료기기 전문기업으로, 2022년 대신밸런스제8호기업인수목적과 합병 후 사명을 원텍 주식회사로...",
+          "pubDate": "02-02 18:16",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=248938"
+        }
+      ]
+    },
+    "417010": {
+      "name": "나노팀",
+      "news": [
+        {
+          "title": "스페이스X 관련주, '덩실덩실' 미래에셋벤처투자·미래에셋증권·나노팀...",
+          "link": "http://www.finomy.com/news/articleView.html?idxno=249026",
+          "description": "3일 한국거래소에 따르면 미래에셋벤처투자, 미래에셋증권, 나노팀, 아주IB투자, 와이제이링크... Ltd.)의 주식 500만주를 취득하기로 결정했다고 지난 1월 15일 공시했다. 취득금액은 73억 6400만원으로 자기자본 대비...",
+          "pubDate": "02-04 00:10",
+          "originallink": "http://www.finomy.com/news/articleView.html?idxno=249026"
+        },
+        {
+          "title": "[주식마감기사] '상장폐지' 피한 파두, 거래재개 후 상한가... 전진건설...",
+          "link": "https://www.ggilbo.com/news/articleView.html?idxno=1139940",
+          "description": "이는 '뻥튀기 상장' 의혹에 휩싸였던 파두의 주식 거래가 이날부터 재개되면서 영향을 받은 것으로... 덕양에너젠, 나노팀, 코아시아씨엠, 흥국에프엔비, SFA반도체, 하림지주다. 이날 코스피는 전장보다 338.41포인트...",
+          "pubDate": "02-03 19:40",
+          "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1139940"
+        },
+        {
+          "title": "스페이스X·xAI 합병?...미래에셋증권 등 관련주 '장중 껑충'",
+          "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=160466",
+          "description": "14%), 나노팀(+20.65%), 세트렉아이(+7.24%), 파이버프로(+5.72%), 제노코(+5.59%) 등도 우주산업 테마로 묶이면서... 특정 섹터 및 특정 기업에 대한 분석 내용과 이슈, 특정 테마는 지켜봐야 하는 경우가 많은 데다, 주식투자...",
+          "pubDate": "02-03 10:56",
+          "originallink": "http://www.choicenews.co.kr/news/articleView.html?idxno=160466"
+        }
+      ]
+    }
+  }
 }
