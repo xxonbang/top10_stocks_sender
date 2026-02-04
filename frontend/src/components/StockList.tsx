@@ -20,9 +20,9 @@ function CompactHeader() {
   return (
     <div className="grid grid-cols-[auto_1fr_auto_auto_auto] gap-2 px-2 py-1.5 text-[9px] sm:text-[10px] text-muted-foreground font-medium border-b border-border/50">
       <span className="w-5 text-center">#</span>
-      <span className="text-center">종목명</span>
-      <span className="text-center w-16 sm:w-20">현재가</span>
-      <span className="text-center w-12 sm:w-14">거래량</span>
+      <span className="text-left">종목명</span>
+      <span className="text-right w-16 sm:w-20">현재가</span>
+      <span className="text-right w-12 sm:w-14">거래량</span>
       <span className="text-center w-14 sm:w-16">등락률</span>
     </div>
   )
