@@ -244,8 +244,8 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
               onClick={handleHistoryClick}
               className={cn(
                 "relative overflow-hidden group",
-                "flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10",
-                "rounded-xl",
+                "flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8",
+                "rounded-lg",
                 "bg-gradient-to-br from-secondary via-secondary to-secondary/80",
                 "border border-border/50",
                 "shadow-sm hover:shadow-md hover:shadow-primary/10",
@@ -260,14 +260,14 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
               {/* 임시 Focus Ring */}
               <div
                 className={cn(
-                  "absolute inset-0 rounded-xl ring-2 ring-primary/40 ring-offset-2 ring-offset-background",
+                  "absolute inset-0 rounded-lg ring-2 ring-primary/40 ring-offset-1 ring-offset-background",
                   "transition-opacity duration-300",
                   historyFocusRing ? "opacity-100" : "opacity-0"
                 )}
               />
 
               {/* Glow effect on hover */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Shimmer effect */}
               <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -278,7 +278,7 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
                 "group-hover:rotate-12 group-active:rotate-0"
               )}>
                 <History className={cn(
-                  "w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:scale-110",
+                  "w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-300 group-hover:scale-110",
                   isViewingHistory && "text-primary"
                 )} />
               </div>
@@ -305,8 +305,8 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
               onClick={handleToggleClick}
               className={cn(
                 "relative overflow-hidden group",
-                "flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10",
-                "rounded-xl",
+                "flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8",
+                "rounded-lg",
                 "bg-gradient-to-br from-secondary via-secondary to-secondary/80",
                 "border border-border/50",
                 "shadow-sm hover:shadow-md hover:shadow-primary/10",
@@ -320,14 +320,14 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
               {/* 임시 Focus Ring - 나타났다 사라짐 */}
               <div
                 className={cn(
-                  "absolute inset-0 rounded-xl ring-2 ring-primary/40 ring-offset-2 ring-offset-background",
+                  "absolute inset-0 rounded-lg ring-2 ring-primary/40 ring-offset-1 ring-offset-background",
                   "transition-opacity duration-300",
                   toggleFocusRing ? "opacity-100" : "opacity-0"
                 )}
               />
 
               {/* Glow effect on hover */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Shimmer effect */}
               <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -338,9 +338,9 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
                 "group-hover:rotate-12 group-active:rotate-0"
               )}>
                 {compactMode ? (
-                  <LayoutGrid className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:scale-110" />
+                  <LayoutGrid className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-300 group-hover:scale-110" />
                 ) : (
-                  <List className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:scale-110" />
+                  <List className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-300 group-hover:scale-110" />
                 )}
               </div>
 
@@ -367,9 +367,9 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
               disabled={loading}
               className={cn(
                 "relative overflow-hidden group",
-                "flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5",
-                "rounded-xl",
-                "font-medium text-xs sm:text-sm",
+                "flex items-center gap-1 px-2 py-1.5 sm:px-2.5 sm:py-1.5",
+                "rounded-lg",
+                "font-medium text-[10px] sm:text-xs",
                 "bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10",
                 "text-primary",
                 "border border-primary/20",
@@ -386,7 +386,7 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
               {/* 임시 Focus Ring */}
               <div
                 className={cn(
-                  "absolute inset-0 rounded-xl ring-2 ring-primary/40 ring-offset-2 ring-offset-background",
+                  "absolute inset-0 rounded-lg ring-2 ring-primary/40 ring-offset-1 ring-offset-background",
                   "transition-opacity duration-300",
                   refreshFocusRing ? "opacity-100" : "opacity-0"
                 )}
@@ -394,7 +394,7 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
 
               {/* Animated glow border */}
               <div className={cn(
-                "absolute inset-0 rounded-xl",
+                "absolute inset-0 rounded-lg",
                 "bg-gradient-to-r from-primary/0 via-primary/30 to-primary/0",
                 "opacity-0 group-hover:opacity-100",
                 "transition-opacity duration-300",
@@ -410,7 +410,7 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
 
               {/* Icon */}
               <RefreshCw className={cn(
-                "relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4",
+                "relative z-10 w-2.5 h-2.5 sm:w-3 sm:h-3",
                 "transition-transform duration-500",
                 loading ? "animate-spin" : "group-hover:rotate-180"
               )} />
