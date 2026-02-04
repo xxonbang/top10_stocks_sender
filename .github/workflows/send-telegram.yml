@@ -106,6 +106,14 @@ jobs:
             if ! git diff --staged --quiet; then
               KST_TIME=$(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M')
               git commit -m "Update stock data - $KST_TIME KST"
+
+              # Pull with rebase to avoid conflicts with remote changes
+              git pull --rebase origin main || {
+                echo "Rebase failed, attempting merge strategy"
+                git rebase --abort 2>/dev/null || true
+                git pull origin main --strategy=ours || true
+              }
+
               git push
               echo "Data committed and pushed"
             else
