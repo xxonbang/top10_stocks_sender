@@ -1,11 +1,30 @@
+import { useState, useEffect } from "react"
 import { Header } from "@/components/Header"
 import { ExchangeRate } from "@/components/ExchangeRate"
 import { StockList } from "@/components/StockList"
 import { useStockData } from "@/hooks/useStockData"
 import { Loader2 } from "lucide-react"
 
+// 로컬 스토리지 키
+const COMPACT_MODE_KEY = "stock-dashboard-compact-mode"
+
 function App() {
   const { data, loading, error, refetch } = useStockData()
+
+  // 컴팩트 모드 상태 (로컬 스토리지에서 복원)
+  const [compactMode, setCompactMode] = useState(() => {
+    const saved = localStorage.getItem(COMPACT_MODE_KEY)
+    return saved === "true"
+  })
+
+  // 컴팩트 모드 변경 시 로컬 스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem(COMPACT_MODE_KEY, String(compactMode))
+  }, [compactMode])
+
+  const toggleCompactMode = () => {
+    setCompactMode((prev) => !prev)
+  }
 
   if (loading && !data) {
     return (
@@ -24,6 +43,8 @@ function App() {
         timestamp={data?.timestamp}
         onRefresh={refetch}
         loading={loading}
+        compactMode={compactMode}
+        onToggleCompact={toggleCompactMode}
       />
 
       <main className="container px-3 sm:px-4 py-4 sm:py-6">
@@ -47,6 +68,7 @@ function App() {
               history={data.history}
               news={data.news}
               type="rising"
+              compactMode={compactMode}
             />
           )}
 
@@ -59,6 +81,7 @@ function App() {
               history={data.history}
               news={data.news}
               type="falling"
+              compactMode={compactMode}
             />
           )}
         </div>
