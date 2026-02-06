@@ -97,7 +97,7 @@ class SupabaseCredentialManager:
 
         try:
             response = client.table('api_credentials').select(
-                'credential_value'
+                'credential_value, expires_at'
             ).eq('service_name', 'kis').eq(
                 'credential_type', 'access_token'
             ).eq('is_active', True).execute()
@@ -105,9 +105,13 @@ class SupabaseCredentialManager:
             if not response.data:
                 return None
 
+            row = response.data[0]
             # JSON으로 저장된 토큰 정보 파싱
-            token_json = response.data[0]['credential_value']
-            token_data = json.loads(token_json)
+            token_data = json.loads(row['credential_value'])
+
+            # DB expires_at 컬럼 값 우선 사용, 없으면 JSON 내부 값으로 폴백
+            if row.get('expires_at'):
+                token_data['expires_at'] = row['expires_at']
 
             return token_data
 
@@ -116,6 +120,49 @@ class SupabaseCredentialManager:
             return None
         except Exception as e:
             print(f"[Supabase] KIS 토큰 조회 실패: {e}")
+            return None
+
+    def get_kis_valid_token(self) -> Optional[Dict[str, Any]]:
+        """만료되지 않은 KIS access_token만 조회 (Supabase에서)
+
+        expires_at > now() 조건으로 DB에서 유효한 토큰만 반환합니다.
+
+        Returns:
+            {
+                'access_token': 'xxx',
+                'expires_at': '2026-01-31T23:15:47',
+                'issued_at': '2026-01-30T23:15:47'
+            } 또는 None (만료되었거나 토큰이 없는 경우)
+        """
+        client = self._get_client()
+        if not client:
+            return None
+
+        try:
+            response = client.table('api_credentials').select(
+                'credential_value, expires_at'
+            ).eq('service_name', 'kis').eq(
+                'credential_type', 'access_token'
+            ).eq('is_active', True).gt(
+                'expires_at', datetime.now().isoformat()
+            ).execute()
+
+            if not response.data:
+                return None
+
+            row = response.data[0]
+            token_data = json.loads(row['credential_value'])
+
+            if row.get('expires_at'):
+                token_data['expires_at'] = row['expires_at']
+
+            return token_data
+
+        except json.JSONDecodeError:
+            print("[Supabase] KIS 토큰 JSON 파싱 실패")
+            return None
+        except Exception as e:
+            print(f"[Supabase] KIS 유효 토큰 조회 실패: {e}")
             return None
 
     def save_kis_token(
@@ -155,6 +202,7 @@ class SupabaseCredentialManager:
                 response = client.table('api_credentials').update({
                     'credential_value': json.dumps(token_data),
                     'updated_at': datetime.now().isoformat(),
+                    'expires_at': expires_at.isoformat(),
                 }).eq('service_name', 'kis').eq(
                     'credential_type', 'access_token'
                 ).execute()
@@ -164,6 +212,7 @@ class SupabaseCredentialManager:
                     'service_name': 'kis',
                     'credential_type': 'access_token',
                     'credential_value': json.dumps(token_data),
+                    'expires_at': expires_at.isoformat(),
                     'environment': 'production',
                     'description': 'KIS OAuth Access Token (자동 갱신)',
                     'is_active': True,
@@ -233,6 +282,12 @@ def get_kis_token_from_supabase() -> Optional[Dict[str, Any]]:
     """Supabase에서 KIS access_token 조회 (편의 함수)"""
     manager = get_supabase_manager()
     return manager.get_kis_token()
+
+
+def get_kis_valid_token_from_supabase() -> Optional[Dict[str, Any]]:
+    """Supabase에서 만료되지 않은 KIS access_token 조회 (편의 함수)"""
+    manager = get_supabase_manager()
+    return manager.get_kis_valid_token()
 
 
 def save_kis_token_to_supabase(
