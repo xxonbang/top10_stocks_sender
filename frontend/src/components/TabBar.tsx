@@ -115,11 +115,11 @@ export function TabBar({ activeTab, onTabChange, fluctuationMode, onFluctuationM
             ref={containerRef}
             role="tablist"
             aria-label="데이터 카테고리"
-            className="relative inline-flex items-center rounded-xl bg-muted p-1"
+            className="relative inline-flex items-center rounded-lg bg-muted p-1"
           >
             {/* 슬라이딩 인디케이터 */}
             <div
-              className="absolute top-1 bottom-1 rounded-lg bg-background shadow-sm ring-1 ring-border/30 transition-all duration-200 ease-out"
+              className="absolute top-1 bottom-1 rounded-md bg-background shadow-sm ring-1 ring-border/30 transition-all duration-200 ease-out"
               style={{
                 width: indicator.width,
                 transform: `translateX(${indicator.left}px)`,
@@ -135,7 +135,7 @@ export function TabBar({ activeTab, onTabChange, fluctuationMode, onFluctuationM
                 onClick={() => onTabChange(tab.key)}
                 onKeyDown={(e) => handleTabKeyDown(e, tab.key)}
                 className={cn(
-                  "relative z-10 px-2.5 sm:px-4 py-2 sm:py-2 text-[11px] sm:text-sm font-medium rounded-lg",
+                  "relative z-10 px-2.5 sm:px-4 py-2 sm:py-2 text-[11px] sm:text-sm font-medium rounded-md",
                   "transition-all duration-200 whitespace-nowrap",
                   activeTab === tab.key
                     ? "text-foreground"
