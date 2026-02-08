@@ -33,7 +33,7 @@ function CompactHeader({ showTradingValue, hasInvestorData, investorEstimated }:
         {hasInvestorData && <span className="text-right w-14 sm:w-16">외국인{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">추정</span>}</span>}
         {hasInvestorData && <span className="text-right w-14 sm:w-16">기관{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">추정</span>}</span>}
         {hasInvestorData && <span className="text-right w-14 sm:w-16">{investorEstimated ? "" : "개인"}</span>}
-        <span className="text-right w-16 sm:w-18">등락률</span>
+        <span className="text-center ml-1 whitespace-nowrap">등락률</span>
       </div>
     </div>
   )
@@ -96,7 +96,7 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
           </span>
         )}
         <span className={cn(
-          "text-[10px] font-semibold px-1.5 py-0.5 rounded text-right w-16 sm:w-18",
+          "text-[10px] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap ml-1",
           effectiveRising ? "bg-red-500/10 text-red-600" : "bg-blue-500/10 text-blue-600"
         )}>
           {formatChangeRate(stock.change_rate)}
