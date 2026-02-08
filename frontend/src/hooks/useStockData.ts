@@ -43,6 +43,12 @@ export function useStockData(): UseStockDataReturn {
   }, [])
 
   const refreshFromAPI = useCallback(async () => {
+    // API 서버 URL이 없으면 정적 데이터 다시 로드
+    if (!API_URL) {
+      await fetchData()
+      return
+    }
+
     setLoading(true)
     setError(null)
     setRefreshElapsed(0)
