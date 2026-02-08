@@ -18,44 +18,29 @@ interface StockListProps {
   investorEstimated?: boolean
 }
 
-// 그리드 cols 계산 (모바일: 수급 컬럼 숨김, 데스크톱: 표시)
-function getGridCols(showTradingValue?: boolean, hasInvestorData?: boolean): string {
-  if (showTradingValue && hasInvestorData) {
-    // mobile 6열: #, name, price, tradingValue, volume, changeRate
-    // desktop 9열: + foreign, institution, individual
-    return "grid grid-cols-[auto_1fr_auto_auto_auto_auto] sm:grid-cols-[auto_1fr_auto_auto_auto_auto_auto_auto_auto]"
-  }
-  if (showTradingValue) {
-    return "grid grid-cols-[auto_1fr_auto_auto_auto_auto]"
-  }
-  if (hasInvestorData) {
-    return "grid grid-cols-[auto_1fr_auto_auto_auto] sm:grid-cols-[auto_1fr_auto_auto_auto_auto_auto_auto]"
-  }
-  return "grid grid-cols-[auto_1fr_auto_auto_auto]"
-}
-
-// 컴팩트 모드 컬럼 헤더
+// 컴팩트 모드 컬럼 헤더 (flex: sticky left + scrollable right)
 function CompactHeader({ showTradingValue, hasInvestorData, investorEstimated }: { showTradingValue?: boolean; hasInvestorData?: boolean; investorEstimated?: boolean }) {
   return (
-    <div className={cn(
-      "gap-2 px-2 py-1.5 text-[9px] sm:text-[10px] text-muted-foreground font-medium border-b border-border/50",
-      getGridCols(showTradingValue, hasInvestorData),
-    )}>
-      <span className="w-5 text-center">#</span>
-      <span className="text-left">종목명</span>
-      <span className="text-right w-16 sm:w-20">현재가</span>
-      {showTradingValue && <span className="text-right w-12 sm:w-16">거래대금</span>}
-      <span className="text-right w-12 sm:w-14">거래량</span>
-      {hasInvestorData && <span className="text-right w-12 sm:w-14 hidden sm:block">외국인{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">추정</span>}</span>}
-      {hasInvestorData && <span className="text-right w-12 sm:w-14 hidden sm:block">기관{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">추정</span>}</span>}
-      {hasInvestorData && <span className="text-right w-12 sm:w-14 hidden sm:block">{investorEstimated ? "" : "개인"}</span>}
-      <span className="text-center w-14 sm:w-16">등락률</span>
+    <div className="flex items-center py-1.5 text-[9px] sm:text-[10px] text-muted-foreground font-medium border-b border-border/50">
+      <div className="sticky left-0 z-10 bg-card flex items-center gap-2 shrink-0 w-28 sm:w-40 pl-2 pr-1">
+        <span className="w-5 text-center shrink-0">#</span>
+        <span>종목명</span>
+      </div>
+      <div className="flex items-center shrink-0 pr-2">
+        <span className="text-right w-16 sm:w-20">현재가</span>
+        {showTradingValue && <span className="text-right w-12 sm:w-16">거래대금</span>}
+        <span className="text-right w-11 sm:w-14">거래량</span>
+        {hasInvestorData && <span className="text-right w-12 sm:w-14">외국인{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">추정</span>}</span>}
+        {hasInvestorData && <span className="text-right w-12 sm:w-14">기관{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">추정</span>}</span>}
+        {hasInvestorData && <span className="text-right w-12 sm:w-14">{investorEstimated ? "" : "개인"}</span>}
+        <span className="text-center w-14 sm:w-16">등락률</span>
+      </div>
     </div>
   )
 }
 
-// 컴팩트 모드용 간단한 종목 행
-function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInvestorData, investorEstimated }: { stock: Stock; type: "rising" | "falling" | "neutral"; showTradingValue?: boolean; investorInfo?: InvestorInfo; hasInvestorData?: boolean; investorEstimated?: boolean }) {
+// 컴팩트 모드용 간단한 종목 행 (flex: sticky left + scrollable right)
+function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInvestorData }: { stock: Stock; type: "rising" | "falling" | "neutral"; showTradingValue?: boolean; investorInfo?: InvestorInfo; hasInvestorData?: boolean }) {
   const effectiveRising = type === "neutral" ? stock.change_rate >= 0 : type === "rising"
   const naverUrl = `https://m.stock.naver.com/domestic/stock/${stock.code}/total`
 
@@ -64,13 +49,10 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
       href={naverUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="block hover:bg-muted/50 rounded-md transition-colors group"
+      className="flex items-center py-2 hover:bg-muted/50 transition-colors group"
     >
-      <div className={cn(
-        "gap-2 items-center py-2 px-2",
-        getGridCols(showTradingValue, hasInvestorData),
-      )}>
-        {/* Rank */}
+      {/* Sticky left: Rank + Name */}
+      <div className="sticky left-0 z-10 bg-card group-hover:bg-muted/50 flex items-center gap-2 shrink-0 w-28 sm:w-40 pl-2 pr-1 transition-colors">
         <span className={cn(
           "w-5 h-5 flex items-center justify-center text-[10px] font-bold rounded-full shrink-0",
           type === "neutral"
@@ -79,52 +61,40 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
         )}>
           {stock.rank}
         </span>
-
-        {/* Name */}
         <div className="flex items-center gap-1 min-w-0">
           <span className="font-medium text-xs truncate">{stock.name}</span>
-          <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity shrink-0" />
+          <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity shrink-0 hidden sm:block" />
         </div>
+      </div>
 
-        {/* Price */}
+      {/* Scrollable right: Data columns */}
+      <div className="flex items-center shrink-0 pr-2">
         <span className="text-xs font-medium tabular-nums text-right w-16 sm:w-20">
           {formatPrice(stock.current_price)}<span className="text-[9px] text-muted-foreground">원</span>
         </span>
-
-        {/* Trading Value (optional) */}
         {showTradingValue && (
           <span className="text-[10px] text-muted-foreground tabular-nums text-right w-12 sm:w-16">
             {stock.trading_value ? formatTradingValue(stock.trading_value) : "-"}
           </span>
         )}
-
-        {/* Volume */}
-        <span className="text-[10px] text-muted-foreground tabular-nums text-right w-12 sm:w-14">
+        <span className="text-[10px] text-muted-foreground tabular-nums text-right w-11 sm:w-14">
           {formatVolume(stock.volume)}
         </span>
-
-        {/* Foreign Net Buy (desktop) */}
         {hasInvestorData && (
-          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo ? getNetBuyColor(investorInfo.foreign_net) : "text-muted-foreground")}>
+          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14", investorInfo ? getNetBuyColor(investorInfo.foreign_net) : "text-muted-foreground")}>
             {investorInfo ? formatNetBuy(investorInfo.foreign_net) : "-"}
           </span>
         )}
-
-        {/* Institution Net Buy (desktop) */}
         {hasInvestorData && (
-          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo ? getNetBuyColor(investorInfo.institution_net) : "text-muted-foreground")}>
+          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14", investorInfo ? getNetBuyColor(investorInfo.institution_net) : "text-muted-foreground")}>
             {investorInfo ? formatNetBuy(investorInfo.institution_net) : "-"}
           </span>
         )}
-
-        {/* Individual Net Buy (desktop) */}
         {hasInvestorData && (
-          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo?.individual_net != null ? getNetBuyColor(investorInfo.individual_net) : "text-muted-foreground")}>
+          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14", investorInfo?.individual_net != null ? getNetBuyColor(investorInfo.individual_net) : "text-muted-foreground")}>
             {investorInfo?.individual_net != null ? formatNetBuy(investorInfo.individual_net) : "-"}
           </span>
         )}
-
-        {/* Change Rate */}
         <span className={cn(
           "text-[10px] font-semibold px-1.5 py-0.5 rounded text-right w-14 sm:w-16",
           effectiveRising ? "bg-red-500/10 text-red-600" : "bg-blue-500/10 text-blue-600"
@@ -132,24 +102,6 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
           {formatChangeRate(stock.change_rate)}
         </span>
       </div>
-
-      {/* Mobile investor sub-row */}
-      {investorInfo && (
-        <div className="sm:hidden flex items-center gap-2 px-2 pb-1.5 pl-9 text-[9px]">
-          <span className="text-muted-foreground">외{investorEstimated ? <span className="text-amber-500">*</span> : ""}</span>
-          <span className={cn("tabular-nums font-medium", getNetBuyColor(investorInfo.foreign_net))}>{formatNetBuy(investorInfo.foreign_net)}</span>
-          <span className="text-border">|</span>
-          <span className="text-muted-foreground">기관{investorEstimated ? <span className="text-amber-500">*</span> : ""}</span>
-          <span className={cn("tabular-nums font-medium", getNetBuyColor(investorInfo.institution_net))}>{formatNetBuy(investorInfo.institution_net)}</span>
-          {investorInfo.individual_net != null && (
-            <>
-              <span className="text-border">|</span>
-              <span className="text-muted-foreground">개인</span>
-              <span className={cn("tabular-nums font-medium", getNetBuyColor(investorInfo.individual_net))}>{formatNetBuy(investorInfo.individual_net)}</span>
-            </>
-          )}
-        </div>
-      )}
     </a>
   )
 }
@@ -174,6 +126,8 @@ function CompactMarketSection({
   investorData?: Record<string, InvestorInfo>
   investorEstimated?: boolean
 }) {
+  const hasInvestorData = !!investorData && Object.keys(investorData).length > 0
+
   if (stocks.length === 0) {
     return (
       <div className="py-2">
@@ -194,11 +148,13 @@ function CompactMarketSection({
         <span className="font-semibold text-xs">{market}</span>
         <span className="text-[10px] text-muted-foreground">({stocks.length})</span>
       </div>
-      {showHeader && <CompactHeader showTradingValue={showTradingValue} hasInvestorData={!!investorData && Object.keys(investorData).length > 0} investorEstimated={investorEstimated} />}
-      <div className="divide-y divide-border/30">
-        {stocks.map((stock) => (
-          <CompactStockRow key={stock.code} stock={stock} type={type} showTradingValue={showTradingValue} investorInfo={investorData?.[stock.code]} hasInvestorData={!!investorData && Object.keys(investorData).length > 0} investorEstimated={investorEstimated} />
-        ))}
+      <div className="overflow-x-auto scrollbar-hide">
+        {showHeader && <CompactHeader showTradingValue={showTradingValue} hasInvestorData={hasInvestorData} investorEstimated={investorEstimated} />}
+        <div className="divide-y divide-border/30">
+          {stocks.map((stock) => (
+            <CompactStockRow key={stock.code} stock={stock} type={type} showTradingValue={showTradingValue} investorInfo={investorData?.[stock.code]} hasInvestorData={hasInvestorData} />
+          ))}
+        </div>
       </div>
     </div>
   )
