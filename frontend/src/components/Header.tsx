@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { BarChart3, RefreshCw, LayoutGrid, List, Calendar, Clock, History } from "lucide-react"
+import { BarChart3, RefreshCw, LayoutGrid, List, Calendar, History } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface HeaderProps {
@@ -186,19 +186,22 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
             <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <h1 className="font-bold text-sm sm:text-lg tracking-tight">Stock TOP10</h1>
-            <p className="text-[10px] sm:text-xs text-muted-foreground hidden xs:block">거래량 + 등락률 교차 분석</p>
+            <h1 className="font-bold text-sm sm:text-lg tracking-tight">
+              <span className="sm:hidden">ThemeAnalyzer</span>
+              <span className="hidden sm:inline">Stock TOP10</span>
+            </h1>
+            <p className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">거래량 + 등락률 교차 분석</p>
           </div>
         </div>
 
         {/* Right Controls */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           {/* Timestamp Badge - 클릭 가능 */}
           {parsed && (
             <div className="relative">
               <button
                 onClick={handleTimestampClick}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-gradient-to-r from-muted/80 to-muted/50 border border-border/50 shadow-sm cursor-pointer hover:border-primary/30 hover:shadow-md transition-all duration-200 focus:outline-none"
+                className="flex items-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-3 sm:py-2 rounded-full bg-gradient-to-r from-muted/80 to-muted/50 border border-border/50 shadow-sm cursor-pointer hover:border-primary/30 hover:shadow-md transition-all duration-200 focus:outline-none"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -207,15 +210,13 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-3 h-3 text-muted-foreground hidden sm:block" />
-                    <span className="text-[10px] sm:text-xs font-medium">
-                      <span className="hidden sm:inline">{parsed.fullDate}</span>
-                      <span className="sm:hidden">{parsed.shortDate}</span>
+                    <span className="text-[10px] sm:text-xs font-medium hidden sm:inline">
+                      {parsed.fullDate}
                       <span className="text-muted-foreground ml-0.5">({parsed.weekday})</span>
                     </span>
                   </div>
                   <span className="w-px h-3 bg-border/70 hidden sm:block"></span>
                   <div className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-muted-foreground hidden sm:block" />
                     <span className="text-[10px] sm:text-xs font-semibold tabular-nums">{parsed.fullTime}</span>
                   </div>
                 </div>

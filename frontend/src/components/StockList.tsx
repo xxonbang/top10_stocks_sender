@@ -55,7 +55,7 @@ function CompactHeader({ showTradingValue, hasInvestorData, investorEstimated }:
 }
 
 // 컴팩트 모드용 간단한 종목 행
-function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInvestorData }: { stock: Stock; type: "rising" | "falling" | "neutral"; showTradingValue?: boolean; investorInfo?: InvestorInfo; hasInvestorData?: boolean }) {
+function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInvestorData, investorEstimated }: { stock: Stock; type: "rising" | "falling" | "neutral"; showTradingValue?: boolean; investorInfo?: InvestorInfo; hasInvestorData?: boolean; investorEstimated?: boolean }) {
   const effectiveRising = type === "neutral" ? stock.change_rate >= 0 : type === "rising"
   const naverUrl = `https://m.stock.naver.com/domestic/stock/${stock.code}/total`
 
@@ -64,72 +64,92 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
       href={naverUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        "gap-2 items-center py-2 px-2 hover:bg-muted/50 rounded-md transition-colors group",
-        getGridCols(showTradingValue, hasInvestorData),
-      )}
+      className="block hover:bg-muted/50 rounded-md transition-colors group"
     >
-      {/* Rank */}
-      <span className={cn(
-        "w-5 h-5 flex items-center justify-center text-[10px] font-bold rounded-full shrink-0",
-        type === "neutral"
-          ? "bg-amber-500/10 text-amber-600"
-          : effectiveRising ? "bg-red-500/10 text-red-600" : "bg-blue-500/10 text-blue-600"
+      <div className={cn(
+        "gap-2 items-center py-2 px-2",
+        getGridCols(showTradingValue, hasInvestorData),
       )}>
-        {stock.rank}
-      </span>
+        {/* Rank */}
+        <span className={cn(
+          "w-5 h-5 flex items-center justify-center text-[10px] font-bold rounded-full shrink-0",
+          type === "neutral"
+            ? "bg-amber-500/10 text-amber-600"
+            : effectiveRising ? "bg-red-500/10 text-red-600" : "bg-blue-500/10 text-blue-600"
+        )}>
+          {stock.rank}
+        </span>
 
-      {/* Name */}
-      <div className="flex items-center gap-1 min-w-0">
-        <span className="font-medium text-xs truncate">{stock.name}</span>
-        <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity shrink-0" />
+        {/* Name */}
+        <div className="flex items-center gap-1 min-w-0">
+          <span className="font-medium text-xs truncate">{stock.name}</span>
+          <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity shrink-0" />
+        </div>
+
+        {/* Price */}
+        <span className="text-xs font-medium tabular-nums text-right w-16 sm:w-20">
+          {formatPrice(stock.current_price)}<span className="text-[9px] text-muted-foreground">원</span>
+        </span>
+
+        {/* Trading Value (optional) */}
+        {showTradingValue && (
+          <span className="text-[10px] text-muted-foreground tabular-nums text-right w-12 sm:w-16">
+            {stock.trading_value ? formatTradingValue(stock.trading_value) : "-"}
+          </span>
+        )}
+
+        {/* Volume */}
+        <span className="text-[10px] text-muted-foreground tabular-nums text-right w-12 sm:w-14">
+          {formatVolume(stock.volume)}
+        </span>
+
+        {/* Foreign Net Buy (desktop) */}
+        {hasInvestorData && (
+          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo ? getNetBuyColor(investorInfo.foreign_net) : "text-muted-foreground")}>
+            {investorInfo ? formatNetBuy(investorInfo.foreign_net) : "-"}
+          </span>
+        )}
+
+        {/* Institution Net Buy (desktop) */}
+        {hasInvestorData && (
+          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo ? getNetBuyColor(investorInfo.institution_net) : "text-muted-foreground")}>
+            {investorInfo ? formatNetBuy(investorInfo.institution_net) : "-"}
+          </span>
+        )}
+
+        {/* Individual Net Buy (desktop) */}
+        {hasInvestorData && (
+          <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo?.individual_net != null ? getNetBuyColor(investorInfo.individual_net) : "text-muted-foreground")}>
+            {investorInfo?.individual_net != null ? formatNetBuy(investorInfo.individual_net) : "-"}
+          </span>
+        )}
+
+        {/* Change Rate */}
+        <span className={cn(
+          "text-[10px] font-semibold px-1.5 py-0.5 rounded text-right w-14 sm:w-16",
+          effectiveRising ? "bg-red-500/10 text-red-600" : "bg-blue-500/10 text-blue-600"
+        )}>
+          {formatChangeRate(stock.change_rate)}
+        </span>
       </div>
 
-      {/* Price */}
-      <span className="text-xs font-medium tabular-nums text-right w-16 sm:w-20">
-        {formatPrice(stock.current_price)}<span className="text-[9px] text-muted-foreground">원</span>
-      </span>
-
-      {/* Trading Value (optional) */}
-      {showTradingValue && (
-        <span className="text-[10px] text-muted-foreground tabular-nums text-right w-12 sm:w-16">
-          {stock.trading_value ? formatTradingValue(stock.trading_value) : "-"}
-        </span>
+      {/* Mobile investor sub-row */}
+      {investorInfo && (
+        <div className="sm:hidden flex items-center gap-2 px-2 pb-1.5 pl-9 text-[9px]">
+          <span className="text-muted-foreground">외{investorEstimated ? <span className="text-amber-500">*</span> : ""}</span>
+          <span className={cn("tabular-nums font-medium", getNetBuyColor(investorInfo.foreign_net))}>{formatNetBuy(investorInfo.foreign_net)}</span>
+          <span className="text-border">|</span>
+          <span className="text-muted-foreground">기관{investorEstimated ? <span className="text-amber-500">*</span> : ""}</span>
+          <span className={cn("tabular-nums font-medium", getNetBuyColor(investorInfo.institution_net))}>{formatNetBuy(investorInfo.institution_net)}</span>
+          {investorInfo.individual_net != null && (
+            <>
+              <span className="text-border">|</span>
+              <span className="text-muted-foreground">개인</span>
+              <span className={cn("tabular-nums font-medium", getNetBuyColor(investorInfo.individual_net))}>{formatNetBuy(investorInfo.individual_net)}</span>
+            </>
+          )}
+        </div>
       )}
-
-      {/* Volume */}
-      <span className="text-[10px] text-muted-foreground tabular-nums text-right w-12 sm:w-14">
-        {formatVolume(stock.volume)}
-      </span>
-
-      {/* Foreign Net Buy */}
-      {hasInvestorData && (
-        <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo ? getNetBuyColor(investorInfo.foreign_net) : "text-muted-foreground")}>
-          {investorInfo ? formatNetBuy(investorInfo.foreign_net) : "-"}
-        </span>
-      )}
-
-      {/* Institution Net Buy */}
-      {hasInvestorData && (
-        <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo ? getNetBuyColor(investorInfo.institution_net) : "text-muted-foreground")}>
-          {investorInfo ? formatNetBuy(investorInfo.institution_net) : "-"}
-        </span>
-      )}
-
-      {/* Individual Net Buy */}
-      {hasInvestorData && (
-        <span className={cn("text-[10px] tabular-nums text-right w-12 sm:w-14 hidden sm:block", investorInfo?.individual_net != null ? getNetBuyColor(investorInfo.individual_net) : "text-muted-foreground")}>
-          {investorInfo?.individual_net != null ? formatNetBuy(investorInfo.individual_net) : "-"}
-        </span>
-      )}
-
-      {/* Change Rate */}
-      <span className={cn(
-        "text-[10px] font-semibold px-1.5 py-0.5 rounded text-right w-14 sm:w-16",
-        effectiveRising ? "bg-red-500/10 text-red-600" : "bg-blue-500/10 text-blue-600"
-      )}>
-        {formatChangeRate(stock.change_rate)}
-      </span>
     </a>
   )
 }
@@ -177,7 +197,7 @@ function CompactMarketSection({
       {showHeader && <CompactHeader showTradingValue={showTradingValue} hasInvestorData={!!investorData && Object.keys(investorData).length > 0} investorEstimated={investorEstimated} />}
       <div className="divide-y divide-border/30">
         {stocks.map((stock) => (
-          <CompactStockRow key={stock.code} stock={stock} type={type} showTradingValue={showTradingValue} investorInfo={investorData?.[stock.code]} hasInvestorData={!!investorData && Object.keys(investorData).length > 0} />
+          <CompactStockRow key={stock.code} stock={stock} type={type} showTradingValue={showTradingValue} investorInfo={investorData?.[stock.code]} hasInvestorData={!!investorData && Object.keys(investorData).length > 0} investorEstimated={investorEstimated} />
         ))}
       </div>
     </div>

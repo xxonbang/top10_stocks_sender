@@ -135,7 +135,7 @@ export function TabBar({ activeTab, onTabChange, fluctuationMode, onFluctuationM
                 onClick={() => onTabChange(tab.key)}
                 onKeyDown={(e) => handleTabKeyDown(e, tab.key)}
                 className={cn(
-                  "relative z-10 px-3 sm:px-4 py-2.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg",
+                  "relative z-10 px-2.5 sm:px-4 py-2 sm:py-2 text-[11px] sm:text-sm font-medium rounded-lg",
                   "transition-all duration-200 whitespace-nowrap",
                   activeTab === tab.key
                     ? "text-foreground"
@@ -169,32 +169,34 @@ export function TabBar({ activeTab, onTabChange, fluctuationMode, onFluctuationM
             <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-4 mt-2.5 pt-2 border-t border-border/30">
               {/* 리스트 구성 방식 토글 (종합 탭 전용) */}
               {showCompositeToggle && (
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-[11px] sm:text-xs text-muted-foreground/80 whitespace-nowrap">
-                    <span className="sm:hidden">구성 방식</span>
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-[11px] sm:text-xs text-muted-foreground/80 whitespace-nowrap shrink-0">
+                    <span className="sm:hidden">구성</span>
                     <span className="hidden sm:inline">리스트 구성 방식</span>
                   </span>
-                  <div
-                    role="radiogroup"
-                    aria-label="리스트 구성 방식"
-                    className="inline-flex items-center rounded-lg bg-muted p-0.5"
-                  >
-                    {compositeModes.map((mode) => (
-                      <button
-                        key={mode.key}
-                        role="radio"
-                        aria-checked={compositeMode === mode.key}
-                        onClick={() => onCompositeModeChange(mode.key)}
-                        className={cn(
-                          "px-2 sm:px-3 py-1.5 sm:py-1.5 rounded-md text-[11px] sm:text-xs",
-                          "transition-all duration-200 whitespace-nowrap",
-                          compositeMode === mode.key ? segmentActive : segmentInactive,
-                        )}
-                      >
-                        <span className="sm:hidden">{mode.shortLabel}</span>
-                        <span className="hidden sm:inline">{mode.label}</span>
-                      </button>
-                    ))}
+                  <div className="overflow-x-auto scrollbar-hide -mx-1 px-1">
+                    <div
+                      role="radiogroup"
+                      aria-label="리스트 구성 방식"
+                      className="inline-flex items-center rounded-lg bg-muted p-0.5"
+                    >
+                      {compositeModes.map((mode) => (
+                        <button
+                          key={mode.key}
+                          role="radio"
+                          aria-checked={compositeMode === mode.key}
+                          onClick={() => onCompositeModeChange(mode.key)}
+                          className={cn(
+                            "px-2 sm:px-3 py-1.5 sm:py-1.5 rounded-md text-[10px] sm:text-xs",
+                            "transition-all duration-200 whitespace-nowrap",
+                            compositeMode === mode.key ? segmentActive : segmentInactive,
+                          )}
+                        >
+                          <span className="sm:hidden">{mode.shortLabel}</span>
+                          <span className="hidden sm:inline">{mode.label}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
