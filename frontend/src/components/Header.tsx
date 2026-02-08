@@ -188,7 +188,7 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
           <div>
             <h1 className="font-bold text-sm sm:text-lg tracking-tight">
               <span className="sm:hidden">ThemeAnalyzer</span>
-              <span className="hidden sm:inline">Stock TOP10</span>
+              <span className="hidden sm:inline">ThemeAnalyzer</span>
             </h1>
             <p className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">거래량 + 등락률 교차 분석</p>
           </div>
