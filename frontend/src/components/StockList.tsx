@@ -149,11 +149,13 @@ function CompactMarketSection({
         <span className="text-[10px] text-muted-foreground">({stocks.length})</span>
       </div>
       <div className="overflow-x-auto scrollbar-hide">
-        {showHeader && <CompactHeader showTradingValue={showTradingValue} hasInvestorData={hasInvestorData} investorEstimated={investorEstimated} />}
-        <div className="divide-y divide-border/30">
-          {stocks.map((stock) => (
-            <CompactStockRow key={stock.code} stock={stock} type={type} showTradingValue={showTradingValue} investorInfo={investorData?.[stock.code]} hasInvestorData={hasInvestorData} />
-          ))}
+        <div className="min-w-fit">
+          {showHeader && <CompactHeader showTradingValue={showTradingValue} hasInvestorData={hasInvestorData} investorEstimated={investorEstimated} />}
+          <div className="divide-y divide-border/30">
+            {stocks.map((stock) => (
+              <CompactStockRow key={stock.code} stock={stock} type={type} showTradingValue={showTradingValue} investorInfo={investorData?.[stock.code]} hasInvestorData={hasInvestorData} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
