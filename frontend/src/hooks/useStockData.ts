@@ -53,6 +53,21 @@ export function useStockData(): UseStockDataReturn {
     setError(null)
     setRefreshElapsed(0)
 
+    // 서버 연결 가능 여부를 먼저 확인 (5초 타임아웃)
+    try {
+      const healthController = new AbortController()
+      const healthTimeout = setTimeout(() => healthController.abort(), 5000)
+      const healthRes = await fetch(API_URL + "/api/health", { signal: healthController.signal })
+      clearTimeout(healthTimeout)
+      if (!healthRes.ok) throw new Error("health check failed")
+    } catch {
+      // 서버 연결 불가 → 즉시 정적 데이터 재로드
+      console.warn("API server unreachable, falling back to static data")
+      await fetchData()
+      setLoading(false)
+      return
+    }
+
     // 1초 간격 경과 시간 카운터
     refreshTimerRef.current = setInterval(() => {
       setRefreshElapsed((prev) => prev + 1)
@@ -60,7 +75,7 @@ export function useStockData(): UseStockDataReturn {
 
     try {
       const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 180000)
+      const timeoutId = setTimeout(() => controller.abort(), 120000)
 
       const response = await fetch(API_URL + "/api/refresh", {
         signal: controller.signal,
