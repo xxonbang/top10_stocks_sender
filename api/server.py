@@ -4,9 +4,8 @@ Refresh 버튼 클릭 시 최신 주식 데이터를 실시간으로 수집하�
 """
 import os
 import sys
-import asyncio
 from datetime import datetime, timezone, timedelta
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, TimeoutError
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -203,12 +202,12 @@ def _refresh_sync():
 
 
 @app.get("/api/refresh")
-async def refresh():
+def refresh():
     """실시간 데이터 수집 - 90초 전역 타임아웃 적용"""
-    try:
-        return await asyncio.wait_for(
-            asyncio.to_thread(_refresh_sync),
-            timeout=90,
-        )
-    except asyncio.TimeoutError:
-        return {"error": "데이터 수집 시간이 초과되었습니다 (90초). 서버에서 KIS API에 연결할 수 없을 수 있습니다."}
+    with ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(_refresh_sync)
+        try:
+            return future.result(timeout=90)
+        except TimeoutError:
+            future.cancel()
+            return {"error": "데이터 수집 시간이 초과되었습니다 (90초). 서버에서 KIS API에 연결할 수 없을 수 있습니다."}
