@@ -2,7 +2,12 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import type { StockData } from "@/types/stock"
 
 const DATA_URL = import.meta.env.BASE_URL + "data/latest.json"
-const API_URL = import.meta.env.VITE_API_URL || ""
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || ""
+const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO || ""
+
+const POLL_INTERVAL = 5000 // 5초 간격 polling
+const POLL_DELAY = 10000 // 10초 대기 후 polling 시작
+const POLL_TIMEOUT = 300000 // 5분 타임아웃
 
 interface UseStockDataReturn {
   data: StockData | null
@@ -19,6 +24,12 @@ export function useStockData(): UseStockDataReturn {
   const [error, setError] = useState<string | null>(null)
   const [refreshElapsed, setRefreshElapsed] = useState(0)
   const refreshTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const dataRef = useRef<StockData | null>(null)
+
+  // dataRef를 data와 동기화
+  useEffect(() => {
+    dataRef.current = data
+  }, [data])
 
   const fetchData = useCallback(async () => {
     setLoading(true)
@@ -43,8 +54,8 @@ export function useStockData(): UseStockDataReturn {
   }, [])
 
   const refreshFromAPI = useCallback(async () => {
-    // API 서버 URL이 없으면 정적 데이터 다시 로드
-    if (!API_URL) {
+    // GitHub Token이 없으면 정적 데이터 재로드
+    if (!GITHUB_TOKEN || !GITHUB_REPO) {
       await fetchData()
       return
     }
@@ -53,53 +64,72 @@ export function useStockData(): UseStockDataReturn {
     setError(null)
     setRefreshElapsed(0)
 
-    // 서버 연결 가능 여부를 먼저 확인 (5초 타임아웃)
-    try {
-      const healthController = new AbortController()
-      const healthTimeout = setTimeout(() => healthController.abort(), 5000)
-      const healthRes = await fetch(API_URL + "/api/health", { signal: healthController.signal })
-      clearTimeout(healthTimeout)
-      if (!healthRes.ok) throw new Error("health check failed")
-    } catch {
-      // 서버 연결 불가 → 즉시 정적 데이터 재로드
-      console.warn("API server unreachable, falling back to static data")
-      await fetchData()
-      setLoading(false)
-      return
-    }
-
     // 1초 간격 경과 시간 카운터
     refreshTimerRef.current = setInterval(() => {
       setRefreshElapsed((prev) => prev + 1)
     }, 1000)
 
     try {
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 120000)
+      // Phase 1: workflow_dispatch 트리거
+      const triggerRes = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/refresh-data.yml/dispatches`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+          body: JSON.stringify({ ref: "main" }),
+        }
+      )
 
-      const response = await fetch(API_URL + "/api/refresh", {
-        signal: controller.signal,
+      if (!triggerRes.ok) {
+        const errBody = await triggerRes.text().catch(() => "")
+        throw new Error(`워크플로우 트리거 실패 (${triggerRes.status}): ${errBody}`)
+      }
+
+      // Phase 2: Polling - latest.json timestamp 변경 감지
+      const currentTimestamp = dataRef.current?.timestamp || ""
+
+      const newData = await new Promise<StockData>((resolve, reject) => {
+        const startTime = Date.now()
+        let pollTimer: ReturnType<typeof setInterval> | null = null
+
+        const startPolling = () => {
+          pollTimer = setInterval(async () => {
+            // 타임아웃 체크
+            if (Date.now() - startTime > POLL_TIMEOUT) {
+              if (pollTimer) clearInterval(pollTimer)
+              reject(new Error("데이터 업데이트 대기 시간이 초과되었습니다. GitHub Actions 탭에서 진행 상황을 확인해주세요."))
+              return
+            }
+
+            try {
+              const res = await fetch(DATA_URL + "?t=" + Date.now())
+              if (!res.ok) return
+
+              const json = await res.json()
+              if (json.timestamp && json.timestamp !== currentTimestamp) {
+                if (pollTimer) clearInterval(pollTimer)
+                resolve(json)
+              }
+            } catch {
+              // polling 중 에러는 무시하고 계속 시도
+            }
+          }, POLL_INTERVAL)
+        }
+
+        // 10초 대기 후 polling 시작
+        setTimeout(startPolling, POLL_DELAY)
       })
-      clearTimeout(timeoutId)
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const jsonData = await response.json()
-
-      if (jsonData.error) {
-        throw new Error(jsonData.error)
-      }
-
-      setData(jsonData)
+      setData(newData)
     } catch (err) {
-      console.error("Failed to refresh from API:", err)
-      const message = err instanceof DOMException && err.name === "AbortError"
-        ? "서버 응답 시간이 초과되었습니다. 잠시 후 다시 시도해주세요."
-        : "실시간 데이터 수집에 실패했습니다. 기존 데이터를 다시 불러옵니다."
+      console.error("Failed to refresh via GitHub Actions:", err)
+      const message = err instanceof Error
+        ? err.message
+        : "데이터 갱신에 실패했습니다."
       setError(message)
-      // 폴백: 기존 latest.json 다시 로드
-      await fetchData()
     } finally {
       if (refreshTimerRef.current) {
         clearInterval(refreshTimerRef.current)

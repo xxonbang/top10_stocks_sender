@@ -430,8 +430,17 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
           {/* Refresh Elapsed Time */}
           {loading && refreshElapsed != null && refreshElapsed > 0 && (
             <span className="text-xs text-muted-foreground tabular-nums animate-pulse">
-              <span className="hidden sm:inline">갱신 중 </span>
-              {refreshElapsed}초
+              {refreshElapsed <= 15 ? (
+                <span className="hidden sm:inline">시작 중...</span>
+              ) : (
+                <>
+                  <span className="hidden sm:inline">데이터 수집 중 </span>
+                  {refreshElapsed}초
+                </>
+              )}
+              {refreshElapsed <= 15 && (
+                <span className="sm:hidden">{refreshElapsed}초</span>
+              )}
             </span>
           )}
         </div>

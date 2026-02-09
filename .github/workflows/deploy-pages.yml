@@ -38,7 +38,8 @@ jobs:
       - name: Build
         working-directory: frontend
         env:
-          VITE_API_URL: https://theme-analysis.onrender.com
+          VITE_GITHUB_TOKEN: ${{ secrets.VITE_GITHUB_PAT }}
+          VITE_GITHUB_REPO: xxonbang/top10_stocks_sender
         run: npm run build
 
       - name: Setup Pages
