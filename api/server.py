@@ -4,6 +4,7 @@ Refresh 버튼 클릭 시 최신 주식 데이터를 실시간으로 수집하�
 """
 import os
 import sys
+import asyncio
 from datetime import datetime, timezone, timedelta
 from concurrent.futures import ThreadPoolExecutor
 
@@ -53,13 +54,8 @@ def health():
     return {"status": "ok", "timestamp": datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")}
 
 
-@app.get("/api/refresh")
-def refresh():
-    """실시간 데이터 수집 - latest.json과 동일한 구조 반환
-
-    main.py의 step 1~9를 실행 (뉴스/텔레그램 제외)
-    독립적인 API 호출은 ThreadPoolExecutor로 병렬 실행하여 응답 시간 단축
-    """
+def _refresh_sync():
+    """실시간 데이터 수집 로직 (동기)"""
     errors = []
 
     # === Phase A: KIS Client 초기화 (순차 필수) ===
@@ -204,3 +200,15 @@ def refresh():
         data["_warnings"] = errors
 
     return data
+
+
+@app.get("/api/refresh")
+async def refresh():
+    """실시간 데이터 수집 - 90초 전역 타임아웃 적용"""
+    try:
+        return await asyncio.wait_for(
+            asyncio.to_thread(_refresh_sync),
+            timeout=90,
+        )
+    except asyncio.TimeoutError:
+        return {"error": "데이터 수집 시간이 초과되었습니다 (90초). 서버에서 KIS API에 연결할 수 없을 수 있습니다."}
