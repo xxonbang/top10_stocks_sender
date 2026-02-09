@@ -21,9 +21,9 @@ const tabs: { key: TabType; label: string; shortLabel: string }[] = [
 
 const compositeModes: { key: CompositeMode; label: string; shortLabel: string }[] = [
   { key: "trading_fluc", label: "거래대금 + 등락률", shortLabel: "대금+등락률" },
+  { key: "volume_fluc", label: "거래량 + 등락률", shortLabel: "거래량+등락률" },
   { key: "all", label: "거래대금 + 거래량 + 등락률", shortLabel: "대금+거래량+등락률" },
   { key: "trading_volume", label: "거래대금 + 거래량", shortLabel: "대금+거래량" },
-  { key: "volume_fluc", label: "거래량 + 등락률", shortLabel: "거래량+등락률" },
 ]
 
 // 세그먼트 버튼 공통 스타일

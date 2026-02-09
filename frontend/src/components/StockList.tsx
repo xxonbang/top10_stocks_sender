@@ -32,7 +32,7 @@ function CompactHeader({ showTradingValue, hasInvestorData, investorEstimated }:
         <span className="text-right w-12 sm:w-14">거래량</span>
         {hasInvestorData && <span className="text-right w-14 sm:w-16">외국인{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">추정</span>}</span>}
         {hasInvestorData && <span className="text-right w-14 sm:w-16">기관{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">추정</span>}</span>}
-        {hasInvestorData && <span className="text-right w-14 sm:w-16">{investorEstimated ? "" : "개인"}</span>}
+        {hasInvestorData && <span className="text-right w-14 sm:w-16">개인{investorEstimated && <span className="text-[8px] text-amber-500 ml-0.5">장중</span>}</span>}
         <span className="text-right w-16 ml-2">등락률</span>
       </div>
     </div>
