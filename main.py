@@ -15,6 +15,7 @@ from modules.naver_news import NaverNewsAPI
 from modules.telegram import TelegramSender
 from modules.data_exporter import export_for_frontend
 from modules.exchange_rate import ExchangeRateAPI
+from modules.gemini_analyzer import analyze_themes
 
 
 def collect_all_stocks(
@@ -62,13 +63,14 @@ def collect_all_stocks(
     return all_stocks
 
 
-def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool = False):
+def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool = False, skip_ai: bool = False):
     """메인 실행 함수
 
     Args:
         test_mode: 테스트 모드 (메시지 미발송, 콘솔 출력만)
         skip_news: 뉴스 수집 건너뛰기
         skip_investor: 수급 데이터 수집 건너뛰기
+        skip_ai: AI 테마 분석 건너뛰기
     """
     print("=" * 60)
     print("  KIS 거래량+등락폭 TOP10 텔레그램 발송")
@@ -78,7 +80,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
     print("=" * 60)
 
     # 1. 환율 정보 조회
-    print("\n[1/12] 환율 정보 조회 중...")
+    print("\n[1/13] 환율 정보 조회 중...")
     exchange_data = {}
     try:
         exchange_api = ExchangeRateAPI()
@@ -94,7 +96,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
         print(f"  ✗ 환율 조회 실패: {e}")
 
     # 2. KIS API 연결
-    print("\n[2/12] KIS API 연결 중...")
+    print("\n[2/13] KIS API 연결 중...")
     try:
         client = KISClient()
         rank_api = KISRankAPI(client)
@@ -105,7 +107,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
         return
 
     # 3. 거래량 TOP30 조회
-    print("\n[3/12] 거래량 TOP30 조회 중...")
+    print("\n[3/13] 거래량 TOP30 조회 중...")
     try:
         volume_data = rank_api.get_top30_by_volume(exclude_etf=True)
         print(f"  ✓ 코스피: {len(volume_data.get('kospi', []))}개")
@@ -115,7 +117,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
         return
 
     # 4. 거래대금 TOP30 조회
-    print("\n[4/12] 거래대금 TOP30 조회 중...")
+    print("\n[4/13] 거래대금 TOP30 조회 중...")
     trading_value_data = {}
     try:
         trading_value_data = rank_api.get_top30_by_trading_value(exclude_etf=True)
@@ -125,7 +127,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
         print(f"  ⚠ 거래대금 조회 실패 (빈 데이터로 계속): {e}")
 
     # 5. 등락폭 TOP30 조회 (자체 계산)
-    print("\n[5/12] 등락폭 TOP30 조회 중...")
+    print("\n[5/13] 등락폭 TOP30 조회 중...")
     try:
         fluctuation_data = rank_api.get_top30_by_fluctuation(exclude_etf=True)
         print(f"  ✓ 코스피 상승: {len(fluctuation_data.get('kospi_up', []))}개")
@@ -137,7 +139,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
         return
 
     # 6. 등락률 전용 API 조회
-    print("\n[6/12] 등락률 전용 API 조회 중...")
+    print("\n[6/13] 등락률 전용 API 조회 중...")
     fluctuation_direct_data = {}
     try:
         fluctuation_direct_data = rank_api.get_top_fluctuation_direct(exclude_etf=True)
@@ -149,7 +151,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
         print(f"  ⚠ 등락률 전용 API 조회 실패 (빈 데이터로 계속): {e}")
 
     # 7. 교차 필터링
-    print("\n[7/12] 교차 필터링 중...")
+    print("\n[7/13] 교차 필터링 중...")
     stock_filter = StockFilter()
 
     rising_stocks = stock_filter.filter_rising_stocks(volume_data, fluctuation_data)
@@ -169,7 +171,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
     print(f"  ✓ 총 {len(all_stocks)}개 종목")
 
     # 8. 3일간 등락률 조회
-    print("\n[8/12] 3일간 등락률 조회 중...")
+    print("\n[8/13] 3일간 등락률 조회 중...")
     try:
         history_data = history_api.get_multiple_stocks_history(all_stocks, days=3)
         print(f"  ✓ {len(history_data)}개 종목 등락률 조회 완료")
@@ -181,7 +183,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
     investor_data = {}
     investor_estimated = False
     if not skip_investor:
-        print("\n[9/12] 수급(투자자) 데이터 수집 중...")
+        print("\n[9/13] 수급(투자자) 데이터 수집 중...")
         try:
             investor_data, investor_estimated = rank_api.get_investor_data_auto(all_stocks)
             label = "추정" if investor_estimated else "확정"
@@ -190,12 +192,35 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
             print(f"  ⚠ 수급 데이터 수집 실패 (빈 데이터로 계속): {e}")
             investor_data = {}
     else:
-        print("\n[9/12] 수급 데이터 수집 건너뜀")
+        print("\n[9/13] 수급 데이터 수집 건너뜀")
 
-    # 10. 뉴스 수집
+    # 10. AI 테마 분석
+    theme_analysis = None
+    if not skip_ai:
+        print("\n[10/13] AI 테마 분석 중...")
+        try:
+            stock_context = {
+                "rising": rising_stocks,
+                "falling": falling_stocks,
+                "volume": volume_data,
+                "trading_value": trading_value_data,
+                "fluctuation": fluctuation_data,
+            }
+            theme_analysis = analyze_themes(stock_context)
+            if theme_analysis:
+                theme_count = len(theme_analysis.get("themes", []))
+                print(f"  ✓ AI 테마 분석 완료 ({theme_count}개 테마 도출)")
+            else:
+                print("  ⚠ AI 테마 분석 실패 (건너뜀)")
+        except Exception as e:
+            print(f"  ⚠ AI 테마 분석 실패 (건너뜀): {e}")
+    else:
+        print("\n[10/13] AI 테마 분석 건너뜀")
+
+    # 11. 뉴스 수집
     news_data = {}
     if not skip_news:
-        print("\n[10/12] 종목별 뉴스 수집 중...")
+        print("\n[11/13] 종목별 뉴스 수집 중...")
         try:
             news_api = NaverNewsAPI()
             news_data = news_api.get_multiple_stocks_news(all_stocks, news_count=3)
@@ -205,10 +230,10 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
             print(f"  ✗ 뉴스 수집 실패: {e}")
             news_data = {}
     else:
-        print("\n[10/12] 뉴스 수집 건너뜀")
+        print("\n[11/13] 뉴스 수집 건너뜀")
 
-    # 10. 프론트엔드용 데이터 내보내기
-    print("\n[11/12] 프론트엔드 데이터 내보내기...")
+    # 12. 프론트엔드용 데이터 내보내기
+    print("\n[12/13] 프론트엔드 데이터 내보내기...")
     try:
         export_path = export_for_frontend(
             rising_stocks, falling_stocks, history_data, news_data, exchange_data,
@@ -218,13 +243,14 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
             fluctuation_direct_data=fluctuation_direct_data,
             investor_data=investor_data,
             investor_estimated=investor_estimated,
+            theme_analysis=theme_analysis,
         )
         print(f"  ✓ 데이터 내보내기 완료: {export_path}")
     except Exception as e:
         print(f"  ✗ 데이터 내보내기 실패: {e}")
 
     # 11. 텔레그램 발송
-    print("\n[12/12] 텔레그램 메시지 준비...")
+    print("\n[13/13] 텔레그램 메시지 준비...")
     telegram = TelegramSender()
 
     # 바리케이트 메시지 (환율 정보 포함)
@@ -340,6 +366,11 @@ if __name__ == "__main__":
         action="store_true",
         help="수급 데이터 수집 건너뛰기",
     )
+    parser.add_argument(
+        "--skip-ai",
+        action="store_true",
+        help="AI 테마 분석 건너뛰기",
+    )
     args = parser.parse_args()
 
-    main(test_mode=args.test, skip_news=args.skip_news, skip_investor=args.skip_investor)
+    main(test_mode=args.test, skip_news=args.skip_news, skip_investor=args.skip_investor, skip_ai=args.skip_ai)

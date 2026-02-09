@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { Header } from "@/components/Header"
 import { ExchangeRate } from "@/components/ExchangeRate"
+import { AIThemeAnalysis } from "@/components/AIThemeAnalysis"
 import { StockList } from "@/components/StockList"
 import { TabBar } from "@/components/TabBar"
 import { HistoryModal } from "@/components/HistoryModal"
@@ -335,6 +336,9 @@ function App() {
 
         {/* Exchange Rate - Top section */}
         {displayData?.exchange && <ExchangeRate exchange={displayData.exchange} />}
+
+        {/* AI Theme Analysis */}
+        {displayData?.theme_analysis && <AIThemeAnalysis themeAnalysis={displayData.theme_analysis} />}
 
         {/* Tab Content */}
         <div className="space-y-4 sm:space-y-6">

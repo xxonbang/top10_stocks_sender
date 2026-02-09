@@ -29,6 +29,11 @@ TELEGRAM_CHAT_ID = os.getenv("CHAT_ID")
 NAVER_CLIENT_ID = os.getenv("NAVER_CLIENT_ID")
 NAVER_CLIENT_SECRET = os.getenv("NAVER_CLIENT_SECRET")
 
+# Gemini AI 설정 (테마 분석용)
+GEMINI_API_KEY_1 = os.getenv("GEMINI_API_KEY_01")
+GEMINI_API_KEY_2 = os.getenv("GEMINI_API_KEY_02")
+GEMINI_API_KEY_3 = os.getenv("GEMINI_API_KEY_03")
+
 # Supabase 설정 (API 키 중앙 관리용)
 # https://supabase.com/dashboard 에서 프로젝트 설정 확인
 SUPABASE_URL = os.getenv("SUPABASE_URL")

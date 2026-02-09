@@ -61,6 +61,31 @@ export type TabType = "composite" | "trading_value" | "volume" | "fluctuation"
 export type FluctuationMode = "calculated" | "direct"
 export type CompositeMode = "all" | "trading_volume" | "trading_fluc" | "volume_fluc"
 
+export interface ThemeNewsEvidence {
+  title: string
+  url: string
+}
+
+export interface ThemeLeaderStock {
+  name: string
+  code: string
+  reason: string
+  news_evidence: ThemeNewsEvidence[]
+}
+
+export interface MarketTheme {
+  theme_name: string
+  theme_description: string
+  leader_stocks: ThemeLeaderStock[]
+}
+
+export interface ThemeAnalysis {
+  analyzed_at: string
+  analysis_date: string
+  market_summary: string
+  themes: MarketTheme[]
+}
+
 export interface InvestorInfo {
   name: string
   foreign_net: number
@@ -87,4 +112,5 @@ export interface StockData {
   news: Record<string, StockNews>
   investor_data?: Record<string, InvestorInfo>
   investor_estimated?: boolean
+  theme_analysis?: ThemeAnalysis
 }
