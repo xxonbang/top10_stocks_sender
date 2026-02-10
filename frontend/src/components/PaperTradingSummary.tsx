@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Wallet, BarChart3 } from "lucide-react"
+import { TrendingUp, TrendingDown, Minus, Wallet, BarChart3 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
@@ -8,6 +8,7 @@ interface PaperTradingSummaryProps {
     totalStocks: number
     profitStocks: number
     lossStocks: number
+    flatStocks: number
     totalInvested: number
     totalValue: number
     totalProfit: number
@@ -80,6 +81,15 @@ export function PaperTradingSummary({ summary }: PaperTradingSummaryProps) {
               <div className="font-medium text-blue-600 tabular-nums">{summary.lossStocks}개</div>
             </div>
           </div>
+          {summary.flatStocks > 0 && (
+            <div className="flex items-center gap-2 text-xs sm:text-sm">
+              <Minus className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+              <div>
+                <div className="text-muted-foreground">보합 종목</div>
+                <div className="font-medium text-muted-foreground tabular-nums">{summary.flatStocks}개</div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 기간/종목 수 */}

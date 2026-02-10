@@ -4,6 +4,11 @@ import type { PaperTradingData, PaperTradingIndexEntry, PaperTradingStock } from
 const INDEX_URL = import.meta.env.BASE_URL + "data/paper-trading-index.json"
 const DATA_BASE_URL = import.meta.env.BASE_URL + "data/paper-trading/"
 
+// 날짜별 제외 키: "2026-02-10:056080"
+function stockKey(date: string, code: string) {
+  return `${date}:${code}`
+}
+
 interface UsePaperTradingDataReturn {
   index: PaperTradingIndexEntry[]
   loading: boolean
@@ -18,6 +23,7 @@ interface UsePaperTradingDataReturn {
     totalStocks: number
     profitStocks: number
     lossStocks: number
+    flatStocks: number
     totalInvested: number
     totalValue: number
     totalProfit: number
@@ -26,8 +32,9 @@ interface UsePaperTradingDataReturn {
   fetchIndex: () => Promise<void>
   toggleDate: (date: string) => void
   toggleAllDates: () => void
-  toggleStock: (code: string) => void
-  toggleAllStocks: (codes: string[]) => void
+  toggleStock: (date: string, code: string) => void
+  toggleAllStocks: (date: string, codes: string[]) => void
+  isStockExcluded: (date: string, code: string) => boolean
   resetExcluded: () => void
 }
 
@@ -107,34 +114,36 @@ export function usePaperTradingData(): UsePaperTradingDataReturn {
     })
   }, [index])
 
-  const toggleStock = useCallback((code: string) => {
+  const toggleStock = useCallback((date: string, code: string) => {
     setExcludedStocks(prev => {
+      const key = stockKey(date, code)
       const next = new Set(prev)
-      if (next.has(code)) {
-        next.delete(code)
+      if (next.has(key)) {
+        next.delete(key)
       } else {
-        next.add(code)
+        next.add(key)
       }
       return next
     })
   }, [])
 
-  const toggleAllStocks = useCallback((codes: string[]) => {
+  const toggleAllStocks = useCallback((date: string, codes: string[]) => {
     setExcludedStocks(prev => {
-      const allExcluded = codes.every(c => prev.has(c))
+      const keys = codes.map(c => stockKey(date, c))
+      const allExcluded = keys.every(k => prev.has(k))
+      const next = new Set(prev)
       if (allExcluded) {
-        // 전체 선택 (제외 해제)
-        const next = new Set(prev)
-        codes.forEach(c => next.delete(c))
-        return next
+        keys.forEach(k => next.delete(k))
       } else {
-        // 전체 해제 (전부 제외)
-        const next = new Set(prev)
-        codes.forEach(c => next.add(c))
-        return next
+        keys.forEach(k => next.add(k))
       }
+      return next
     })
   }, [])
+
+  const isStockExcluded = useCallback((date: string, code: string) => {
+    return excludedStocks.has(stockKey(date, code))
+  }, [excludedStocks])
 
   const resetExcluded = useCallback(() => {
     setExcludedStocks(new Set())
@@ -152,16 +161,28 @@ export function usePaperTradingData(): UsePaperTradingDataReturn {
     return stocks
   }, [selectedDates, dailyData])
 
-  // 제외되지 않은 활성 종목
+  // 제외되지 않은 활성 종목 (날짜별 제외 반영)
   const activeStocks = useMemo(() => {
-    return allStocks.filter(s => !excludedStocks.has(s.code))
-  }, [allStocks, excludedStocks])
+    const stocks: PaperTradingStock[] = []
+    for (const date of selectedDates) {
+      const data = dailyData.get(date)
+      if (data) {
+        for (const s of data.stocks) {
+          if (!excludedStocks.has(stockKey(date, s.code))) {
+            stocks.push(s)
+          }
+        }
+      }
+    }
+    return stocks
+  }, [selectedDates, dailyData, excludedStocks])
 
   // 종합 수익률 계산
   const summary = useMemo(() => {
     const totalStocks = activeStocks.length
     const profitStocks = activeStocks.filter(s => s.profit_rate > 0).length
     const lossStocks = activeStocks.filter(s => s.profit_rate < 0).length
+    const flatStocks = activeStocks.filter(s => s.profit_rate === 0).length
     const totalInvested = activeStocks.reduce((sum, s) => sum + s.buy_price, 0)
     const totalValue = activeStocks.reduce((sum, s) => sum + s.close_price, 0)
     const totalProfit = totalValue - totalInvested
@@ -174,6 +195,7 @@ export function usePaperTradingData(): UsePaperTradingDataReturn {
       totalStocks,
       profitStocks,
       lossStocks,
+      flatStocks,
       totalInvested,
       totalValue,
       totalProfit,
@@ -196,6 +218,7 @@ export function usePaperTradingData(): UsePaperTradingDataReturn {
     toggleAllDates,
     toggleStock,
     toggleAllStocks,
+    isStockExcluded,
     resetExcluded,
   }
 }

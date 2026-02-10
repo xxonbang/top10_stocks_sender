@@ -1,5 +1,5 @@
-import { useEffect } from "react"
-import { Loader2, LineChart, RotateCcw, CheckCheck } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Loader2, LineChart, RotateCcw, CheckCheck, ChevronDown, ChevronUp } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { PaperTradingStockCard } from "@/components/PaperTradingStockCard"
 import { PaperTradingSummary } from "@/components/PaperTradingSummary"
@@ -14,7 +14,6 @@ export function PaperTradingPage() {
     loading,
     error,
     selectedDates,
-    excludedStocks,
     dailyData,
     summary,
     fetchIndex,
@@ -22,6 +21,8 @@ export function PaperTradingPage() {
     toggleAllDates,
     toggleStock,
     toggleAllStocks,
+    isStockExcluded,
+    excludedStocks,
     resetExcluded,
   } = usePaperTradingData()
 
@@ -38,6 +39,20 @@ export function PaperTradingPage() {
         </div>
       </div>
     )
+  }
+
+  const [collapsedDates, setCollapsedDates] = useState<Set<string>>(new Set())
+
+  const toggleCollapse = (date: string) => {
+    setCollapsedDates(prev => {
+      const next = new Set(prev)
+      if (next.has(date)) {
+        next.delete(date)
+      } else {
+        next.add(date)
+      }
+      return next
+    })
   }
 
   // 선택된 날짜의 데이터를 날짜순으로 정렬
@@ -77,6 +92,8 @@ export function PaperTradingPage() {
           <PaperTradingDateSelector
             entries={index}
             selectedDates={selectedDates}
+            dailyData={dailyData}
+            isStockExcluded={isStockExcluded}
             onToggleDate={toggleDate}
             onToggleAll={toggleAllDates}
           />
@@ -84,58 +101,78 @@ export function PaperTradingPage() {
       </Card>
 
       {/* 일별 종목 카드 */}
-      {selectedDailyData.map(({ date, data }) => (
-        <Card key={date} className="overflow-hidden shadow-sm">
-          <CardContent className="p-3 sm:p-4 space-y-3">
-            {/* 일별 헤더 */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-sm sm:text-base">
-                  {date.replace(/-/g, ".")}
-                </span>
-                <span className="text-[10px] sm:text-xs text-muted-foreground">
-                  {data.stocks.length}종목
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => toggleAllStocks(data.stocks.map(s => s.code))}
-                  className={cn(
-                    "flex items-center gap-1 px-2 py-1 rounded-md text-xs",
-                    "transition-colors duration-150",
-                    "hover:bg-muted text-muted-foreground hover:text-foreground",
+      {selectedDailyData.map(({ date, data }) => {
+        const collapsed = collapsedDates.has(date)
+        return (
+          <Card key={date} className="overflow-hidden shadow-sm">
+            <CardContent className="p-3 sm:p-4 space-y-3">
+              {/* 일별 헤더 */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => toggleCollapse(date)}
+                    className="flex items-center gap-1.5 hover:text-primary transition-colors"
+                  >
+                    {collapsed ? (
+                      <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                    ) : (
+                      <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                    )}
+                    <span className="font-semibold text-sm sm:text-base">
+                      {date.replace(/-/g, ".")}
+                    </span>
+                  </button>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground">
+                    {data.stocks.length}종목
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  {!collapsed && (
+                    <button
+                      onClick={() => toggleAllStocks(date, data.stocks.map(s => s.code))}
+                      className={cn(
+                        "flex items-center gap-1 px-2 py-1 rounded-md text-xs",
+                        "transition-colors duration-150",
+                        "hover:bg-muted text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      <CheckCheck className="w-3.5 h-3.5" />
+                      {data.stocks.every(s => isStockExcluded(date, s.code)) ? "전체 선택" : "전체 해제"}
+                    </button>
                   )}
-                >
-                  <CheckCheck className="w-3.5 h-3.5" />
-                  {data.stocks.every(s => excludedStocks.has(s.code)) ? "전체 선택" : "전체 해제"}
-                </button>
-                <div className={cn(
-                  "font-bold text-sm sm:text-base tabular-nums",
-                  data.summary.total_profit_rate > 0 && "text-red-600",
-                  data.summary.total_profit_rate < 0 && "text-blue-600",
-                )}>
-                  {data.summary.total_profit_rate >= 0 ? "+" : ""}{data.summary.total_profit_rate}%
+                  <div className={cn(
+                    "font-bold text-sm sm:text-base tabular-nums",
+                    data.summary.total_profit_rate > 0 && "text-red-600",
+                    data.summary.total_profit_rate < 0 && "text-blue-600",
+                  )}>
+                    {data.summary.total_profit_rate >= 0 ? "+" : ""}{data.summary.total_profit_rate}%
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <hr className="border-border/50" />
+              {!collapsed && (
+                <>
+                  <hr className="border-border/50" />
 
-            {/* 종목 카드 그리드 */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-              {data.stocks.map(stock => (
-                <PaperTradingStockCard
-                  key={`${date}-${stock.code}`}
-                  stock={stock}
-                  isExcluded={excludedStocks.has(stock.code)}
-                  onToggle={toggleStock}
-                  morningTimestamp={data.morning_timestamp}
-                />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+                  {/* 종목 카드 그리드 */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                    {data.stocks.map(stock => (
+                      <PaperTradingStockCard
+                        key={`${date}-${stock.code}`}
+                        stock={stock}
+                        date={date}
+                        isExcluded={isStockExcluded(date, stock.code)}
+                        onToggle={toggleStock}
+                        morningTimestamp={data.morning_timestamp}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </CardContent>
+          </Card>
+        )
+      })}
 
       {/* 제외된 종목 초기화 */}
       {excludedStocks.size > 0 && (
