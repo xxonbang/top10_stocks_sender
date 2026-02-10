@@ -4,12 +4,13 @@ import type { PaperTradingStock } from "@/types/stock"
 
 interface PaperTradingStockCardProps {
   stock: PaperTradingStock
+  date: string
   isExcluded: boolean
-  onToggle: (code: string) => void
+  onToggle: (date: string, code: string) => void
   morningTimestamp?: string
 }
 
-export function PaperTradingStockCard({ stock, isExcluded, onToggle, morningTimestamp }: PaperTradingStockCardProps) {
+export function PaperTradingStockCard({ stock, date, isExcluded, onToggle, morningTimestamp }: PaperTradingStockCardProps) {
   const isProfit = stock.profit_rate > 0
   const isLoss = stock.profit_rate < 0
 
@@ -69,7 +70,7 @@ export function PaperTradingStockCard({ stock, isExcluded, onToggle, morningTime
           </div>
 
           <button
-            onClick={() => onToggle(stock.code)}
+            onClick={() => onToggle(date, stock.code)}
             className={cn(
               "flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-md",
               "transition-colors duration-150",
