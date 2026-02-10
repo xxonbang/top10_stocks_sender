@@ -105,6 +105,12 @@ export function PaperTradingPage() {
       {/* 일별 종목 카드 */}
       {selectedDailyData.map(({ date, data }) => {
         const collapsed = collapsedDates.has(date)
+        const activeStocks = data.stocks.filter(s => !isStockExcluded(date, s.code))
+        const dayInvested = activeStocks.reduce((sum, s) => sum + s.buy_price, 0)
+        const dayValue = activeStocks.reduce((sum, s) => sum + s.close_price, 0)
+        const dayProfitRate = dayInvested > 0
+          ? Math.round(((dayValue - dayInvested) / dayInvested) * 10000) / 100
+          : 0
         return (
           <Card key={date} className="overflow-hidden shadow-sm">
             <CardContent className="p-3 sm:p-4 space-y-3">
@@ -125,7 +131,7 @@ export function PaperTradingPage() {
                     </span>
                   </button>
                   <span className="text-[10px] sm:text-xs text-muted-foreground">
-                    {data.stocks.length}종목
+                    {activeStocks.length}/{data.stocks.length}종목
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -144,10 +150,10 @@ export function PaperTradingPage() {
                   )}
                   <div className={cn(
                     "font-bold text-sm sm:text-base tabular-nums",
-                    data.summary.total_profit_rate > 0 && "text-red-600",
-                    data.summary.total_profit_rate < 0 && "text-blue-600",
+                    dayProfitRate > 0 && "text-red-600",
+                    dayProfitRate < 0 && "text-blue-600",
                   )}>
-                    {data.summary.total_profit_rate >= 0 ? "+" : ""}{data.summary.total_profit_rate}%
+                    {dayProfitRate >= 0 ? "+" : ""}{dayProfitRate}%
                   </div>
                 </div>
               </div>
