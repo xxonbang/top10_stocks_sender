@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Loader2, LineChart, RotateCcw } from "lucide-react"
+import { Loader2, LineChart, RotateCcw, CheckCheck } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { PaperTradingStockCard } from "@/components/PaperTradingStockCard"
 import { PaperTradingSummary } from "@/components/PaperTradingSummary"
@@ -21,6 +21,7 @@ export function PaperTradingPage() {
     toggleDate,
     toggleAllDates,
     toggleStock,
+    toggleAllStocks,
     resetExcluded,
   } = usePaperTradingData()
 
@@ -96,12 +97,25 @@ export function PaperTradingPage() {
                   {data.stocks.length}종목
                 </span>
               </div>
-              <div className={cn(
-                "font-bold text-sm sm:text-base tabular-nums",
-                data.summary.total_profit_rate > 0 && "text-red-600",
-                data.summary.total_profit_rate < 0 && "text-blue-600",
-              )}>
-                {data.summary.total_profit_rate >= 0 ? "+" : ""}{data.summary.total_profit_rate}%
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => toggleAllStocks(data.stocks.map(s => s.code))}
+                  className={cn(
+                    "flex items-center gap-1 px-2 py-1 rounded-md text-xs",
+                    "transition-colors duration-150",
+                    "hover:bg-muted text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  <CheckCheck className="w-3.5 h-3.5" />
+                  {data.stocks.every(s => excludedStocks.has(s.code)) ? "전체 선택" : "전체 해제"}
+                </button>
+                <div className={cn(
+                  "font-bold text-sm sm:text-base tabular-nums",
+                  data.summary.total_profit_rate > 0 && "text-red-600",
+                  data.summary.total_profit_rate < 0 && "text-blue-600",
+                )}>
+                  {data.summary.total_profit_rate >= 0 ? "+" : ""}{data.summary.total_profit_rate}%
+                </div>
               </div>
             </div>
 

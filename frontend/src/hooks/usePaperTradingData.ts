@@ -27,6 +27,7 @@ interface UsePaperTradingDataReturn {
   toggleDate: (date: string) => void
   toggleAllDates: () => void
   toggleStock: (code: string) => void
+  toggleAllStocks: (codes: string[]) => void
   resetExcluded: () => void
 }
 
@@ -118,6 +119,23 @@ export function usePaperTradingData(): UsePaperTradingDataReturn {
     })
   }, [])
 
+  const toggleAllStocks = useCallback((codes: string[]) => {
+    setExcludedStocks(prev => {
+      const allExcluded = codes.every(c => prev.has(c))
+      if (allExcluded) {
+        // 전체 선택 (제외 해제)
+        const next = new Set(prev)
+        codes.forEach(c => next.delete(c))
+        return next
+      } else {
+        // 전체 해제 (전부 제외)
+        const next = new Set(prev)
+        codes.forEach(c => next.add(c))
+        return next
+      }
+    })
+  }, [])
+
   const resetExcluded = useCallback(() => {
     setExcludedStocks(new Set())
   }, [])
@@ -177,6 +195,7 @@ export function usePaperTradingData(): UsePaperTradingDataReturn {
     toggleDate,
     toggleAllDates,
     toggleStock,
+    toggleAllStocks,
     resetExcluded,
   }
 }
