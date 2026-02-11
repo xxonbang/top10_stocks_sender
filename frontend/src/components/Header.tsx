@@ -216,7 +216,7 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
               <span className="sm:hidden">ThemeAnalyzer</span>
               <span className="hidden sm:inline">ThemeAnalyzer</span>
             </h1>
-            <p className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">거래량 + 등락률 교차 분석</p>
+            <p className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">오늘의 테마 분석</p>
           </div>
         </div>
 

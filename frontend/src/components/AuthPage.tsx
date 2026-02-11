@@ -52,7 +52,7 @@ export function AuthPage() {
             <EyeChartLogo className="w-8 h-8" />
           </div>
           <h1 className="text-xl font-bold tracking-tight">ThemeAnalyzer</h1>
-          <p className="text-sm text-muted-foreground">거래량 + 등락률 교차 분석</p>
+          <p className="text-sm text-muted-foreground">오늘의 테마 분석</p>
         </div>
 
         {/* Tab Switcher (PaperTradingPage 스타일) */}
