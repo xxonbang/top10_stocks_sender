@@ -294,6 +294,176 @@ WHERE email = 'admin@example.com';
 
 ---
 
+## 5단계: 사용자 활동 로그 (Activity Logging)
+
+세션 관리와 함께, 사용자의 상세 활동 이력을 Supabase에 기록한다.
+
+### 테이블 생성
+
+```sql
+CREATE TABLE user_activity_log (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id uuid NOT NULL REFERENCES auth.users(id),
+  email text NOT NULL DEFAULT '',
+  system_name text NOT NULL,
+  action_type text NOT NULL,
+  action_detail jsonb NOT NULL DEFAULT '{}',
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 조회 성능을 위한 인덱스
+CREATE INDEX idx_activity_log_user_system ON user_activity_log(user_id, system_name);
+CREATE INDEX idx_activity_log_created_at ON user_activity_log(created_at DESC);
+
+-- RLS 활성화
+ALTER TABLE user_activity_log ENABLE ROW LEVEL SECURITY;
+
+-- 인증된 사용자가 자기 이력만 INSERT 가능
+CREATE POLICY "Users can insert own activity"
+  ON user_activity_log FOR INSERT
+  TO authenticated
+  WITH CHECK (auth.uid() = user_id);
+```
+
+### 추적 이벤트 종류
+
+| action_type | action_detail 예시 | 설명 |
+|------------|-------------------|------|
+| `login` | `{}` | 사용자 로그인 |
+| `logout` | `{}` | 사용자 로그아웃 |
+| `page_view` | `{"page": "home"}` | 페이지 접속/전환 |
+| `tab_switch` | `{"tab": "volume"}` | 데이터 탭 전환 |
+| `mode_change` | `{"fluctuation_mode": "direct"}` | 보기 모드 변경 |
+| `history_view` | `{"date": "2026-02-10"}` | 과거 데이터 조회 |
+| `data_refresh` | `{}` | 수동 데이터 새로고침 |
+
+### 구현 패턴
+
+#### 1) 공통 로깅 함수
+
+Auth Provider 외부에 Supabase INSERT를 직접 호출하는 헬퍼 함수를 정의한다:
+
+```typescript
+function insertActivityLog(
+  userId: string,
+  email: string,
+  actionType: string,
+  actionDetail?: Record<string, string>,
+) {
+  supabase
+    .from("user_activity_log")
+    .insert({
+      user_id: userId,
+      email,
+      system_name: SYSTEM_NAME,
+      action_type: actionType,
+      action_detail: actionDetail ?? {},
+    })
+    .then(({ error }) => {
+      if (error) console.error("Failed to log activity:", error.message)
+    })
+}
+```
+
+#### 2) Context에 logActivity 노출
+
+Auth Provider 내부에서 현재 사용자 기반으로 간편 호출 가능한 함수를 만들어 context에 추가한다:
+
+```typescript
+const logActivity = useCallback(
+  (actionType: string, actionDetail?: Record<string, string>) => {
+    if (user) insertActivityLog(user.id, user.email ?? "", actionType, actionDetail)
+  },
+  [user],
+)
+```
+
+#### 3) 로그인/로그아웃 추적
+
+로그인은 `onAuthStateChange`에서, 로그아웃은 `signOut` 함수에서 직접 호출한다:
+
+```typescript
+// 로그인 (onAuthStateChange 콜백 내)
+if (event === "SIGNED_IN" && session?.user) {
+  insertActivityLog(session.user.id, session.user.email ?? "", "login")
+}
+
+// 로그아웃 (signOut 함수 내)
+const signOut = async () => {
+  if (user) {
+    insertActivityLog(user.id, user.email ?? "", "logout")
+  }
+  await supabase.auth.signOut()
+}
+```
+
+#### 4) 페이지/탭 전환 추적
+
+페이지 전환은 useEffect로, 탭 전환은 핸들러 래핑으로 추적한다:
+
+```typescript
+// 페이지 전환 — useEffect (마운트 + 변경 시 모두 기록)
+useEffect(() => {
+  logActivity("page_view", { page: currentPage })
+}, [currentPage, logActivity])
+
+// 탭 전환 — 핸들러 래핑 (사용자 조작 시에만 기록)
+const handleTabChange = useCallback((tab: string) => {
+  setActiveTab(tab)
+  logActivity("tab_switch", { tab })
+}, [logActivity])
+```
+
+#### 5) 기타 이벤트 추적
+
+기능 사용 시점에 `logActivity`를 호출한다:
+
+```typescript
+// 과거 데이터 조회
+const handleHistorySelect = async (entry: HistoryEntry) => {
+  await fetchHistoryData(entry)
+  logActivity("history_view", { date: entry.date })
+}
+
+// 수동 새로고침
+const handleRefresh = useCallback(() => {
+  refreshFromAPI()
+  logActivity("data_refresh")
+}, [refreshFromAPI, logActivity])
+```
+
+### 데이터 활용
+
+Supabase Dashboard → Table Editor 또는 SQL Editor에서 조회:
+
+```sql
+-- 최근 활동 100건
+SELECT * FROM user_activity_log ORDER BY created_at DESC LIMIT 100;
+
+-- 사용자별 활동 요약
+SELECT email, action_type, COUNT(*), MAX(created_at) as last_at
+FROM user_activity_log
+GROUP BY email, action_type
+ORDER BY email, COUNT(*) DESC;
+
+-- 일별 활성 사용자 수
+SELECT DATE(created_at) as date, COUNT(DISTINCT user_id) as dau
+FROM user_activity_log
+GROUP BY DATE(created_at)
+ORDER BY date DESC;
+```
+
+### 데이터 정리 (선택)
+
+로그가 누적되면 오래된 데이터를 정리한다:
+
+```sql
+-- 90일 이전 로그 삭제
+DELETE FROM user_activity_log WHERE created_at < NOW() - INTERVAL '90 days';
+```
+
+---
+
 ## 설정값 커스터마이징
 
 | 상수 | 기본값 | 설명 |
@@ -314,3 +484,15 @@ WHERE email = 'admin@example.com';
 - [ ] admin 면제 로직 추가 (`ExpireStorage.setAdmin` + 타이머 스킵)
 - [ ] 로그아웃 시 `ExpireStorage.setAdmin(false)` 호출
 - [ ] 빌드 및 동작 확인
+
+### 활동 로그
+
+- [ ] `user_activity_log` 테이블 생성 (SQL 실행)
+- [ ] RLS 정책 설정 (INSERT only, auth.uid() = user_id)
+- [ ] `insertActivityLog` 헬퍼 함수 구현
+- [ ] Auth Context에 `logActivity` 노출
+- [ ] 로그인/로그아웃 이벤트 추적
+- [ ] 페이지 전환 (`page_view`) 추적
+- [ ] 탭 전환 (`tab_switch`) 추적
+- [ ] 모드 변경 (`mode_change`) 추적
+- [ ] 기타 이벤트 (history_view, data_refresh) 추적

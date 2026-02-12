@@ -12,6 +12,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: string | null }>
   signOut: () => Promise<void>
   recordVisit: () => void
+  logActivity: (actionType: string, actionDetail?: Record<string, string>) => void
 }
 
 const SYSTEM_NAME = "Theme_Analysis"
@@ -23,6 +24,21 @@ const INACTIVITY_TIMEOUT_MS = 60 * 60 * 1000
 const ACTIVITY_THROTTLE_MS = 30 * 1000
 
 const AuthContext = createContext<AuthContextType | null>(null)
+
+function insertActivityLog(userId: string, email: string, actionType: string, actionDetail?: Record<string, string>) {
+  supabase
+    .from("user_activity_log")
+    .insert({
+      user_id: userId,
+      email,
+      system_name: SYSTEM_NAME,
+      action_type: actionType,
+      action_detail: actionDetail ?? {},
+    })
+    .then(({ error }) => {
+      if (error) console.error("Failed to log activity:", error.message)
+    })
+}
 
 function recordUserHistory(user: User) {
   supabase
@@ -140,6 +156,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null)
       if (event === "SIGNED_IN" && session?.user) {
         recordUserHistory(session.user)
+        insertActivityLog(session.user.id, session.user.email ?? "", "login")
       }
       if (event === "SIGNED_OUT") {
         ExpireStorage.setAdmin(false)
@@ -162,6 +179,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signOut = async () => {
+    if (user) {
+      insertActivityLog(user.id, user.email ?? "", "logout")
+    }
     await supabase.auth.signOut()
   }
 
@@ -169,8 +189,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (user) recordUserHistory(user)
   }, [user])
 
+  const logActivity = useCallback((actionType: string, actionDetail?: Record<string, string>) => {
+    if (user) insertActivityLog(user.id, user.email ?? "", actionType, actionDetail)
+  }, [user])
+
   return (
-    <AuthContext.Provider value={{ user, session, loading, isAdmin, signUp, signIn, signOut, recordVisit }}>
+    <AuthContext.Provider value={{ user, session, loading, isAdmin, signUp, signIn, signOut, recordVisit, logActivity }}>
       {children}
     </AuthContext.Provider>
   )

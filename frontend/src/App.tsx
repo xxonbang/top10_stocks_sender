@@ -24,13 +24,14 @@ const FLUCTUATION_MODE_KEY = "stock-dashboard-fluctuation-mode"
 const COMPOSITE_MODE_KEY = "stock-dashboard-composite-mode"
 
 function App() {
-  const { user, loading: authLoading, isAdmin, recordVisit } = useAuth()
+  const { user, loading: authLoading, isAdmin, recordVisit, logActivity } = useAuth()
   const [currentPage, setCurrentPage] = useState<PageType>("home")
 
-  // 페이지 전환 시 방문 이력 기록
+  // 페이지 전환/접속 시 이력 기록
   useEffect(() => {
     recordVisit()
-  }, [currentPage, recordVisit])
+    logActivity("page_view", { page: currentPage })
+  }, [currentPage, recordVisit, logActivity])
   const { data: currentData, loading, error, refreshFromAPI, refreshElapsed } = useStockData()
   const {
     groupedHistory,
@@ -241,6 +242,22 @@ function App() {
     return "거래량"
   }, [compositeMode])
 
+  // 탭 전환 핸들러 (활동 로그 포함)
+  const handleTabChange = useCallback((tab: TabType) => {
+    setActiveTab(tab)
+    logActivity("tab_switch", { tab })
+  }, [logActivity])
+
+  const handleFluctuationModeChange = useCallback((mode: FluctuationMode) => {
+    setFluctuationMode(mode)
+    logActivity("mode_change", { fluctuation_mode: mode })
+  }, [logActivity])
+
+  const handleCompositeModeChange = useCallback((mode: CompositeMode) => {
+    setCompositeMode(mode)
+    logActivity("mode_change", { composite_mode: mode })
+  }, [logActivity])
+
   // 히스토리 버튼 클릭 핸들러
   const handleHistoryClick = async () => {
     await fetchIndex()
@@ -251,12 +268,19 @@ function App() {
   const handleHistorySelect = async (entry: HistoryEntry) => {
     await fetchHistoryData(entry)
     setShowHistoryModal(false)
+    logActivity("history_view", { date: entry.date })
   }
 
   // 실시간 데이터로 돌아가기
   const handleBackToLive = () => {
     clearSelection()
   }
+
+  // 데이터 수동 새로고침 핸들러
+  const handleRefresh = useCallback(() => {
+    refreshFromAPI()
+    logActivity("data_refresh")
+  }, [refreshFromAPI, logActivity])
 
   // Auth guard
   if (authLoading) {
@@ -294,7 +318,7 @@ function App() {
     <div className="min-h-screen bg-background">
       <Header
         timestamp={displayData?.timestamp}
-        onRefresh={refreshFromAPI}
+        onRefresh={handleRefresh}
         loading={loading}
         compactMode={compactMode}
         onToggleCompact={toggleCompactMode}
@@ -356,11 +380,11 @@ function App() {
       <div className={cn("sticky z-40", isViewingHistory && selectedEntry ? "top-[88px] sm:top-[100px]" : "top-14 sm:top-16")}>
         <TabBar
           activeTab={activeTab}
-          onTabChange={setActiveTab}
+          onTabChange={handleTabChange}
           fluctuationMode={fluctuationMode}
-          onFluctuationModeChange={setFluctuationMode}
+          onFluctuationModeChange={handleFluctuationModeChange}
           compositeMode={compositeMode}
-          onCompositeModeChange={setCompositeMode}
+          onCompositeModeChange={handleCompositeModeChange}
         />
       </div>
 

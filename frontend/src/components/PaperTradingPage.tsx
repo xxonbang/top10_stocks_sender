@@ -6,6 +6,7 @@ import { PaperTradingSummary } from "@/components/PaperTradingSummary"
 import { PaperTradingDateSelector } from "@/components/PaperTradingDateSelector"
 import { usePaperTradingData } from "@/hooks/usePaperTradingData"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/hooks/useAuth"
 import type { PaperTradingData, PaperTradingMode } from "@/types/stock"
 
 export function PaperTradingPage() {
@@ -29,8 +30,14 @@ export function PaperTradingPage() {
     selectBuyTimestamp,
   } = usePaperTradingData()
 
+  const { logActivity } = useAuth()
   const [collapsedDates, setCollapsedDates] = useState<Set<string>>(new Set())
   const [activeTab, setActiveTab] = useState<PaperTradingMode>("close")
+
+  const handleModeChange = (mode: PaperTradingMode) => {
+    setActiveTab(mode)
+    logActivity("mode_change", { paper_trading_mode: mode })
+  }
 
   useEffect(() => {
     fetchIndex()
@@ -84,7 +91,7 @@ export function PaperTradingPage() {
       {/* 매도 기준 탭 */}
       <div className="flex rounded-lg bg-muted/50 p-1 gap-1">
         <button
-          onClick={() => setActiveTab("close")}
+          onClick={() => handleModeChange("close")}
           className={cn(
             "flex-1 py-1.5 px-3 rounded-md text-xs sm:text-sm font-medium transition-all duration-150",
             activeTab === "close"
@@ -95,7 +102,7 @@ export function PaperTradingPage() {
           종가 매도
         </button>
         <button
-          onClick={() => setActiveTab("high")}
+          onClick={() => handleModeChange("high")}
           className={cn(
             "flex-1 py-1.5 px-3 rounded-md text-xs sm:text-sm font-medium transition-all duration-150",
             activeTab === "high"
