@@ -1,0 +1,123 @@
+{
+  "trade_date": "2026-02-12",
+  "morning_timestamp": "2026-02-12 09:14:13",
+  "collected_at": "2026-02-12 06:40:26",
+  "price_snapshots": [
+    {
+      "timestamp": "2026-02-12 09:14:13",
+      "prices": {
+        "005930": 171200,
+        "000660": 885000,
+        "440110": 53100,
+        "443670": 5990,
+        "242040": 4160,
+        "032820": 13390
+      }
+    },
+    {
+      "timestamp": "2026-02-12 11:52:13",
+      "prices": {
+        "005930": 178000,
+        "000660": 888000,
+        "440110": 53300,
+        "443670": 5740,
+        "242040": 3890,
+        "032820": 13700
+      }
+    }
+  ],
+  "stocks": [
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "theme": "AI 반도체 및 CXL 기술",
+      "buy_price": 171200,
+      "close_price": 178600,
+      "profit_rate": 4.32,
+      "profit_amount": 7400,
+      "high_price": 179600,
+      "high_time": "11:00",
+      "high_profit_rate": 4.91,
+      "high_profit_amount": 8400
+    },
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "theme": "AI 반도체 및 CXL 기술",
+      "buy_price": 885000,
+      "close_price": 888000,
+      "profit_rate": 0.34,
+      "profit_amount": 3000,
+      "high_price": 894000,
+      "high_time": "11:00",
+      "high_profit_rate": 1.02,
+      "high_profit_amount": 9000
+    },
+    {
+      "code": "440110",
+      "name": "파두",
+      "theme": "AI 반도체 및 CXL 기술",
+      "buy_price": 53100,
+      "close_price": 55000,
+      "profit_rate": 3.58,
+      "profit_amount": 1900,
+      "high_price": 59900,
+      "high_time": "12:18",
+      "high_profit_rate": 12.81,
+      "high_profit_amount": 6800
+    },
+    {
+      "code": "443670",
+      "name": "에스피소프트",
+      "theme": "AI 소프트웨어 및 클라우드/데이터센터",
+      "buy_price": 5990,
+      "close_price": 5700,
+      "profit_rate": -4.84,
+      "profit_amount": -290,
+      "high_price": 6270,
+      "high_time": "09:11",
+      "high_profit_rate": 4.67,
+      "high_profit_amount": 280
+    },
+    {
+      "code": "242040",
+      "name": "나무기술",
+      "theme": "AI 소프트웨어 및 클라우드/데이터센터",
+      "buy_price": 4160,
+      "close_price": 3930,
+      "profit_rate": -5.53,
+      "profit_amount": -230,
+      "high_price": 4245,
+      "high_time": "10:30",
+      "high_profit_rate": 2.04,
+      "high_profit_amount": 85
+    },
+    {
+      "code": "032820",
+      "name": "우리기술",
+      "theme": "원자력 발전",
+      "buy_price": 13390,
+      "close_price": 13620,
+      "profit_rate": 1.72,
+      "profit_amount": 230,
+      "high_price": 14360,
+      "high_time": "10:20",
+      "high_profit_rate": 7.24,
+      "high_profit_amount": 970
+    }
+  ],
+  "summary": {
+    "total_stocks": 6,
+    "profit_stocks": 4,
+    "loss_stocks": 2,
+    "total_invested": 1132840,
+    "total_value": 1144850,
+    "total_profit": 12010,
+    "total_profit_rate": 1.06,
+    "high_total_value": 1158375,
+    "high_total_profit": 25535,
+    "high_total_profit_rate": 2.25,
+    "high_profit_stocks": 6,
+    "high_loss_stocks": 0
+  }
+}
