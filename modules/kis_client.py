@@ -552,23 +552,35 @@ class KISClient:
         }
         return self.request("GET", path, tr_id, params=params)
 
-    def get_financial_ratio(self, stock_code: str) -> Dict[str, Any]:
-        """주식 재무비율 조회 (ROE, 부채비율, EPS증가율 등)"""
+    def get_financial_ratio(self, stock_code: str, div_cls_code: str = "1") -> Dict[str, Any]:
+        """주식 재무비율 조회 (ROE, 부채비율, 영업이익률 등)
+
+        Args:
+            stock_code: 종목코드
+            div_cls_code: 분류 구분 (0: 년, 1: 분기)
+        """
         path = "/uapi/domestic-stock/v1/finance/financial-ratio"
         tr_id = "FHKST66430300"
         params = {
-            "FID_COND_MRKT_DIV_CODE": "J",
-            "FID_INPUT_ISCD": stock_code,
+            "fid_cond_mrkt_div_code": "J",
+            "fid_input_iscd": stock_code,
+            "FID_DIV_CLS_CODE": div_cls_code,
         }
         return self.request("GET", path, tr_id, params=params)
 
-    def get_profit_ratio(self, stock_code: str) -> Dict[str, Any]:
-        """주식 수익성비율 조회 (영업이익률 등)"""
+    def get_profit_ratio(self, stock_code: str, div_cls_code: str = "1") -> Dict[str, Any]:
+        """주식 수익성비율 조회 (매출순이익률, 매출총이익률 등)
+
+        Args:
+            stock_code: 종목코드
+            div_cls_code: 분류 구분 (0: 년, 1: 분기)
+        """
         path = "/uapi/domestic-stock/v1/finance/profit-ratio"
         tr_id = "FHKST66430400"
         params = {
-            "FID_COND_MRKT_DIV_CODE": "J",
-            "FID_INPUT_ISCD": stock_code,
+            "fid_cond_mrkt_div_code": "J",
+            "fid_input_iscd": stock_code,
+            "FID_DIV_CLS_CODE": div_cls_code,
         }
         return self.request("GET", path, tr_id, params=params)
 

@@ -78,11 +78,10 @@ class FundamentalCollector:
     def collect_fundamental(self, stock_code: str) -> Dict[str, Any]:
         """단일 종목 펀더멘탈 데이터 수집
 
-        3개 API 호출:
+        2개 API 호출:
         1. get_stock_price() -> PER, PBR, EPS, BPS, 시가총액
-        2. get_financial_ratio() -> ROE, 부채비율, EPS증가율
-        3. get_profit_ratio() -> 영업이익률(OPM)
-        + PEG = PER / EPS증가율 (계산)
+        2. get_financial_ratio() -> ROE, 부채비율, 영업이익률(OPM), 매출액증가율
+        + PEG = PER / 매출액증가율 (계산)
         """
         result = {
             "per": None, "pbr": None, "eps": None, "bps": None,
@@ -105,7 +104,8 @@ class FundamentalCollector:
         except Exception:
             pass
 
-        # 2) financial-ratio -> roe, 부채비율, EPS증가율
+        # 2) financial-ratio -> roe, 부채비율, 영업이익률, 매출액증가율
+        #    (profit-ratio 별도 호출 불필요: bsop_prfi_inrt가 이미 포함)
         try:
             fin_data = self.client.get_financial_ratio(stock_code)
             if fin_data.get("rt_cd") == "0":
@@ -114,17 +114,7 @@ class FundamentalCollector:
                     latest = items[0]
                     result["roe"] = safe_float(latest.get("roe_val"))
                     result["debt_ratio"] = safe_float(latest.get("lblt_rate"))
-                    result["eps_growth"] = safe_float(latest.get("eps_cagr"))
-        except Exception:
-            pass
-
-        # 3) profit-ratio -> 영업이익률
-        try:
-            profit_data = self.client.get_profit_ratio(stock_code)
-            if profit_data.get("rt_cd") == "0":
-                items = profit_data.get("output", [])
-                if items:
-                    latest = items[0]
+                    result["eps_growth"] = safe_float(latest.get("grs"))
                     result["opm"] = safe_float(latest.get("bsop_prfi_inrt"))
         except Exception:
             pass
