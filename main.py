@@ -16,6 +16,7 @@ from modules.telegram import TelegramSender
 from modules.data_exporter import export_for_frontend
 from modules.exchange_rate import ExchangeRateAPI
 from modules.gemini_analyzer import analyze_themes
+from modules.fundamental import FundamentalCollector
 
 
 def collect_all_stocks(
@@ -61,6 +62,49 @@ def collect_all_stocks(
                 all_stocks.append(stock)
 
     return all_stocks
+
+
+def _get_gemini_target_stocks(stock_context: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Gemini 프롬프트에 포함되는 주요 종목만 추출 (중복 제거)
+
+    거래대금+상승률 교차 종목, 상승률 TOP, 등락률 TOP 등에서 추출.
+    """
+    seen_codes = set()
+    targets = []
+
+    # 거래대금 TOP (코스피/코스닥)
+    for market in ("kospi", "kosdaq"):
+        for s in stock_context.get("trading_value", {}).get(market, [])[:20]:
+            code = s.get("code", "")
+            if code and code not in seen_codes:
+                seen_codes.add(code)
+                targets.append(s)
+
+    # 상승률 TOP
+    for market in ("kospi", "kosdaq"):
+        for s in stock_context.get("rising", {}).get(market, [])[:10]:
+            code = s.get("code", "")
+            if code and code not in seen_codes:
+                seen_codes.add(code)
+                targets.append(s)
+
+    # 등락률 상승 TOP
+    for key in ("kospi_up", "kosdaq_up"):
+        for s in stock_context.get("fluctuation", {}).get(key, [])[:20]:
+            code = s.get("code", "")
+            if code and code not in seen_codes:
+                seen_codes.add(code)
+                targets.append(s)
+
+    # 거래량 TOP
+    for market in ("kospi", "kosdaq"):
+        for s in stock_context.get("volume", {}).get(market, [])[:20]:
+            code = s.get("code", "")
+            if code and code not in seen_codes:
+                seen_codes.add(code)
+                targets.append(s)
+
+    return targets
 
 
 def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool = False, skip_ai: bool = False):
@@ -185,6 +229,32 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
         print(f"  ✗ 등락률 조회 실패: {e}")
         history_data = {}
 
+    # 8-1. 펀더멘탈 데이터 수집
+    fundamental_data = {}
+    if not skip_ai:
+        print("\n[8-1/13] 펀더멘탈 데이터 수집 중...")
+        try:
+            fundamental_collector = FundamentalCollector(client)
+
+            # Gemini에 전달할 주요 종목만 추출
+            stock_context_for_targets = {
+                "rising": rising_stocks,
+                "volume": volume_data,
+                "trading_value": trading_value_data,
+                "fluctuation": fluctuation_data,
+            }
+            target_stocks = _get_gemini_target_stocks(stock_context_for_targets)
+
+            # RSI 계산용 raw 일봉 데이터
+            daily_raw = {code: h.get("raw_daily_prices", []) for code, h in history_data.items()}
+
+            fundamental_data = fundamental_collector.collect_all_fundamentals(target_stocks, daily_raw)
+            print(f"  \u2713 {len(fundamental_data)}개 종목 펀더멘탈 수집 완료")
+        except Exception as e:
+            print(f"  \u26a0 펀더멘탈 수집 실패 (빈 데이터로 계속): {e}")
+    else:
+        print("\n[8-1/13] 펀더멘탈 데이터 수집 건너뜀 (--skip-ai)")
+
     # 9. 수급(투자자) 데이터 수집
     investor_data = {}
     investor_estimated = False
@@ -212,7 +282,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
                 "trading_value": trading_value_data,
                 "fluctuation": fluctuation_data,
             }
-            theme_analysis = analyze_themes(stock_context)
+            theme_analysis = analyze_themes(stock_context, fundamental_data=fundamental_data)
             if theme_analysis:
                 theme_count = len(theme_analysis.get("themes", []))
                 print(f"  ✓ AI 테마 분석 완료 ({theme_count}개 테마 도출)")

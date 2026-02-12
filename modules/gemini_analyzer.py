@@ -23,7 +23,7 @@ def _get_api_keys() -> List[str]:
     return [k for k in keys if k]
 
 
-def _build_stock_context(stock_data: Dict[str, Any]) -> str:
+def _build_stock_context(stock_data: Dict[str, Any], fundamental_data: Dict[str, Dict] = None) -> str:
     """수집된 종목 데이터에서 Gemini 프롬프트용 컨텍스트 생성"""
     lines = []
 
@@ -91,6 +91,55 @@ def _build_stock_context(stock_data: Dict[str, Any]) -> str:
             tv_str = f"{tv / 100_000_000:,.0f}억원" if tv else "N/A"
             lines.append(f"- {s.get('name')}({s.get('code')}) 코스닥 등락:+{s.get('change_rate', 0):.2f}% 거래대금:{tv_str}")
 
+    # 펀더멘탈 데이터 섹션
+    if fundamental_data:
+        # 종목코드 → 종목명 매핑 구성
+        code_to_name = {}
+        all_sections = [
+            stock_data.get("rising", {}),
+            stock_data.get("falling", {}),
+            stock_data.get("volume", {}),
+            stock_data.get("trading_value", {}),
+        ]
+        fluc_data = stock_data.get("fluctuation", {})
+        for section in all_sections:
+            for market_stocks in section.values():
+                if isinstance(market_stocks, list):
+                    for s in market_stocks:
+                        c = s.get("code", "")
+                        if c:
+                            code_to_name[c] = s.get("name", c)
+        for key in ("kospi_up", "kospi_down", "kosdaq_up", "kosdaq_down"):
+            for s in fluc_data.get(key, []):
+                c = s.get("code", "")
+                if c:
+                    code_to_name[c] = s.get("name", c)
+
+        lines.append("\n## 종목별 밸류에이션/재무 지표")
+        for code, f in fundamental_data.items():
+            name = code_to_name.get(code, code)
+            parts = []
+            if f.get("per") is not None:
+                parts.append(f"PER:{f['per']}")
+            if f.get("pbr") is not None:
+                parts.append(f"PBR:{f['pbr']}")
+            if f.get("eps") is not None:
+                parts.append(f"EPS:{f['eps']:,.0f}원")
+            if f.get("market_cap") is not None:
+                parts.append(f"시총:{f['market_cap']:,.0f}억")
+            if f.get("roe") is not None:
+                parts.append(f"ROE:{f['roe']}%")
+            if f.get("opm") is not None:
+                parts.append(f"OPM:{f['opm']}%")
+            if f.get("debt_ratio") is not None:
+                parts.append(f"부채비율:{f['debt_ratio']}%")
+            if f.get("peg") is not None:
+                parts.append(f"PEG:{f['peg']}")
+            if f.get("rsi") is not None:
+                parts.append(f"RSI:{f['rsi']:.1f}")
+            if parts:
+                lines.append(f"- {name}({code}): {' | '.join(parts)}")
+
     return "\n".join(lines)
 
 
@@ -110,6 +159,10 @@ def _build_prompt(stock_context: str) -> str:
 3. 각 테마별 대장주 1~3개를 선정하고, 해당 종목이 대장주인 이유를 설명하세요.
 4. 각 대장주에 대한 뉴스 근거를 2~4개 제시하세요 (뉴스 제목과 URL).
 5. 시장 전체 상황을 1~2문장으로 요약하세요.
+6. 각 대장주의 밸류에이션 평가를 추가하세요:
+   - 제공된 PER, PBR, ROE, OPM, PEG, RSI 지표를 활용
+   - Google Search로 "{{종목명}} 실적" 키워드를 검색하여 최신 실적 정보를 보완
+   - 현재 주가 수준이 고평가/적정/저평가 중 어디에 해당하는지 판단
 
 중요:
 - 반드시 오늘({today}) 기준의 최신 뉴스만 참고하세요.
@@ -130,6 +183,7 @@ def _build_prompt(stock_context: str) -> str:
           "name": "종목명",
           "code": "종목코드",
           "reason": "대장주 선정 이유",
+          "valuation": "밸류에이션 평가 (PER/PBR/ROE 등 기반 1~2문장)",
           "news_evidence": [
             {{"title": "뉴스 제목", "url": "뉴스 URL"}}
           ]
@@ -194,11 +248,12 @@ def _call_gemini(prompt: str, api_key: str) -> Optional[Dict]:
     return _extract_json(text)
 
 
-def analyze_themes(stock_data: Dict[str, Any]) -> Optional[Dict]:
+def analyze_themes(stock_data: Dict[str, Any], fundamental_data: Dict[str, Dict] = None) -> Optional[Dict]:
     """수집된 종목 데이터로 AI 테마 분석 수행
 
     Args:
         stock_data: rising, falling, volume, trading_value 등 수집 데이터
+        fundamental_data: {종목코드: {"per": ..., "pbr": ..., ...}} 펀더멘탈 데이터
 
     Returns:
         분석 결과 dict 또는 실패 시 None
@@ -208,7 +263,7 @@ def analyze_themes(stock_data: Dict[str, Any]) -> Optional[Dict]:
         print("  ⚠ Gemini API 키가 설정되지 않았습니다")
         return None
 
-    stock_context = _build_stock_context(stock_data)
+    stock_context = _build_stock_context(stock_data, fundamental_data)
     if not stock_context.strip():
         print("  ⚠ 분석할 종목 데이터가 없습니다")
         return None

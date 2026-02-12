@@ -10,6 +10,8 @@
 - 로컬과 GitHub Actions 간 토큰 공유를 위해 Supabase를 사용합니다.
 """
 import json
+import time
+import threading
 import requests
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -63,6 +65,11 @@ class KISClient:
         self._access_token: Optional[str] = None
         self._token_expires_at: Optional[datetime] = None
         self._token_issued_at: Optional[datetime] = None
+
+        # Rate limiter: 초당 최대 20건
+        self._rate_lock = threading.Lock()
+        self._last_request_time = 0.0
+        self._min_interval = 0.05  # 1/20 = 50ms
 
         self._validate_credentials()
         self._load_cached_token()
@@ -382,6 +389,14 @@ class KISClient:
 
         토큰 만료로 401 에러 발생 시 자동으로 토큰 재발급 후 재시도합니다.
         """
+        # Rate limiting 적용 (초당 최대 20건)
+        with self._rate_lock:
+            now = time.time()
+            elapsed = now - self._last_request_time
+            if elapsed < self._min_interval:
+                time.sleep(self._min_interval - elapsed)
+            self._last_request_time = time.time()
+
         url = f"{self.base_url}{path}"
         headers = self._get_headers(tr_id, tr_cont)
 
@@ -534,6 +549,26 @@ class KISClient:
             "FID_COND_MRKT_DIV_CODE": "J",
             "FID_INPUT_ISCD": stock_code,
             "FID_INPUT_HOUR_1": "",
+        }
+        return self.request("GET", path, tr_id, params=params)
+
+    def get_financial_ratio(self, stock_code: str) -> Dict[str, Any]:
+        """주식 재무비율 조회 (ROE, 부채비율, EPS증가율 등)"""
+        path = "/uapi/domestic-stock/v1/finance/financial-ratio"
+        tr_id = "FHKST66430300"
+        params = {
+            "FID_COND_MRKT_DIV_CODE": "J",
+            "FID_INPUT_ISCD": stock_code,
+        }
+        return self.request("GET", path, tr_id, params=params)
+
+    def get_profit_ratio(self, stock_code: str) -> Dict[str, Any]:
+        """주식 수익성비율 조회 (영업이익률 등)"""
+        path = "/uapi/domestic-stock/v1/finance/profit-ratio"
+        tr_id = "FHKST66430400"
+        params = {
+            "FID_COND_MRKT_DIV_CODE": "J",
+            "FID_INPUT_ISCD": stock_code,
         }
         return self.request("GET", path, tr_id, params=params)
 

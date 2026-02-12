@@ -88,11 +88,12 @@ class StockHistoryAPI:
                 "code": stock_code,
                 "changes": changes,
                 "total_change_rate": round(total_change_rate, 2),
+                "raw_daily_prices": output2,  # RSI 계산용 raw 데이터
             }
 
         except Exception as e:
             print(f"[ERROR] 등락률 조회 실패 ({stock_code}): {e}")
-            return {"code": stock_code, "changes": [], "total_change_rate": 0}
+            return {"code": stock_code, "changes": [], "total_change_rate": 0, "raw_daily_prices": []}
 
     def get_multiple_stocks_history(
         self,
