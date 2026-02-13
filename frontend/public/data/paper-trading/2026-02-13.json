@@ -1,0 +1,126 @@
+{
+  "trade_date": "2026-02-13",
+  "morning_timestamp": "2026-02-13 09:13:33",
+  "collected_at": "2026-02-13 06:40:32",
+  "price_snapshots": [
+    {
+      "timestamp": "2026-02-13 09:13:33",
+      "prices": {
+        "006800": 57000,
+        "001510": 1016,
+        "403870": 43050,
+        "412350": 5610,
+        "475150": 26800,
+        "352820": 397000,
+        "402340": 576000
+      }
+    }
+  ],
+  "stocks": [
+    {
+      "code": "006800",
+      "name": "미래에셋증권",
+      "theme": "증권/금융주 강세",
+      "buy_price": 57000,
+      "close_price": 61600,
+      "profit_rate": 8.07,
+      "profit_amount": 4600,
+      "high_price": 64600,
+      "high_time": "10:38",
+      "high_profit_rate": 13.33,
+      "high_profit_amount": 7600
+    },
+    {
+      "code": "001510",
+      "name": "SK증권",
+      "theme": "증권/금융주 강세",
+      "buy_price": 1016,
+      "close_price": 1215,
+      "profit_rate": 19.59,
+      "profit_amount": 199,
+      "high_price": 1215,
+      "high_time": "15:30",
+      "high_profit_rate": 19.59,
+      "high_profit_amount": 199
+    },
+    {
+      "code": "403870",
+      "name": "HPSP",
+      "theme": "AI/첨단 반도체 및 장비",
+      "buy_price": 43050,
+      "close_price": 42600,
+      "profit_rate": -1.05,
+      "profit_amount": -450,
+      "high_price": 43500,
+      "high_time": "09:10",
+      "high_profit_rate": 1.05,
+      "high_profit_amount": 450
+    },
+    {
+      "code": "412350",
+      "name": "레이저쎌",
+      "theme": "AI/첨단 반도체 및 장비",
+      "buy_price": 5610,
+      "close_price": 5210,
+      "profit_rate": -7.13,
+      "profit_amount": -400,
+      "high_price": 6000,
+      "high_time": "09:06",
+      "high_profit_rate": 6.95,
+      "high_profit_amount": 390
+    },
+    {
+      "code": "475150",
+      "name": "SK이터닉스",
+      "theme": "신재생에너지 및 친환경 사업",
+      "buy_price": 26800,
+      "close_price": 28650,
+      "profit_rate": 6.9,
+      "profit_amount": 1850,
+      "high_price": 29850,
+      "high_time": "09:22",
+      "high_profit_rate": 11.38,
+      "high_profit_amount": 3050
+    },
+    {
+      "code": "352820",
+      "name": "하이브",
+      "theme": "엔터테인먼트/콘텐츠",
+      "buy_price": 397000,
+      "close_price": 390000,
+      "profit_rate": -1.76,
+      "profit_amount": -7000,
+      "high_price": 405500,
+      "high_time": "09:08",
+      "high_profit_rate": 2.14,
+      "high_profit_amount": 8500
+    },
+    {
+      "code": "402340",
+      "name": "SK스퀘어",
+      "theme": "지주사 주주환원 및 기업가치 제고",
+      "buy_price": 576000,
+      "close_price": 558000,
+      "profit_rate": -3.12,
+      "profit_amount": -18000,
+      "high_price": 586000,
+      "high_time": "09:03",
+      "high_profit_rate": 1.74,
+      "high_profit_amount": 10000
+    }
+  ],
+  "summary": {
+    "total_stocks": 7,
+    "profit_stocks": 3,
+    "loss_stocks": 4,
+    "total_invested": 1106476,
+    "total_value": 1087275,
+    "total_profit": -19201,
+    "total_profit_rate": -1.74,
+    "high_total_value": 1136665,
+    "high_total_profit": 30189,
+    "high_total_profit_rate": 2.73,
+    "high_profit_stocks": 7,
+    "high_loss_stocks": 0
+  }
+}
