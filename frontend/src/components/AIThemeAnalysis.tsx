@@ -105,15 +105,22 @@ function ThemeCard({ theme, index }: { theme: MarketTheme; index: number }) {
 }
 
 export function AIThemeAnalysis({ themeAnalysis }: AIThemeAnalysisProps) {
+  const [collapsed, setCollapsed] = useState(true)
+
   if (!themeAnalysis?.themes?.length) {
     return null
   }
 
+  const themeCount = themeAnalysis.themes.length
+
   return (
     <Card className="mb-4 sm:mb-6 overflow-hidden shadow-sm">
       <CardContent className="p-3 sm:p-4 space-y-3">
-        {/* 헤더 */}
-        <div className="flex items-center justify-between">
+        {/* 헤더 (클릭으로 전체 토글) */}
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="flex items-center justify-between w-full text-left"
+        >
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
             <span className="font-semibold text-sm sm:text-base">AI 테마 분석</span>
@@ -121,19 +128,25 @@ export function AIThemeAnalysis({ themeAnalysis }: AIThemeAnalysisProps) {
               ({themeAnalysis.analysis_date} {themeAnalysis.analyzed_at.split(" ")[1]} 분석)
             </span>
           </div>
-        </div>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Badge variant="secondary" className="text-[10px] sm:text-xs">{themeCount}개 테마</Badge>
+            {collapsed ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
+          </div>
+        </button>
 
-        {/* 시장 요약 */}
+        {/* 시장 요약 (항상 표시) */}
         <p className="text-xs sm:text-sm text-muted-foreground bg-muted/50 rounded-md px-3 py-2 leading-relaxed">
           {themeAnalysis.market_summary}
         </p>
 
-        {/* 테마 카드 */}
-        <div className="space-y-2.5">
-          {themeAnalysis.themes.map((theme, index) => (
-            <ThemeCard key={index} theme={theme} index={index} />
-          ))}
-        </div>
+        {/* 테마 카드 (접기/펼치기) */}
+        {!collapsed && (
+          <div className="space-y-2.5">
+            {themeAnalysis.themes.map((theme, index) => (
+              <ThemeCard key={index} theme={theme} index={index} />
+            ))}
+          </div>
+        )}
       </CardContent>
     </Card>
   )
