@@ -1,0 +1,126 @@
+{
+  "trade_date": "2026-02-17",
+  "morning_timestamp": "2026-02-17 09:14:03",
+  "collected_at": "2026-02-17 06:40:29",
+  "price_snapshots": [
+    {
+      "timestamp": "2026-02-17 09:14:03",
+      "prices": {
+        "006800": 61600,
+        "003530": 7360,
+        "475150": 28650,
+        "478340": 55600,
+        "494120": 80400,
+        "348340": 83000,
+        "352820": 390000
+      }
+    }
+  ],
+  "stocks": [
+    {
+      "code": "006800",
+      "name": "미래에셋증권",
+      "theme": "증권업 호황 및 밸류업 프로그램 수혜",
+      "buy_price": 61600,
+      "close_price": 61600,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 64600,
+      "high_time": "10:38",
+      "high_profit_rate": 4.87,
+      "high_profit_amount": 3000
+    },
+    {
+      "code": "003530",
+      "name": "한화투자증권",
+      "theme": "증권업 호황 및 밸류업 프로그램 수혜",
+      "buy_price": 7360,
+      "close_price": 7360,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 8040,
+      "high_time": "13:59",
+      "high_profit_rate": 9.24,
+      "high_profit_amount": 680
+    },
+    {
+      "code": "475150",
+      "name": "SK이터닉스",
+      "theme": "신재생에너지 및 친환경 산업 성장",
+      "buy_price": 28650,
+      "close_price": 28650,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 29850,
+      "high_time": "09:22",
+      "high_profit_rate": 4.19,
+      "high_profit_amount": 1200
+    },
+    {
+      "code": "478340",
+      "name": "나라스페이스테크놀로지",
+      "theme": "로봇/우주/바이오 혁신 기술 성장",
+      "buy_price": 55600,
+      "close_price": 55600,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 58200,
+      "high_time": "14:40",
+      "high_profit_rate": 4.68,
+      "high_profit_amount": 2600
+    },
+    {
+      "code": "494120",
+      "name": "큐리오시스",
+      "theme": "로봇/우주/바이오 혁신 기술 성장",
+      "buy_price": 80400,
+      "close_price": 80400,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 81800,
+      "high_time": "13:55",
+      "high_profit_rate": 1.74,
+      "high_profit_amount": 1400
+    },
+    {
+      "code": "348340",
+      "name": "뉴로메카",
+      "theme": "로봇/우주/바이오 혁신 기술 성장",
+      "buy_price": 83000,
+      "close_price": 83000,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 85600,
+      "high_time": "12:44",
+      "high_profit_rate": 3.13,
+      "high_profit_amount": 2600
+    },
+    {
+      "code": "352820",
+      "name": "하이브",
+      "theme": "엔터테인먼트 산업의 글로벌 확장 및 IP 가치 재평가",
+      "buy_price": 390000,
+      "close_price": 390000,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 405500,
+      "high_time": "09:08",
+      "high_profit_rate": 3.97,
+      "high_profit_amount": 15500
+    }
+  ],
+  "summary": {
+    "total_stocks": 7,
+    "profit_stocks": 0,
+    "loss_stocks": 0,
+    "total_invested": 706610,
+    "total_value": 706610,
+    "total_profit": 0,
+    "total_profit_rate": 0.0,
+    "high_total_value": 733590,
+    "high_total_profit": 26980,
+    "high_total_profit_rate": 3.82,
+    "high_profit_stocks": 7,
+    "high_loss_stocks": 0
+  }
+}
