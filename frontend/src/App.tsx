@@ -492,6 +492,8 @@ function App() {
               showTradingValue={true}
               investorData={displayData.investor_data}
               investorEstimated={displayData?.investor_estimated}
+              criteriaData={displayData?.criteria_data}
+              isAdmin={isAdmin}
             />
           )}
 
@@ -507,6 +509,8 @@ function App() {
               showTradingValue={true}
               investorData={displayData.investor_data}
               investorEstimated={displayData?.investor_estimated}
+              criteriaData={displayData?.criteria_data}
+              isAdmin={isAdmin}
             />
           )}
 
@@ -523,6 +527,8 @@ function App() {
                 showTradingValue={true}
                 investorData={displayData.investor_data}
                 investorEstimated={displayData?.investor_estimated}
+                criteriaData={displayData?.criteria_data}
+                isAdmin={isAdmin}
               />
               <StockList
                 title="등락률 하락 TOP20"
@@ -535,6 +541,8 @@ function App() {
                 showTradingValue={true}
                 investorData={displayData.investor_data}
                 investorEstimated={displayData?.investor_estimated}
+                criteriaData={displayData?.criteria_data}
+                isAdmin={isAdmin}
               />
             </>
           )}
