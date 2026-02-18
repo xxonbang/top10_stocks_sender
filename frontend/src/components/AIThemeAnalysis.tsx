@@ -1,19 +1,19 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Sparkles, ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
+import { Sparkles, ChevronDown, ChevronUp, ExternalLink, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { ThemeAnalysis, MarketTheme, StockCriteria } from "@/types/stock"
 
 /** 대장주 칩용 기준 도트 색상 (다른 컴포넌트와 동일 체계) */
 const LEADER_CRITERIA = [
-  { key: "high_breakout", dot: "bg-red-500" },
-  { key: "momentum_history", dot: "bg-orange-500" },
-  { key: "resistance_breakout", dot: "bg-yellow-400" },
-  { key: "ma_alignment", dot: "bg-teal-500" },
-  { key: "supply_demand", dot: "bg-blue-500" },
-  { key: "program_trading", dot: "bg-violet-500" },
-  { key: "top30_trading_value", dot: "bg-fuchsia-500" },
+  { key: "high_breakout", dot: "bg-red-500", label: "전고점 돌파" },
+  { key: "momentum_history", dot: "bg-orange-500", label: "끼 보유" },
+  { key: "resistance_breakout", dot: "bg-yellow-400", label: "저항선 돌파" },
+  { key: "ma_alignment", dot: "bg-teal-500", label: "정배열" },
+  { key: "supply_demand", dot: "bg-blue-500", label: "외국인/기관 수급" },
+  { key: "program_trading", dot: "bg-violet-500", label: "프로그램 매매" },
+  { key: "top30_trading_value", dot: "bg-fuchsia-500", label: "거래대금 TOP30" },
 ] as const
 
 interface AIThemeAnalysisProps {
@@ -25,6 +25,7 @@ interface AIThemeAnalysisProps {
 
 function ThemeCard({ theme, index, criteriaData, isAdmin }: { theme: MarketTheme; index: number; criteriaData?: Record<string, StockCriteria>; isAdmin?: boolean }) {
   const [expanded, setExpanded] = useState(false)
+  const [popupStockCode, setPopupStockCode] = useState<string | null>(null)
   const showCriteria = isAdmin && criteriaData
 
   return (
@@ -57,13 +58,10 @@ function ThemeCard({ theme, index, criteriaData, isAdmin }: { theme: MarketTheme
           const hasDots = metDots.length > 0
 
           return (
-            <a
+            <span
               key={stock.code}
-              href={`https://m.stock.naver.com/domestic/stock/${stock.code}/total`}
-              target="_blank"
-              rel="noopener noreferrer"
               className={cn(
-                "inline-flex items-center gap-1 px-2 py-1 rounded-md",
+                "inline-flex items-center gap-1 px-2 py-1 rounded-md relative",
                 "text-xs sm:text-sm font-medium",
                 "transition-all duration-150",
                 allMet
@@ -72,15 +70,54 @@ function ThemeCard({ theme, index, criteriaData, isAdmin }: { theme: MarketTheme
               )}
             >
               {hasDots && (
-                <span className="inline-flex items-center gap-px mr-0.5">
+                <button
+                  onClick={() => setPopupStockCode(popupStockCode === stock.code ? null : stock.code)}
+                  className="inline-flex items-center gap-px mr-0.5 hover:opacity-70 transition-opacity"
+                >
                   {metDots.map(({ key, dot }) => (
                     <span key={key} className={cn("w-1.5 h-1.5 rounded-full", dot)} />
                   ))}
-                </span>
+                </button>
               )}
-              {stock.name}
-              <ExternalLink className="w-3 h-3 opacity-50" />
-            </a>
+              <a
+                href={`https://m.stock.naver.com/domestic/stock/${stock.code}/total`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 hover:underline"
+              >
+                {stock.name}
+                <ExternalLink className="w-3 h-3 opacity-50" />
+              </a>
+              {/* Criteria popup */}
+              {popupStockCode === stock.code && criteria && (
+                <div className="absolute left-0 top-full mt-1 z-50 w-64 sm:w-72 bg-popover text-popover-foreground rounded-lg shadow-lg border border-border p-2.5">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-semibold">{stock.name} 기준 충족</span>
+                    <button
+                      onClick={() => setPopupStockCode(null)}
+                      className="text-muted-foreground hover:text-foreground"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                  <div className="space-y-1.5">
+                    {metDots.map(({ key, dot, label }) => {
+                      const c = criteria[key as keyof StockCriteria]
+                      if (typeof c === "boolean") return null
+                      return (
+                        <div key={key} className="flex items-start gap-1.5">
+                          <span className={cn("w-2 h-2 rounded-full shrink-0 mt-0.5", dot)} />
+                          <div className="min-w-0">
+                            <span className="text-[10px] font-semibold">{label}</span>
+                            <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-relaxed">{c?.reason || "근거 없음"}</p>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+            </span>
           )
         })}
       </div>

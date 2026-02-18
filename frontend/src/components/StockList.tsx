@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { TrendingUp, TrendingDown, BarChart3, ExternalLink } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -7,13 +8,13 @@ import type { Stock, StockHistory, StockNews, InvestorInfo, StockCriteria } from
 
 /** 컴팩트 모드용 기준별 도트 색상 */
 const COMPACT_CRITERIA = [
-  { key: "high_breakout", dot: "bg-red-500" },
-  { key: "momentum_history", dot: "bg-orange-500" },
-  { key: "resistance_breakout", dot: "bg-yellow-400" },
-  { key: "ma_alignment", dot: "bg-teal-500" },
-  { key: "supply_demand", dot: "bg-blue-500" },
-  { key: "program_trading", dot: "bg-violet-500" },
-  { key: "top30_trading_value", dot: "bg-fuchsia-500" },
+  { key: "high_breakout", dot: "bg-red-500", label: "전고점 돌파" },
+  { key: "momentum_history", dot: "bg-orange-500", label: "끼 보유" },
+  { key: "resistance_breakout", dot: "bg-yellow-400", label: "저항선 돌파" },
+  { key: "ma_alignment", dot: "bg-teal-500", label: "정배열" },
+  { key: "supply_demand", dot: "bg-blue-500", label: "외국인/기관 수급" },
+  { key: "program_trading", dot: "bg-violet-500", label: "프로그램 매매" },
+  { key: "top30_trading_value", dot: "bg-fuchsia-500", label: "거래대금 TOP30" },
 ] as const
 
 interface StockListProps {
@@ -58,17 +59,15 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
   const naverUrl = `https://m.stock.naver.com/domestic/stock/${stock.code}/total`
   const allMet = isAdmin && criteria?.all_met
   const showDots = isAdmin && criteria
+  const [criteriaExpanded, setCriteriaExpanded] = useState(false)
+  const metCriteria = showDots ? COMPACT_CRITERIA.filter(({ key }) => {
+    const c = criteria[key as keyof StockCriteria]
+    return typeof c !== "boolean" && c?.met
+  }) : []
 
   return (
-    <a
-      href={naverUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn(
-        "flex items-center py-2 hover:bg-muted/50 transition-colors group",
-        allMet && "border-l-[3px] border-yellow-400"
-      )}
-    >
+    <div className={cn(allMet && "border-l-[3px] border-yellow-400")}>
+      <div className="flex items-center py-2 hover:bg-muted/50 transition-colors group">
       {/* Sticky left: Rank + Name */}
       <div className={cn(
         "sticky left-0 z-10 group-hover:bg-muted/50 flex items-center gap-2 shrink-0 w-28 sm:w-40 pl-2 pr-1 transition-colors",
@@ -83,24 +82,35 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
           {stock.rank}
         </span>
         <div className="min-w-0">
-          <div className="flex items-center gap-1">
+          <a
+            href={naverUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1"
+          >
             <span className="font-medium text-xs truncate">{stock.name}</span>
             <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity shrink-0 hidden sm:block" />
-          </div>
-          {showDots && (
-            <div className="flex items-center gap-px mt-0.5">
-              {COMPACT_CRITERIA.map(({ key, dot }) => {
-                const c = criteria[key as keyof StockCriteria]
-                if (typeof c === "boolean" || !c?.met) return null
-                return <span key={key} className={cn("w-1.5 h-1.5 rounded-full", dot)} />
-              })}
-            </div>
+          </a>
+          {metCriteria.length > 0 && (
+            <button
+              onClick={() => setCriteriaExpanded(!criteriaExpanded)}
+              className="flex items-center gap-px mt-0.5 hover:opacity-70 transition-opacity"
+            >
+              {metCriteria.map(({ key, dot }) => (
+                <span key={key} className={cn("w-1.5 h-1.5 rounded-full", dot)} />
+              ))}
+            </button>
           )}
         </div>
       </div>
 
-      {/* Scrollable right: Data columns */}
-      <div className="flex items-center shrink-0 ml-auto">
+      {/* Scrollable right: Data columns (link to Naver) */}
+      <a
+        href={naverUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center shrink-0 ml-auto"
+      >
         <span className="text-xs font-medium tabular-nums text-right w-16 sm:w-20">
           {formatPrice(stock.current_price)}<span className="text-[9px] text-muted-foreground">원</span>
         </span>
@@ -133,8 +143,28 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
         )}>
           {formatChangeRate(stock.change_rate)}
         </span>
+      </a>
       </div>
-    </a>
+
+      {/* Criteria detail (expanded) */}
+      {criteriaExpanded && (
+        <div className="px-2 pb-2 pl-9 sm:pl-12 space-y-1.5 bg-muted/20 border-t border-border/30">
+          {metCriteria.map(({ key, dot, label }) => {
+            const c = criteria![key as keyof StockCriteria]
+            if (typeof c === "boolean") return null
+            return (
+              <div key={key} className="flex items-start gap-1.5">
+                <span className={cn("w-2 h-2 rounded-full shrink-0 mt-0.5", dot)} />
+                <div className="min-w-0">
+                  <span className="text-[10px] font-semibold">{label}</span>
+                  <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-relaxed">{c?.reason || "근거 없음"}</p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
   )
 }
 
