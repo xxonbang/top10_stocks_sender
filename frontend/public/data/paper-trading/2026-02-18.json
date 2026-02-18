@@ -1,0 +1,140 @@
+{
+  "trade_date": "2026-02-18",
+  "morning_timestamp": "2026-02-18 09:12:15",
+  "collected_at": "2026-02-18 06:40:32",
+  "price_snapshots": [
+    {
+      "timestamp": "2026-02-18 09:12:15",
+      "prices": {
+        "001510": 1215,
+        "006800": 61600,
+        "003530": 7360,
+        "403870": 42600,
+        "412350": 5210,
+        "348340": 83000,
+        "034020": 96700,
+        "475150": 28650
+      }
+    }
+  ],
+  "stocks": [
+    {
+      "code": "001510",
+      "name": "SK증권",
+      "theme": "증권/금융 업종 실적 개선 및 강세",
+      "buy_price": 1215,
+      "close_price": 1215,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 1215,
+      "high_time": "15:30",
+      "high_profit_rate": 0.0,
+      "high_profit_amount": 0
+    },
+    {
+      "code": "006800",
+      "name": "미래에셋증권",
+      "theme": "증권/금융 업종 실적 개선 및 강세",
+      "buy_price": 61600,
+      "close_price": 61600,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 64600,
+      "high_time": "10:38",
+      "high_profit_rate": 4.87,
+      "high_profit_amount": 3000
+    },
+    {
+      "code": "003530",
+      "name": "한화투자증권",
+      "theme": "증권/금융 업종 실적 개선 및 강세",
+      "buy_price": 7360,
+      "close_price": 7360,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 8040,
+      "high_time": "13:59",
+      "high_profit_rate": 9.24,
+      "high_profit_amount": 680
+    },
+    {
+      "code": "403870",
+      "name": "HPSP",
+      "theme": "AI/반도체 장비 및 로봇 산업 성장 기대",
+      "buy_price": 42600,
+      "close_price": 42600,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 43500,
+      "high_time": "09:10",
+      "high_profit_rate": 2.11,
+      "high_profit_amount": 900
+    },
+    {
+      "code": "412350",
+      "name": "레이저쎌",
+      "theme": "AI/반도체 장비 및 로봇 산업 성장 기대",
+      "buy_price": 5210,
+      "close_price": 5210,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 6000,
+      "high_time": "09:06",
+      "high_profit_rate": 15.16,
+      "high_profit_amount": 790
+    },
+    {
+      "code": "348340",
+      "name": "뉴로메카",
+      "theme": "AI/반도체 장비 및 로봇 산업 성장 기대",
+      "buy_price": 83000,
+      "close_price": 83000,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 85600,
+      "high_time": "12:44",
+      "high_profit_rate": 3.13,
+      "high_profit_amount": 2600
+    },
+    {
+      "code": "034020",
+      "name": "두산에너빌리티",
+      "theme": "원전 및 신재생에너지 확대 정책 수혜",
+      "buy_price": 96700,
+      "close_price": 96700,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 99900,
+      "high_time": "13:04",
+      "high_profit_rate": 3.31,
+      "high_profit_amount": 3200
+    },
+    {
+      "code": "475150",
+      "name": "SK이터닉스",
+      "theme": "원전 및 신재생에너지 확대 정책 수혜",
+      "buy_price": 28650,
+      "close_price": 28650,
+      "profit_rate": 0.0,
+      "profit_amount": 0,
+      "high_price": 29850,
+      "high_time": "09:22",
+      "high_profit_rate": 4.19,
+      "high_profit_amount": 1200
+    }
+  ],
+  "summary": {
+    "total_stocks": 8,
+    "profit_stocks": 0,
+    "loss_stocks": 0,
+    "total_invested": 326335,
+    "total_value": 326335,
+    "total_profit": 0,
+    "total_profit_rate": 0.0,
+    "high_total_value": 338705,
+    "high_total_profit": 12370,
+    "high_total_profit_rate": 3.79,
+    "high_profit_stocks": 7,
+    "high_loss_stocks": 0
+  }
+}
