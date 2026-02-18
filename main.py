@@ -17,6 +17,7 @@ from modules.data_exporter import export_for_frontend
 from modules.exchange_rate import ExchangeRateAPI
 from modules.gemini_analyzer import analyze_themes
 from modules.fundamental import FundamentalCollector
+from modules.stock_criteria import evaluate_all_stocks
 
 
 def collect_all_stocks(
@@ -297,6 +298,22 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
     else:
         print("\n[10/13] AI 테마 분석 건너뜀")
 
+    # 10-1. 종목 선정 기준 평가
+    criteria_data = {}
+    print("\n[10-1/13] 종목 선정 기준 평가 중...")
+    try:
+        criteria_data = evaluate_all_stocks(
+            all_stocks=all_stocks,
+            history_data=history_data,
+            fundamental_data=fundamental_data,
+            investor_data=investor_data,
+            trading_value_data=trading_value_data,
+        )
+        met_all = sum(1 for v in criteria_data.values() if v.get("all_met"))
+        print(f"  ✓ {len(criteria_data)}개 종목 평가 완료 (전 기준 충족: {met_all}개)")
+    except Exception as e:
+        print(f"  ⚠ 기준 평가 실패 (빈 데이터로 계속): {e}")
+
     # 11. 뉴스 수집
     news_data = {}
     if not skip_news:
@@ -323,6 +340,7 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
             fluctuation_direct_data=fluctuation_direct_data,
             investor_data=investor_data,
             investor_estimated=investor_estimated,
+            criteria_data=criteria_data,
             theme_analysis=theme_analysis,
         )
         print(f"  ✓ 데이터 내보내기 완료: {export_path}")

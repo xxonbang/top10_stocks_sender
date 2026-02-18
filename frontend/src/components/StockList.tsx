@@ -3,7 +3,18 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { StockCard } from "@/components/StockCard"
 import { cn, formatPrice, formatVolume, formatChangeRate, formatTradingValue, formatNetBuy, getNetBuyColor } from "@/lib/utils"
-import type { Stock, StockHistory, StockNews, InvestorInfo } from "@/types/stock"
+import type { Stock, StockHistory, StockNews, InvestorInfo, StockCriteria } from "@/types/stock"
+
+/** 컴팩트 모드용 기준별 도트 색상 */
+const COMPACT_CRITERIA = [
+  { key: "high_breakout", dot: "bg-red-500" },
+  { key: "momentum_history", dot: "bg-orange-500" },
+  { key: "resistance_breakout", dot: "bg-yellow-400" },
+  { key: "ma_alignment", dot: "bg-green-500" },
+  { key: "supply_demand", dot: "bg-blue-500" },
+  { key: "program_trading", dot: "bg-lime-400" },
+  { key: "top30_trading_value", dot: "bg-pink-500" },
+] as const
 
 interface StockListProps {
   title: string
@@ -16,6 +27,8 @@ interface StockListProps {
   showTradingValue?: boolean
   investorData?: Record<string, InvestorInfo>
   investorEstimated?: boolean
+  criteriaData?: Record<string, StockCriteria>
+  isAdmin?: boolean
 }
 
 // 컴팩트 모드 컬럼 헤더 (flex: sticky left + scrollable right)
@@ -40,19 +53,27 @@ function CompactHeader({ showTradingValue, hasInvestorData, investorEstimated }:
 }
 
 // 컴팩트 모드용 간단한 종목 행 (flex: sticky left + scrollable right)
-function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInvestorData }: { stock: Stock; type: "rising" | "falling" | "neutral"; showTradingValue?: boolean; investorInfo?: InvestorInfo; hasInvestorData?: boolean }) {
+function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInvestorData, criteria, isAdmin }: { stock: Stock; type: "rising" | "falling" | "neutral"; showTradingValue?: boolean; investorInfo?: InvestorInfo; hasInvestorData?: boolean; criteria?: StockCriteria; isAdmin?: boolean }) {
   const effectiveRising = type === "neutral" ? stock.change_rate >= 0 : type === "rising"
   const naverUrl = `https://m.stock.naver.com/domestic/stock/${stock.code}/total`
+  const allMet = isAdmin && criteria?.all_met
+  const showDots = isAdmin && criteria
 
   return (
     <a
       href={naverUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center py-2 hover:bg-muted/50 transition-colors group"
+      className={cn(
+        "flex items-center py-2 hover:bg-muted/50 transition-colors group",
+        allMet && "border-l-[3px] border-yellow-400"
+      )}
     >
       {/* Sticky left: Rank + Name */}
-      <div className="sticky left-0 z-10 bg-card group-hover:bg-muted/50 flex items-center gap-2 shrink-0 w-28 sm:w-40 pl-2 pr-1 transition-colors">
+      <div className={cn(
+        "sticky left-0 z-10 group-hover:bg-muted/50 flex items-center gap-2 shrink-0 w-28 sm:w-40 pl-2 pr-1 transition-colors",
+        allMet ? "bg-yellow-50/40" : "bg-card"
+      )}>
         <span className={cn(
           "w-5 h-5 flex items-center justify-center text-[10px] font-bold rounded-full shrink-0",
           type === "neutral"
@@ -61,9 +82,20 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
         )}>
           {stock.rank}
         </span>
-        <div className="flex items-center gap-1 min-w-0">
-          <span className="font-medium text-xs truncate">{stock.name}</span>
-          <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity shrink-0 hidden sm:block" />
+        <div className="min-w-0">
+          <div className="flex items-center gap-1">
+            <span className="font-medium text-xs truncate">{stock.name}</span>
+            <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity shrink-0 hidden sm:block" />
+          </div>
+          {showDots && (
+            <div className="flex items-center gap-px mt-0.5">
+              {COMPACT_CRITERIA.map(({ key, dot }) => {
+                const c = criteria[key as keyof StockCriteria]
+                if (typeof c === "boolean" || !c?.met) return null
+                return <span key={key} className={cn("w-1.5 h-1.5 rounded-full", dot)} />
+              })}
+            </div>
+          )}
         </div>
       </div>
 
@@ -116,6 +148,8 @@ function CompactMarketSection({
   showTradingValue,
   investorData,
   investorEstimated,
+  criteriaData,
+  isAdmin,
 }: {
   market: string
   stocks: Stock[]
@@ -125,6 +159,8 @@ function CompactMarketSection({
   showTradingValue?: boolean
   investorData?: Record<string, InvestorInfo>
   investorEstimated?: boolean
+  criteriaData?: Record<string, StockCriteria>
+  isAdmin?: boolean
 }) {
   const hasInvestorData = !!investorData && Object.keys(investorData).length > 0
 
@@ -153,7 +189,7 @@ function CompactMarketSection({
           {showHeader && <CompactHeader showTradingValue={showTradingValue} hasInvestorData={hasInvestorData} investorEstimated={investorEstimated} />}
           <div className="divide-y divide-border/30">
             {stocks.map((stock) => (
-              <CompactStockRow key={stock.code} stock={stock} type={type} showTradingValue={showTradingValue} investorInfo={investorData?.[stock.code]} hasInvestorData={hasInvestorData} />
+              <CompactStockRow key={stock.code} stock={stock} type={type} showTradingValue={showTradingValue} investorInfo={investorData?.[stock.code]} hasInvestorData={hasInvestorData} criteria={criteriaData?.[stock.code]} isAdmin={isAdmin} />
             ))}
           </div>
         </div>
@@ -162,7 +198,7 @@ function CompactMarketSection({
   )
 }
 
-export function StockList({ title, kospiStocks, kosdaqStocks, history, news, type, compactMode, showTradingValue, investorData, investorEstimated }: StockListProps) {
+export function StockList({ title, kospiStocks, kosdaqStocks, history, news, type, compactMode, showTradingValue, investorData, investorEstimated, criteriaData, isAdmin }: StockListProps) {
   const isNeutral = type === "neutral"
   const isRising = type === "rising"
   const Icon = isNeutral ? BarChart3 : isRising ? TrendingUp : TrendingDown
@@ -197,6 +233,8 @@ export function StockList({ title, kospiStocks, kosdaqStocks, history, news, typ
             showTradingValue={showTradingValue}
             investorData={investorData}
             investorEstimated={investorEstimated}
+            criteriaData={criteriaData}
+            isAdmin={isAdmin}
           />
           <CompactMarketSection
             market="KOSDAQ"
@@ -207,6 +245,8 @@ export function StockList({ title, kospiStocks, kosdaqStocks, history, news, typ
             showTradingValue={showTradingValue}
             investorData={investorData}
             investorEstimated={investorEstimated}
+            criteriaData={criteriaData}
+            isAdmin={isAdmin}
           />
         </CardContent>
       </Card>
@@ -244,6 +284,8 @@ export function StockList({ title, kospiStocks, kosdaqStocks, history, news, typ
                   type={type}
                   investorInfo={investorData?.[stock.code]}
                   investorEstimated={investorEstimated}
+                  criteria={criteriaData?.[stock.code]}
+                  isAdmin={isAdmin}
                 />
               ))}
             </div>
@@ -270,6 +312,8 @@ export function StockList({ title, kospiStocks, kosdaqStocks, history, news, typ
                   type={type}
                   investorInfo={investorData?.[stock.code]}
                   investorEstimated={investorEstimated}
+                  criteria={criteriaData?.[stock.code]}
+                  isAdmin={isAdmin}
                 />
               ))}
             </div>

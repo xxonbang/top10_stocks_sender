@@ -67,6 +67,16 @@ body {
   display: none;
 }
 
+/* Shimmer animation for all-criteria-met stocks */
+@keyframes shimmer {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(234, 179, 8, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(234, 179, 8, 0.4);
+  }
+}
+
 /* Container responsive */
 .container {
   width: 100%;

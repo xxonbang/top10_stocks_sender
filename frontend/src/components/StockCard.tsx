@@ -1,9 +1,20 @@
-import { useState } from "react"
-import { TrendingUp, TrendingDown, ExternalLink, Newspaper, ChevronDown, ChevronUp } from "lucide-react"
+import { useState, Fragment } from "react"
+import { TrendingUp, TrendingDown, ExternalLink, Newspaper, ChevronDown, ChevronUp, X } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn, formatPrice, formatVolume, formatChangeRate, formatTradingValue, getChangeBgColor, formatNetBuy, getNetBuyColor } from "@/lib/utils"
-import type { Stock, StockHistory, StockNews, InvestorInfo } from "@/types/stock"
+import type { Stock, StockHistory, StockNews, InvestorInfo, StockCriteria } from "@/types/stock"
+
+/** 기준별 색상 및 라벨 정의 */
+const CRITERIA_CONFIG = [
+  { key: "high_breakout", dot: "bg-red-500", badge: "bg-red-100 text-red-700", label: "전고점 돌파", shortLabel: "전고점" },
+  { key: "momentum_history", dot: "bg-orange-500", badge: "bg-orange-100 text-orange-700", label: "끼 보유", shortLabel: "끼" },
+  { key: "resistance_breakout", dot: "bg-yellow-400", badge: "bg-yellow-100 text-yellow-700", label: "저항선 돌파", shortLabel: "저항선" },
+  { key: "ma_alignment", dot: "bg-green-500", badge: "bg-green-100 text-green-700", label: "정배열", shortLabel: "정배열" },
+  { key: "supply_demand", dot: "bg-blue-500", badge: "bg-blue-100 text-blue-700", label: "외국인/기관 수급", shortLabel: "수급" },
+  { key: "program_trading", dot: "bg-lime-400", badge: "bg-lime-100 text-lime-700", label: "프로그램 매매", shortLabel: "프로그램" },
+  { key: "top30_trading_value", dot: "bg-pink-500", badge: "bg-pink-100 text-pink-700", label: "거래대금 TOP30", shortLabel: "TOP30" },
+] as const
 
 interface StockCardProps {
   stock: Stock
@@ -12,18 +23,32 @@ interface StockCardProps {
   type: "rising" | "falling" | "neutral"
   investorInfo?: InvestorInfo
   investorEstimated?: boolean
+  criteria?: StockCriteria
+  isAdmin?: boolean
 }
 
-export function StockCard({ stock, history, news, type, investorInfo, investorEstimated }: StockCardProps) {
+export function StockCard({ stock, history, news, type, investorInfo, investorEstimated, criteria, isAdmin }: StockCardProps) {
   const [isNewsExpanded, setIsNewsExpanded] = useState(false)
+  const [popupCriterion, setPopupCriterion] = useState<string | null>(null)
   const effectiveType = type === "neutral" ? (stock.change_rate >= 0 ? "rising" : "falling") : type
   const isRising = effectiveType === "rising"
   const TrendIcon = isRising ? TrendingUp : TrendingDown
   const naverUrl = `https://m.stock.naver.com/domestic/stock/${stock.code}/total`
   const hasNews = news && news.news && news.news.length > 0
+  const allMet = criteria?.all_met ?? false
+  const showCriteria = isAdmin && criteria
+
+  const handleDotClick = (e: React.MouseEvent, key: string) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setPopupCriterion(popupCriterion === key ? null : key)
+  }
 
   return (
-    <Card className="group hover:shadow-lg transition-all duration-200 hover:border-primary/30 bg-card">
+    <Card className={cn(
+      "group hover:shadow-lg transition-all duration-200 hover:border-primary/30 bg-card",
+      allMet && isAdmin && "ring-2 ring-yellow-400/70 shadow-[0_0_12px_rgba(234,179,8,0.3)] animate-[shimmer_3s_ease-in-out_infinite]"
+    )}>
       <CardContent className="p-3 sm:p-4">
         {/* Header: Rank + Name + Price */}
         <div className="flex items-start justify-between gap-2">
@@ -46,6 +71,83 @@ export function StockCard({ stock, history, news, type, investorInfo, investorEs
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 hidden sm:block" />
               </a>
               <p className="text-[10px] sm:text-xs text-muted-foreground font-mono">{stock.code}</p>
+
+              {/* 기준 인디케이터 (admin만 표시) */}
+              {showCriteria && (
+                <div className="relative flex items-center gap-1 mt-0.5 flex-wrap">
+                  {CRITERIA_CONFIG.map(({ key, dot, badge, label, shortLabel }) => {
+                    const criterion = criteria[key as keyof StockCriteria]
+                    if (typeof criterion === "boolean") return null
+                    if (!criterion?.met) return null
+
+                    const is52w = key === "high_breakout" && criterion?.is_52w_high
+
+                    return (
+                      <Fragment key={key}>
+                        {/* 모바일: 도트 */}
+                        <button
+                          onClick={(e) => handleDotClick(e, key)}
+                          className={cn(
+                            "w-2.5 h-2.5 rounded-full shrink-0 cursor-pointer sm:hidden",
+                            "transition-transform hover:scale-125 shadow-sm",
+                            dot
+                          )}
+                          title={label}
+                        />
+                        {is52w && (
+                          <button
+                            onClick={(e) => handleDotClick(e, key)}
+                            className={cn(
+                              "w-2.5 h-2.5 rounded-full shrink-0 cursor-pointer sm:hidden",
+                              "transition-transform hover:scale-125 shadow-sm",
+                              dot
+                            )}
+                            title={`${label} (52주 신고가)`}
+                          />
+                        )}
+                        {/* PC/태블릿: 뱃지 */}
+                        <button
+                          onClick={(e) => handleDotClick(e, key)}
+                          className={cn(
+                            "hidden sm:inline-flex items-center gap-0.5 text-[9px] px-1.5 py-0.5 rounded-full font-medium cursor-pointer",
+                            "transition-opacity hover:opacity-80",
+                            badge
+                          )}
+                        >
+                          <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", dot)} />
+                          {is52w ? "52주 신고가" : shortLabel}
+                        </button>
+                      </Fragment>
+                    )
+                  })}
+
+                  {/* 팝업 */}
+                  {popupCriterion && (() => {
+                    const cfg = CRITERIA_CONFIG.find(c => c.key === popupCriterion)
+                    const criterion = criteria[popupCriterion as keyof StockCriteria]
+                    if (!cfg || typeof criterion === "boolean") return null
+                    return (
+                      <div className="absolute left-0 top-full mt-1 z-50 w-64 sm:w-72 bg-popover text-popover-foreground rounded-lg shadow-lg border border-border p-2.5">
+                        <div className="flex items-center justify-between mb-1.5">
+                          <div className="flex items-center gap-1.5">
+                            <span className={cn("w-2.5 h-2.5 rounded-full", cfg.dot)} />
+                            <span className="text-xs font-semibold">{cfg.label}</span>
+                          </div>
+                          <button
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setPopupCriterion(null) }}
+                            className="text-muted-foreground hover:text-foreground"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                        <p className="text-[11px] text-muted-foreground leading-relaxed">
+                          {criterion?.reason || "근거 없음"}
+                        </p>
+                      </div>
+                    )
+                  })()}
+                </div>
+              )}
             </div>
           </div>
 

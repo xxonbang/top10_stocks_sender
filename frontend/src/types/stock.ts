@@ -93,6 +93,26 @@ export interface InvestorInfo {
   individual_net?: number
 }
 
+export interface CriterionResult {
+  met: boolean
+  reason?: string | null
+  is_52w_high?: boolean
+  had_limit_up?: boolean
+  had_15pct_rise?: boolean
+  ma_values?: Record<string, number>
+}
+
+export interface StockCriteria {
+  high_breakout: CriterionResult
+  momentum_history: CriterionResult
+  resistance_breakout: CriterionResult
+  ma_alignment: CriterionResult
+  supply_demand: CriterionResult
+  program_trading: CriterionResult
+  top30_trading_value: CriterionResult
+  all_met: boolean
+}
+
 export interface StockData {
   timestamp: string
   exchange: ExchangeData
@@ -113,6 +133,7 @@ export interface StockData {
   investor_data?: Record<string, InvestorInfo>
   investor_estimated?: boolean
   theme_analysis?: ThemeAnalysis
+  criteria_data?: Record<string, StockCriteria>
 }
 
 // 모의투자 관련 타입

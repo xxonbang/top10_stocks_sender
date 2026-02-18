@@ -7,6 +7,7 @@ import { TabBar } from "@/components/TabBar"
 import { HistoryModal } from "@/components/HistoryModal"
 import { PaperTradingPage } from "@/components/PaperTradingPage"
 import { AuthPage } from "@/components/AuthPage"
+import { CriteriaLegend } from "@/components/CriteriaLegend"
 import { useStockData } from "@/hooks/useStockData"
 import { useHistoryData } from "@/hooks/useHistoryData"
 import { useAuth } from "@/hooks/useAuth"
@@ -401,6 +402,13 @@ function App() {
         {/* AI Theme Analysis */}
         {displayData?.theme_analysis && <AIThemeAnalysis themeAnalysis={displayData.theme_analysis} />}
 
+        {/* Criteria Legend (admin only) */}
+        {isAdmin && displayData?.criteria_data && (
+          <div className="mb-4">
+            <CriteriaLegend />
+          </div>
+        )}
+
         {/* Tab Content */}
         <div className="space-y-4 sm:space-y-6">
           {activeTab === "composite" && displayData && (
@@ -418,6 +426,8 @@ function App() {
                     showTradingValue={true}
                     investorData={displayData.investor_data}
                     investorEstimated={displayData?.investor_estimated}
+                    criteriaData={displayData?.criteria_data}
+                    isAdmin={isAdmin}
                   />
                   <StockList
                     title={`${compositeTitle} + 하락률 TOP`}
@@ -430,6 +440,8 @@ function App() {
                     showTradingValue={true}
                     investorData={displayData.investor_data}
                     investorEstimated={displayData?.investor_estimated}
+                    criteriaData={displayData?.criteria_data}
+                    isAdmin={isAdmin}
                   />
                 </>
               ) : (
@@ -446,6 +458,8 @@ function App() {
                     showTradingValue={true}
                     investorData={displayData.investor_data}
                     investorEstimated={displayData?.investor_estimated}
+                    criteriaData={displayData?.criteria_data}
+                    isAdmin={isAdmin}
                   />
                   <StockList
                     title={`${compositeTitle} + 하락률 TOP10`}
@@ -458,6 +472,8 @@ function App() {
                     showTradingValue={true}
                     investorData={displayData.investor_data}
                     investorEstimated={displayData?.investor_estimated}
+                    criteriaData={displayData?.criteria_data}
+                    isAdmin={isAdmin}
                   />
                 </>
               )}

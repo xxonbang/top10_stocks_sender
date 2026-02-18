@@ -529,7 +529,7 @@ class KISClient:
         tr_id = "FHKST03010100"
 
         end_date = datetime.now().strftime("%Y%m%d")
-        start_date = (datetime.now() - timedelta(days=100)).strftime("%Y%m%d")
+        start_date = (datetime.now() - timedelta(days=300)).strftime("%Y%m%d")
 
         params = {
             "FID_COND_MRKT_DIV_CODE": "J",

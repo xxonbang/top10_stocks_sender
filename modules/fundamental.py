@@ -90,6 +90,9 @@ class FundamentalCollector:
             "opm": None,
             "peg": None, "rsi": None,
             "pgtr_ntby_qty": None,
+            "w52_hgpr": None,
+            "w52_lwpr": None,
+            "stck_prpr": None,
         }
 
         # 1) inquire-price -> per, pbr, eps, bps, hts_avls(시가총액)
@@ -102,6 +105,25 @@ class FundamentalCollector:
                 result["eps"] = safe_float(output.get("eps"))
                 result["bps"] = safe_float(output.get("bps"))
                 result["market_cap"] = safe_float(output.get("hts_avls"))
+                # 52주 최고가/최저가, 현재가
+                w52h = output.get("w52_hgpr")
+                if w52h is not None and w52h != "":
+                    try:
+                        result["w52_hgpr"] = int(w52h)
+                    except (ValueError, TypeError):
+                        pass
+                w52l = output.get("w52_lwpr")
+                if w52l is not None and w52l != "":
+                    try:
+                        result["w52_lwpr"] = int(w52l)
+                    except (ValueError, TypeError):
+                        pass
+                prpr = output.get("stck_prpr")
+                if prpr is not None and prpr != "":
+                    try:
+                        result["stck_prpr"] = int(prpr)
+                    except (ValueError, TypeError):
+                        pass
                 # 프로그램 매매 순매수 수량
                 pgtr = output.get("pgtr_ntby_qty")
                 if pgtr is not None and pgtr != "":
