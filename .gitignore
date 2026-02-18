@@ -24,6 +24,9 @@ docs/
 # Demo files
 frontend/public/demo-criteria.html
 
+# Tests
+tests/
+
 # Claude
 .claude/
 
