@@ -1,41 +1,11 @@
 {
-  "updated_at": "2026-02-19 00:05:15",
+  "updated_at": "2026-02-19 09:22:03",
   "entries": [
     {
-      "filename": "2026-02-19_0005.json",
+      "filename": "2026-02-19_0922.json",
       "date": "2026-02-19",
-      "time": "00:05",
-      "path": "data/history/2026-02-19_0005.json"
-    },
-    {
-      "filename": "2026-02-19_0002.json",
-      "date": "2026-02-19",
-      "time": "00:02",
-      "path": "data/history/2026-02-19_0002.json"
-    },
-    {
-      "filename": "2026-02-18_2355.json",
-      "date": "2026-02-18",
-      "time": "23:55",
-      "path": "data/history/2026-02-18_2355.json"
-    },
-    {
-      "filename": "2026-02-18_2353.json",
-      "date": "2026-02-18",
-      "time": "23:53",
-      "path": "data/history/2026-02-18_2353.json"
-    },
-    {
-      "filename": "2026-02-18_2352.json",
-      "date": "2026-02-18",
-      "time": "23:52",
-      "path": "data/history/2026-02-18_2352.json"
-    },
-    {
-      "filename": "2026-02-18_2342.json",
-      "date": "2026-02-18",
-      "time": "23:42",
-      "path": "data/history/2026-02-18_2342.json"
+      "time": "09:22",
+      "path": "data/history/2026-02-19_0922.json"
     },
     {
       "filename": "2026-02-18_2200.json",
@@ -84,30 +54,6 @@
       "date": "2026-02-13",
       "time": "09:13",
       "path": "data/history/2026-02-13_0913.json"
-    },
-    {
-      "filename": "2026-02-12_2359.json",
-      "date": "2026-02-12",
-      "time": "23:59",
-      "path": "data/history/2026-02-12_2359.json"
-    },
-    {
-      "filename": "2026-02-12_2349.json",
-      "date": "2026-02-12",
-      "time": "23:49",
-      "path": "data/history/2026-02-12_2349.json"
-    },
-    {
-      "filename": "2026-02-12_2339.json",
-      "date": "2026-02-12",
-      "time": "23:39",
-      "path": "data/history/2026-02-12_2339.json"
-    },
-    {
-      "filename": "2026-02-12_2336.json",
-      "date": "2026-02-12",
-      "time": "23:36",
-      "path": "data/history/2026-02-12_2336.json"
     },
     {
       "filename": "2026-02-12_2201.json",
