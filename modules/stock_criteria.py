@@ -189,15 +189,21 @@ def check_resistance_breakout(
 # 4. 이동평균선 정배열 (초록색)
 # ────────────────────────────────────────────────────────────
 
-def _calc_sma(closes: List[int], period: int) -> Optional[float]:
-    """단순 이동평균 계산"""
+def _calc_ema(closes: List[int], period: int) -> Optional[float]:
+    """지수 이동평균(EMA) 계산. closes는 최신순."""
     if len(closes) < period:
         return None
-    return sum(closes[:period]) / period
+    # 오래된 것부터 계산
+    data = list(reversed(closes[:period * 2])) if len(closes) >= period * 2 else list(reversed(closes))
+    k = 2 / (period + 1)
+    ema = data[0]
+    for price in data[1:]:
+        ema = price * k + ema * (1 - k)
+    return ema
 
 
 def check_ma_alignment(current_price: int, daily_prices: List[Dict]) -> Dict[str, Any]:
-    """모든 이동평균선(5/10/20/60/120)이 정배열인지"""
+    """모든 이동평균선(EMA 5/10/20/60/120)이 정배열인지"""
     result = {"met": False, "ma_values": {}, "reason": None}
 
     if not current_price or not daily_prices:
@@ -213,7 +219,7 @@ def check_ma_alignment(current_price: int, daily_prices: List[Dict]) -> Dict[str
     periods = [5, 10, 20, 60, 120]
     ma_values = {}
     for period in periods:
-        ma = _calc_sma(closes, period)
+        ma = _calc_ema(closes, period)
         if ma is not None:
             ma_values[f"MA{period}"] = round(ma)
 
