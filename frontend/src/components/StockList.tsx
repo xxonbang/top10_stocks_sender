@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TrendingUp, TrendingDown, BarChart3, ExternalLink } from "lucide-react"
+import { TrendingUp, TrendingDown, BarChart3, ExternalLink, X } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { StockCard } from "@/components/StockCard"
@@ -88,7 +88,7 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
         )}>
           {stock.rank}
         </span>
-        <div className="min-w-0">
+        <div className="min-w-0 relative">
           <a
             href={naverUrl}
             target="_blank"
@@ -107,6 +107,61 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
                 <span key={key} className={cn("w-1.5 h-1.5 rounded-full", dot)} />
               ))}
             </button>
+          )}
+          {/* Criteria popup */}
+          {criteriaExpanded && (
+            <div className="absolute left-0 top-full mt-1 z-50 w-64 sm:w-72 bg-popover text-popover-foreground rounded-lg shadow-lg border border-border p-2.5 max-h-80 overflow-y-auto">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-semibold">{stock.name} 기준 평가</span>
+                <button
+                  onClick={() => setCriteriaExpanded(false)}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
+              {metCriteria.length > 0 && (
+                <div className="space-y-1.5">
+                  {metCriteria.map(({ key, dot, label }) => {
+                    const c = criteria![key as keyof StockCriteria]
+                    if (typeof c === "boolean") return null
+                    return (
+                      <div key={key}>
+                        <div className="flex items-center gap-1.5">
+                          <span className={cn("w-2 h-2 rounded-full shrink-0", dot)} />
+                          <span className="text-[10px] font-semibold">{label}</span>
+                        </div>
+                        <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-relaxed pl-3.5">{c?.reason || "근거 없음"}</p>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+              {unmetCriteria.length > 0 && (
+                <>
+                  <div className="flex items-center gap-1.5 mt-2.5 mb-1.5">
+                    <div className="flex-1 border-t border-border/50" />
+                    <span className="text-[9px] text-muted-foreground/60 shrink-0">미충족</span>
+                    <div className="flex-1 border-t border-border/50" />
+                  </div>
+                  <div className="space-y-1.5 opacity-60">
+                    {unmetCriteria.map(({ key, label }) => {
+                      const c = criteria![key as keyof StockCriteria]
+                      if (typeof c === "boolean") return null
+                      return (
+                        <div key={key}>
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full shrink-0 bg-gray-300 dark:bg-gray-600" />
+                            <span className="text-[10px] font-medium text-muted-foreground">{label}</span>
+                          </div>
+                          <p className="text-[9px] sm:text-[10px] text-muted-foreground/70 leading-relaxed pl-3.5">{c?.reason || ""}</p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </>
+              )}
+            </div>
           )}
         </div>
       </div>
@@ -153,52 +208,6 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
       </a>
       </div>
 
-      {/* Criteria detail (expanded) */}
-      {criteriaExpanded && (
-        <div className="px-2 pb-2 pl-9 sm:pl-12 bg-muted/20 border-t border-border/30">
-          {metCriteria.length > 0 && (
-            <div className="space-y-1.5 pt-1.5">
-              {metCriteria.map(({ key, dot, label }) => {
-                const c = criteria![key as keyof StockCriteria]
-                if (typeof c === "boolean") return null
-                return (
-                  <div key={key}>
-                    <div className="flex items-center gap-1.5">
-                      <span className={cn("w-2 h-2 rounded-full shrink-0", dot)} />
-                      <span className="text-[10px] font-semibold">{label}</span>
-                    </div>
-                    <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-relaxed pl-3.5">{c?.reason || "근거 없음"}</p>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-          {unmetCriteria.length > 0 && (
-            <>
-              <div className="flex items-center gap-1.5 mt-2 mb-1.5">
-                <div className="flex-1 border-t border-border/50" />
-                <span className="text-[9px] text-muted-foreground/60 shrink-0">미충족</span>
-                <div className="flex-1 border-t border-border/50" />
-              </div>
-              <div className="space-y-1.5 opacity-60">
-                {unmetCriteria.map(({ key, label }) => {
-                  const c = criteria![key as keyof StockCriteria]
-                  if (typeof c === "boolean") return null
-                  return (
-                    <div key={key}>
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full shrink-0 bg-gray-300 dark:bg-gray-600" />
-                        <span className="text-[10px] font-medium text-muted-foreground">{label}</span>
-                      </div>
-                      <p className="text-[9px] sm:text-[10px] text-muted-foreground/70 leading-relaxed pl-3.5">{c?.reason || ""}</p>
-                    </div>
-                  )
-                })}
-              </div>
-            </>
-          )}
-        </div>
-      )}
     </div>
   )
 }
