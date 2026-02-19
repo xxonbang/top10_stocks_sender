@@ -57,7 +57,7 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
     return typeof c !== "boolean" && c?.met
   }) : []
   return (
-    <div className={cn(shortWarning ? "border-l-[3px] border-red-500" : allMet && "border-l-[3px] border-yellow-400")}>
+    <div className={cn(shortWarning ? "border-l-[3px] border-l-red-500" : allMet && "border-l-[3px] border-l-yellow-400")}>
       <div className="flex items-center py-2 hover:bg-muted/50 transition-colors group">
       {/* Sticky left: Rank + Name */}
       <div className={cn(
