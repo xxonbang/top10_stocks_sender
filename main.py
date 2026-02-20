@@ -430,6 +430,48 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
     else:
         print("\n[11/13] 뉴스 수집 건너뜀")
 
+    # 11-1. 수집 실패 데이터 기존 값 폴백
+    _existing_data = None
+    if not exchange_data.get("rates") or kosdaq_index_data is None or theme_analysis is None:
+        try:
+            existing_path = os.path.join("frontend", "public", "data", "latest.json")
+            if os.path.exists(existing_path):
+                with open(existing_path, "r", encoding="utf-8") as f:
+                    _existing_data = json.load(f)
+        except Exception:
+            pass
+
+    if _existing_data:
+        if not exchange_data.get("rates") and _existing_data.get("exchange", {}).get("rates"):
+            exchange_data = _existing_data["exchange"]
+            print(f"  ℹ 환율: 기존 데이터 보존 (기준일: {exchange_data.get('search_date', '')})")
+
+        if kosdaq_index_data is None and _existing_data.get("kosdaq_index"):
+            kosdaq_index_data = _existing_data["kosdaq_index"]
+            print(f"  ℹ 코스닥 지수: 기존 데이터 보존 ({kosdaq_index_data.get('status', '')})")
+
+        if theme_analysis is None and _existing_data.get("theme_analysis"):
+            theme_analysis = _existing_data["theme_analysis"]
+            theme_count = len(theme_analysis.get("themes", []))
+            print(f"  ℹ 테마 분석: 기존 데이터 보존 ({theme_count}개 테마)")
+
+    # 히스토리에서 테마 분석 폴백 (latest.json에도 없는 경우)
+    if theme_analysis is None:
+        try:
+            hist_dir = os.path.join("frontend", "public", "data", "history")
+            if os.path.isdir(hist_dir):
+                for fname in sorted(os.listdir(hist_dir), reverse=True)[:10]:
+                    fpath = os.path.join(hist_dir, fname)
+                    with open(fpath, "r", encoding="utf-8") as f:
+                        hist = json.load(f)
+                    if hist.get("theme_analysis"):
+                        theme_analysis = hist["theme_analysis"]
+                        theme_count = len(theme_analysis.get("themes", []))
+                        print(f"  ℹ 테마 분석: 히스토리에서 복원 ({fname}, {theme_count}개 테마)")
+                        break
+        except Exception:
+            pass
+
     # 12. 프론트엔드용 데이터 내보내기
     print("\n[12/13] 프론트엔드 데이터 내보내기...")
     try:
