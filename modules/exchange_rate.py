@@ -3,6 +3,7 @@
 - 실시간 환율 정보 조회
 - 주요 통화(USD, JPY, EUR, CNY) 환율 제공
 """
+import time
 import requests
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
@@ -51,9 +52,27 @@ class ExchangeRateAPI:
         }
 
         try:
-            response = requests.get(self.api_url, params=params, timeout=10)
-            response.raise_for_status()
-            data = response.json()
+            # Session 사용 (WAF 쿠키 검증 통과를 위해 필수)
+            session = requests.Session()
+            session.headers.update({
+                "User-Agent": "Mozilla/5.0 (compatible; ExchangeRateBot/1.0)"
+            })
+
+            data = None
+            last_err = None
+            for attempt in range(3):
+                try:
+                    response = session.get(self.api_url, params=params, timeout=10)
+                    response.raise_for_status()
+                    data = response.json()
+                    break
+                except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+                    last_err = e
+                    print(f"[환율] 연결 재시도 ({attempt + 1}/3): {e}")
+                    time.sleep(2 * (attempt + 1))
+
+            if data is None and last_err:
+                raise last_err
 
             if not data:
                 # 데이터가 없으면 최대 7일 전까지 조회 시도 (주말/공휴일 대응)
@@ -61,7 +80,7 @@ class ExchangeRateAPI:
                 for days_back in range(1, 8):
                     prev_date = (base_date - timedelta(days=days_back)).strftime("%Y%m%d")
                     params["searchdate"] = prev_date
-                    response = requests.get(self.api_url, params=params, timeout=10)
+                    response = session.get(self.api_url, params=params, timeout=10)
                     response.raise_for_status()
                     data = response.json()
                     if data:

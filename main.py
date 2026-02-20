@@ -6,7 +6,8 @@ KIS 거래량+등락폭 TOP10 텔레그램 발송
 import argparse
 import json
 import os
-from datetime import datetime
+import time
+from datetime import datetime, timedelta
 from typing import Dict, List, Any
 
 from modules.kis_client import KISClient
@@ -153,16 +154,41 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
         print(f"  ✗ KIS API 연결 실패: {e}")
         return
 
-    # 2-1. 코스닥 지수 이동평균선 분석
+    # 2-1. 코스닥 지수 이동평균선 분석 (API 페이지당 50건 제한 → 여러 페이지 조회)
     kosdaq_index_data = None
-    try:
-        print("\n[2-1/13] 코스닥 지수 이동평균선 분석 중...")
-        idx_resp = client.get_index_daily_price("2001")  # 코스닥 종합
-        rt_cd = idx_resp.get("rt_cd")
-        if rt_cd == "0":
-            output2 = idx_resp.get("output2", [])
+    print("\n[2-1/13] 코스닥 지수 이동평균선 분석 중...")
+    for attempt in range(3):
+        try:
+            if attempt > 0:
+                time.sleep(3 * attempt)
+                print(f"  재시도 ({attempt + 1}/3)...")
+
+            all_items = []
+            end_date = datetime.now().strftime("%Y%m%d")
+            for page in range(3):  # 최대 3페이지 (150건)
+                start_date = (datetime.now() - timedelta(days=300)).strftime("%Y%m%d")
+                idx_resp = client.get_index_daily_price(
+                    "2001", start_date=start_date, end_date=end_date
+                )
+                rt_cd = idx_resp.get("rt_cd")
+                if rt_cd != "0":
+                    msg = idx_resp.get("msg1", "알 수 없음")
+                    print(f"  ⚠ 코스닥 지수 API 응답 오류 (rt_cd={rt_cd}, msg={msg})")
+                    break
+                page_items = idx_resp.get("output2", [])
+                if not page_items:
+                    break
+                all_items.extend(page_items)
+                if len(all_items) >= 120:
+                    break
+                # 다음 페이지: 마지막 날짜 하루 전부터
+                last_date = page_items[-1].get("stck_bsop_date", "")
+                if not last_date:
+                    break
+                end_date = (datetime.strptime(last_date, "%Y%m%d") - timedelta(days=1)).strftime("%Y%m%d")
+
             closes = []
-            for item in output2:
+            for item in all_items:
                 try:
                     val = float(item.get("bstp_nmix_prpr", 0))
                     if val > 0:
@@ -195,13 +221,14 @@ def main(test_mode: bool = False, skip_news: bool = False, skip_investor: bool =
                     "status": status,
                 }
                 print(f"  ✓ 코스닥 지수: {current:.2f} ({status}) [{len(closes)}일분 데이터]")
+                break
             else:
-                print(f"  ⚠ 코스닥 지수 데이터 부족 ({len(closes)}일분, output2={len(output2)}건)")
-        else:
-            msg = idx_resp.get("msg1", "알 수 없음")
-            print(f"  ⚠ 코스닥 지수 API 응답 오류 (rt_cd={rt_cd}, msg={msg})")
-    except Exception as e:
-        print(f"  ⚠ 코스닥 지수 분석 실패: {e}")
+                print(f"  ⚠ 코스닥 지수 데이터 부족 ({len(closes)}일분, 전체 {len(all_items)}건)")
+                break  # 데이터 부족은 재시도해도 동일
+        except Exception as e:
+            print(f"  ⚠ 코스닥 지수 분석 실패: {e}")
+            if attempt == 2:
+                break
 
     # 3. 거래량 TOP30 조회
     print("\n[3/13] 거래량 TOP30 조회 중...")
