@@ -180,8 +180,8 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
   const relativeTime = timestamp ? getRelativeTime(timestamp) : null
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 shadow-sm">
-      <div className="flex h-14 sm:h-16 items-center justify-between px-3 sm:px-4">
+    <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm">
+      <div className="flex h-14 sm:h-16 items-center justify-between px-3 sm:px-4 max-w-[100vw] overflow-hidden">
         {/* Logo & Title */}
         <button
           onClick={() => { if (currentPage !== "home") onPageChange?.("home") }}
