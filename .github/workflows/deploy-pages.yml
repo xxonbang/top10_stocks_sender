@@ -6,6 +6,8 @@ on:
     paths:
       - 'frontend/**'
       - '!frontend/public/data/**'
+      - 'main.py'
+      - 'modules/**'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
