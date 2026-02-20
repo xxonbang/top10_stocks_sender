@@ -181,11 +181,11 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 shadow-sm">
-      <div className="container flex h-14 sm:h-16 items-center justify-between px-3 sm:px-4">
+      <div className="flex h-14 sm:h-16 items-center justify-between px-3 sm:px-4">
         {/* Logo & Title */}
         <button
           onClick={() => { if (currentPage !== "home") onPageChange?.("home") }}
-          className="flex items-center gap-2 sm:gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+          className="flex items-center gap-1.5 sm:gap-3 cursor-pointer hover:opacity-80 transition-opacity shrink-0"
         >
           <div className="flex items-center justify-center w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-sm">
             <EyeChartLogo className="w-4 h-4 sm:w-6 sm:h-6" />
@@ -197,13 +197,13 @@ export function Header({ timestamp, onRefresh, loading, compactMode, onToggleCom
         </button>
 
         {/* Right Controls */}
-        <div className="flex items-center gap-1 sm:gap-1.5">
+        <div className="flex items-center gap-1 sm:gap-1.5 min-w-0">
           {/* Timestamp Badge - 클릭 가능 */}
           {parsed && (
             <div className="relative">
               <button
                 onClick={handleTimestampClick}
-                className="flex items-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-3 sm:py-2 rounded-full bg-gradient-to-r from-muted/80 to-muted/50 border border-border/50 shadow-sm cursor-pointer hover:border-primary/30 hover:shadow-md transition-all duration-200 focus:outline-none"
+                className="flex items-center gap-1 px-1.5 py-1 sm:px-2.5 sm:py-1.5 rounded-full bg-gradient-to-r from-muted/80 to-muted/50 border border-border/50 shadow-sm cursor-pointer hover:border-primary/30 hover:shadow-md transition-all duration-200 focus:outline-none"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
