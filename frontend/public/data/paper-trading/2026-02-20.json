@@ -1,0 +1,192 @@
+{
+  "trade_date": "2026-02-20",
+  "morning_timestamp": "2026-02-20 09:19:56",
+  "collected_at": "2026-02-20 06:40:29",
+  "price_snapshots": [
+    {
+      "timestamp": "2026-02-20 09:19:56",
+      "prices": {
+        "001510": 1966,
+        "001290": 1432,
+        "024060": 18020,
+        "152550": 225,
+        "012450": 1210000,
+        "272210": 118200,
+        "009150": 379500,
+        "034220": 13680
+      }
+    },
+    {
+      "timestamp": "2026-02-20 09:43:05",
+      "prices": {
+        "001510": 1882,
+        "001290": 1370,
+        "024060": 17690,
+        "152550": 237,
+        "012450": 1215000,
+        "272210": 116300,
+        "009150": 378500,
+        "034220": 13500
+      }
+    },
+    {
+      "timestamp": "2026-02-20 10:57:47",
+      "prices": {
+        "001510": 1897,
+        "001290": 1365,
+        "024060": 17690,
+        "152550": 237,
+        "012450": 1212000,
+        "272210": 114500,
+        "009150": 371500,
+        "034220": 13120
+      }
+    },
+    {
+      "timestamp": "2026-02-20 11:11:10",
+      "prices": {
+        "001510": 1857,
+        "001290": 1351,
+        "024060": 17420,
+        "152550": 237,
+        "012450": 1205000,
+        "272210": 114200,
+        "009150": 372500,
+        "034220": 13120
+      }
+    },
+    {
+      "timestamp": "2026-02-20 11:58:11",
+      "prices": {
+        "001510": 1905,
+        "001290": 1384,
+        "024060": 17370,
+        "152550": 223,
+        "012450": 1212000,
+        "272210": 116100,
+        "009150": 376000,
+        "034220": 13260
+      }
+    }
+  ],
+  "stocks": [
+    {
+      "code": "001510",
+      "name": "SK증권",
+      "theme": "증권주 (금융규제 완화 및 실적 개선 기대감)",
+      "buy_price": 1966,
+      "close_price": 1869,
+      "profit_rate": -4.93,
+      "profit_amount": -97,
+      "high_price": 2045,
+      "high_time": "09:02",
+      "high_profit_rate": 4.02,
+      "high_profit_amount": 79
+    },
+    {
+      "code": "001290",
+      "name": "상상인증권",
+      "theme": "증권주 (금융규제 완화 및 실적 개선 기대감)",
+      "buy_price": 1432,
+      "close_price": 1287,
+      "profit_rate": -10.13,
+      "profit_amount": -145,
+      "high_price": 1498,
+      "high_time": "09:07",
+      "high_profit_rate": 4.61,
+      "high_profit_amount": 66
+    },
+    {
+      "code": "024060",
+      "name": "흥구석유",
+      "theme": "에너지/자원 개발 (중동 지정학적 리스크 고조)",
+      "buy_price": 18020,
+      "close_price": 19040,
+      "profit_rate": 5.66,
+      "profit_amount": 1020,
+      "high_price": 19620,
+      "high_time": "15:02",
+      "high_profit_rate": 8.88,
+      "high_profit_amount": 1600
+    },
+    {
+      "code": "152550",
+      "name": "한국ANKOR유전",
+      "theme": "에너지/자원 개발 (중동 지정학적 리스크 고조)",
+      "buy_price": 225,
+      "close_price": 237,
+      "profit_rate": 5.33,
+      "profit_amount": 12,
+      "high_price": 237,
+      "high_time": "15:30",
+      "high_profit_rate": 5.33,
+      "high_profit_amount": 12
+    },
+    {
+      "code": "012450",
+      "name": "한화에어로스페이스",
+      "theme": "방산/우주항공 (수출 호조 및 미래 사업 확장)",
+      "buy_price": 1210000,
+      "close_price": 1242000,
+      "profit_rate": 2.64,
+      "profit_amount": 32000,
+      "high_price": 1258000,
+      "high_time": "13:40",
+      "high_profit_rate": 3.97,
+      "high_profit_amount": 48000
+    },
+    {
+      "code": "272210",
+      "name": "한화시스템",
+      "theme": "방산/우주항공 (수출 호조 및 미래 사업 확장)",
+      "buy_price": 118200,
+      "close_price": 116500,
+      "profit_rate": -1.44,
+      "profit_amount": -1700,
+      "high_price": 121800,
+      "high_time": "09:02",
+      "high_profit_rate": 3.05,
+      "high_profit_amount": 3600
+    },
+    {
+      "code": "009150",
+      "name": "삼성전기",
+      "theme": "AI/IT 부품 (AI 산업 성장 수혜)",
+      "buy_price": 379500,
+      "close_price": 377000,
+      "profit_rate": -0.66,
+      "profit_amount": -2500,
+      "high_price": 386000,
+      "high_time": "09:10",
+      "high_profit_rate": 1.71,
+      "high_profit_amount": 6500
+    },
+    {
+      "code": "034220",
+      "name": "LG디스플레이",
+      "theme": "AI/IT 부품 (AI 산업 성장 수혜)",
+      "buy_price": 13680,
+      "close_price": 13310,
+      "profit_rate": -2.7,
+      "profit_amount": -370,
+      "high_price": 14190,
+      "high_time": "09:09",
+      "high_profit_rate": 3.73,
+      "high_profit_amount": 510
+    }
+  ],
+  "summary": {
+    "total_stocks": 8,
+    "profit_stocks": 3,
+    "loss_stocks": 5,
+    "total_invested": 1743023,
+    "total_value": 1771243,
+    "total_profit": 28220,
+    "total_profit_rate": 1.62,
+    "high_total_value": 1803390,
+    "high_total_profit": 60367,
+    "high_total_profit_rate": 3.46,
+    "high_profit_stocks": 8,
+    "high_loss_stocks": 0
+  }
+}
