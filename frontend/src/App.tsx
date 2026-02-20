@@ -598,10 +598,10 @@ function App() {
         className={cn(
           "fixed bottom-6 right-6 z-50",
           "w-10 h-10 rounded-full",
-          "bg-primary/20 text-primary-foreground/50",
-          "backdrop-blur-sm",
+          "bg-card/60 text-foreground/60 border border-border/50",
+          "backdrop-blur-md shadow-lg",
           "flex items-center justify-center",
-          "hover:bg-primary/40 hover:text-primary-foreground hover:scale-110 active:scale-95",
+          "hover:bg-card/80 hover:text-foreground hover:scale-110 active:scale-95",
           "transition-all duration-200",
           showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none",
         )}
