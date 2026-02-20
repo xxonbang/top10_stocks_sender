@@ -242,6 +242,21 @@ export function ThemeForecastPage({ criteriaData, isAdmin }: ThemeForecastPagePr
               </p>
             )}
           </div>
+
+          {/* 범례 */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] sm:text-xs text-muted-foreground border-t border-border/50 pt-2">
+            <span className="font-medium text-foreground/70">범례</span>
+            <span className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500" />높음
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 ml-1" />보통
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-400 ml-1" />낮음
+              <span className="ml-0.5">— 신뢰도</span>
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              <span>— 예상 부각 시점</span>
+            </span>
+          </div>
         </CardContent>
       </Card>
 
