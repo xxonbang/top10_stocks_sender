@@ -81,8 +81,8 @@ function CompactStockRow({ stock, type, showTradingValue, investorInfo, hasInves
             : effectiveRising ? "bg-red-500/10 text-red-600" : "bg-blue-500/10 text-blue-600"
         )}>
           {stock.rank}
-          {/* 경고 알림 뱃지 (all_met + 경고 동시 발생 시) */}
-          {allMet && (shortWarning || overheatWarning || reverseWarning) && (
+          {/* 경고 알림 뱃지 */}
+          {(shortWarning || overheatWarning || reverseWarning) && (
             <span className={cn(
               "absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white animate-pulse",
               shortWarning ? "bg-red-500" : overheatWarning ? "bg-orange-500" : "bg-indigo-500"

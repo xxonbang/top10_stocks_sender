@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { ChevronDown, ChevronUp } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { KosdaqIndex } from "@/types/stock"
 
@@ -54,9 +55,12 @@ export function KosdaqIndexAlert({ data }: KosdaqIndexAlertProps) {
             {data.status}
           </span>
         </div>
-        <span className="text-xs sm:text-sm font-bold tabular-nums shrink-0">
-          {data.current.toFixed(2)}
-        </span>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <span className="text-xs sm:text-sm font-bold tabular-nums">
+            {data.current.toFixed(2)}
+          </span>
+          {showDetail ? <ChevronUp className="w-3.5 h-3.5 opacity-60" /> : <ChevronDown className="w-3.5 h-3.5 opacity-60" />}
+        </div>
       </div>
 
       {showDetail && (

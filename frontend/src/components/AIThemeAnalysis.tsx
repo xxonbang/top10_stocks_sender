@@ -82,8 +82,8 @@ function ThemeCard({ theme, index, criteriaData, isAdmin, stockMarketMap, stockT
                           : "bg-blue-500/10 hover:bg-blue-500/20 text-blue-600"
               )}
             >
-              {/* 경고 알림 뱃지 (all_met + 경고 동시 발생 시) */}
-              {allMet && (shortWarning || overheatWarning || reverseWarning) && (
+              {/* 경고 알림 뱃지 */}
+              {(shortWarning || overheatWarning || reverseWarning) && (
                 <span className={cn(
                   "absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white animate-pulse",
                   shortWarning ? "bg-red-500" : overheatWarning ? "bg-orange-500" : "bg-indigo-500"

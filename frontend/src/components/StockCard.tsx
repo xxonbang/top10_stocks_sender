@@ -57,8 +57,8 @@ export function StockCard({ stock, history, news, type, investorInfo, investorEs
               ? "ring-2 ring-indigo-500/70 shadow-[0_0_12px_rgba(99,102,241,0.3)] animate-[blue-shimmer_2s_ease-in-out_infinite]"
               : ""
     )}>
-      {/* 경고 알림 뱃지 (all_met + 경고 동시 발생 시) */}
-      {allMet && isAdmin && (shortWarning || overheatWarning || reverseWarning) && (
+      {/* 경고 알림 뱃지 */}
+      {isAdmin && (shortWarning || overheatWarning || reverseWarning) && (
         <div className="absolute -top-1.5 -right-1.5 z-10 flex gap-0.5">
           {shortWarning && <span className="w-3 h-3 rounded-full bg-red-500 border-2 border-white animate-pulse" title="공매도 경고" />}
           {overheatWarning && <span className="w-3 h-3 rounded-full bg-orange-500 border-2 border-white animate-pulse" title="과열 경고" />}
