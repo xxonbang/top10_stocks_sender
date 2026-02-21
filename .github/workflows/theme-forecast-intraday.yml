@@ -39,6 +39,8 @@ jobs:
           GEMINI_API_KEY_01: ${{ secrets.GEMINI_API_KEY_01 }}
           GEMINI_API_KEY_02: ${{ secrets.GEMINI_API_KEY_02 }}
           GEMINI_API_KEY_03: ${{ secrets.GEMINI_API_KEY_03 }}
+          GEMINI_API_KEY_04: ${{ secrets.GEMINI_API_KEY_04 }}
+          GEMINI_API_KEY_05: ${{ secrets.GEMINI_API_KEY_05 }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python forecast_main.py --intraday
